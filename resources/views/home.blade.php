@@ -12,10 +12,11 @@
                     <h4 class="card-title">Gestionnaire</h4>
                     <h6 class="card-subtitle text-muted">Gestion de vos données en ligne</h6>
 
+                    <br>
                     <div class="card-text fbm-title">
                         Vous êtes connecté !
 
-                       <h4><i class="fa fa-btn fa-commenting"></i> @{{mainCtrlMsg}}</h4>
+                       <h5><i class="fa fa-btn fa-commenting"></i> @{{mainCtrlMsg}}</h5>
                     </div>
                 </div>
             </div>
