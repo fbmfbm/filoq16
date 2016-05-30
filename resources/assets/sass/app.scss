@@ -3,10 +3,11 @@ $brand-info: #00EFD9;
 
 //@import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,800);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.min.css);
 @import "node_modules/bootstrap/scss/bootstrap-flex.scss";
 
 @import "pages/home.scss";
+@import "modules/typo.scss";
 
 
  
@@ -21,7 +22,7 @@ body{
 .jumbotron{
 
     height: 100vh;
-    background-color: $brand-primary;
+    background-color: darken($brand-primary, 3%);
     color: #FFF;
 }
 

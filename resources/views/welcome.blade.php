@@ -2,26 +2,27 @@
 
 @section('content')
 <div class="jumbotron jumbotron-fluid" style="margin-top:-50px">
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
+                <h1 class="display-4 "><i class="fa fa-btn fa-bar-chart text-info" aria-hidden="true"></i> FILOCOM au quartier</h1>
+                <h3>Premiers effets de la rénovation urbaine</h3>
+                <h5 class="fbm-font-light">Offre de logements et mobilités résidentielles</h5>
+                <br>
                 <h1 clas="display-3">Bienvenue</h1>
-
                 <div class="lead">
-                    Page d'accueil du site pour tous les visiteurs
-
                 </div>
                 <br>
-                <p><a class="btn btn-info-outline" href="#login-form" >Connectez-vous</a> 
-                    pour accèder aux fonctionnalités complètes du site
+                <p><a class="btn btn-info-outline" href="#btn-submit_login" >Connectez-vous</a> 
+                     pour accèder aux fonctionnalités complètes du site
                     </p>
             </div>
         </div>
     </div>
 </div>
 </div>
-<div class="container">
+<div class="container-fluid">
      <div class="row col-md-10 col-md-offset-1">
          <div class="card" id="login-form">
              <div class="card-header">Connexion</div>
@@ -69,7 +70,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="btn-submit_login">
                                     <i class="fa fa-btn fa-sign-in"></i> Connexion
                                 </button>
 
