@@ -1,5 +1,8 @@
-$brand-primary:   #C136B4; 
-$brand-info: #00EFD9;
+$brand-primary:   			#C136B4; 
+$brand-info: 				#00EFD9;
+
+$enable-flex:               true;
+$enable-rounded:            false;
 
 //@import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,800);
@@ -8,6 +11,9 @@ $brand-info: #00EFD9;
 
 @import "pages/home.scss";
 @import "modules/typo.scss";
+@import "modules/block.scss";
+
+
 
 
  

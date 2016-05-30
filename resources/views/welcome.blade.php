@@ -10,13 +10,23 @@
                 <h3>Premiers effets de la rénovation urbaine</h3>
                 <h5 class="fbm-font-light">Offre de logements et mobilités résidentielles</h5>
                 <br>
-                <h1 clas="display-3">Bienvenue</h1>
+                 @if (Auth::guest())
+                <h1 clas="display-3">Bienvenue </h1>
                 <div class="lead">
                 </div>
                 <br>
                 <p><a class="btn btn-info-outline" href="#btn-submit_login" >Connectez-vous</a> 
                      pour accèder aux fonctionnalités complètes du site
                     </p>
+                @else
+                <h2 clas="display-3">Bienvenue  <span class="text-info">{{ Auth::user()->name }}</span></h2>
+                        <div class="lead">
+                        <div class="col-md-4 fbm-card-negative ">
+                            <p>Rejoignez-directement la section de zonage pour accèder aux données</p>
+                        </div>
+                        
+                        </div>
+                @endif
             </div>
         </div>
     </div>
