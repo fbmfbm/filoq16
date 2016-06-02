@@ -1,6 +1,23 @@
 .fbm-card-negative{
 
-	border: solid 1px #FFF;
-	padding : 10px;
-	
+	border: solid 1px lighten($brand-primary, 80%);
+	padding: 10px;
+	width: 200px;
+	/* text-align: center; */
+	font-size: .95em;
+	line-height: 1.2em;
+	/* background-color: #9C2290; */
+	/* font-weight: 100; */
+	// color: #2B1629;
+	/* margin-right: 25px; */
+	margin-bottom: 25px !important;
+
 }
+
+.fbm-card-negative:hover{
+
+		background-color: rgba(200,200,200,.3);
+		border: solid 1px lighten($brand-primary, 80%);
+		cursor: pointer;
+
+	}

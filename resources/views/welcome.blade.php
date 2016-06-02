@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div id="wrarpper" ng-controller="MainCtrl">
 <div class="jumbotron jumbotron-fluid" style="margin-top:-50px">
 <div class="container-fluid">
     <div class="row">
@@ -20,11 +21,16 @@
                     </p>
                 @else
                 <h2 clas="display-3">Bienvenue  <span class="text-info">{{ Auth::user()->name }}</span></h2>
-                        <div class="lead">
-                        <div class="col-md-4 fbm-card-negative ">
-                            <p>Rejoignez-directement la section de zonage pour accèder aux données</p>
-                        </div>
-                        
+                        <div class="row">
+                            <div class="fbm-card-negative center-block" ng-click="goToURL('zonnage/')">
+                                <i class="fa fa-btn fa-pie-chart text-info fbm-picto-block" aria-hidden="true"></i><p>Zonage aux quartiers</p>
+                            </div>
+                            <div class="fbm-card-negative center-block">
+                                <i class="fa fa-btn fa-line-chart text-info fbm-picto-block" aria-hidden="true"></i><p>Données aggrégées sur zonage</p>
+                            </div>
+                             <div class="fbm-card-negative center-block">
+                                <i class="fa fa-btn fa-file-text text-info fbm-picto-block" aria-hidden="true"></i><p>Lexique des indicateurs</p>
+                            </div>
                         </div>
                 @endif
             </div>
@@ -34,12 +40,12 @@
 </div>
 <div class="container-fluid">
      <div class="row col-md-10 col-md-offset-1">
+     @if (Auth::guest())
          <div class="card" id="login-form">
              <div class="card-header">Connexion</div>
              <div class="card-block">
                  <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
-
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail</label>
 
@@ -91,6 +97,8 @@
 
              </div>
          </div>
+         @endif
      </div>
  </div> 
+ </div>
 @endsection

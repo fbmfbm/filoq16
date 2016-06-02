@@ -1,0 +1,38 @@
+@media print {
+ 	.fbm-table-header{
+		background-color: darken($brand-info, 5%);
+		color: #FFF;
+	}
+}
+
+.fbm-table{
+
+}
+
+.fbm-table th{
+	line-height: .9;
+}
+
+.fbm-table tr td{
+	font-size: .95em;
+}
+
+.fbm-table tr td+td{
+	text-align: right;
+}
+
+
+
+.fbm-table-right{
+	text-align: right;
+}
+
+.fbm-table-header{
+	background-color: darken($brand-info, 5%);;
+}
+
+.fbm-table-enphase{
+
+	color : $brand-primary;
+	font-style : italic;
+}
