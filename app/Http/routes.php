@@ -19,7 +19,7 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/zonage', 'ZonageController@index');
-Route::get('/thema/offre', 'ThemaController@offre_logmt');
+Route::get('/thema/offre/{convent}', 'ThemaController@offre_logmt');
 
 Route::post('/jx/geojson', 'AjaxController@getGeojson');
 Route::post('/jx/pgdata', 'AjaxController@getPGData');

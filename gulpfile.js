@@ -19,6 +19,7 @@ elixir(function(mix) {
     	'/../../../node_modules/angular/angular.js',
     	'/../../../node_modules/angular-sanitize/angular-sanitize.min.js',
     	'/../../../node_modules/angular-openlayers-directive/dist/angular-openlayers-directive.js',
+        'lib/layerswitcher.js',
     	'app.js',
     	'controllers/main_ctrl.js',
         'controllers/zonage_ctrl.js',

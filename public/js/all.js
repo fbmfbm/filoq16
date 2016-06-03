@@ -34418,6 +34418,67 @@ angular.module('openlayers-directive').factory('olMapDefaults', ["$q", "olHelper
 }]);
 
 }));
+// Create a simple layer switcher in element div:
+var LayerSwitcher = function(options){
+  var o = this.options = options || {};
+  var map = this.map = options.map;
+  var cssPath = o.cssPath || 'css/LayerSwitcher.css';
+  
+  // element to render in:
+  var $div;
+  if(!o.div){
+    $div = $('<div class="LayerSwitcher">'); $(document.body).append($div);
+    o.div = $div[0];
+  } else {
+    var $div = typeof o.div == 'string' ? $('#'+o.div) : $(o.div);
+    $div.addClass("LayerSwitcher");
+  }
+  this.div = o.div;
+  
+  var $baseDiv = $('<div class="BaseLayerDiv">');
+  var $overDiv = $('<div class="OverlayDiv">');
+  $div.append($baseDiv, $overDiv);
+  
+  // load css:
+  //var cssL = document.createElement('link'); 
+  var $cssL = $('<link>'), cssL = $cssL[0];
+  cssL.rel = 'stylesheet'; cssL.type = 'text/css'; cssL.href = cssPath;
+  $(document.head).append(cssL);
+  
+  // array with layers:
+  var layers = map.getLayers().getArray();
+  
+  // turn off other baselayers:
+  var otherBLoff = function(layer){
+    $.each(layers, function(i,l){
+      if(l!==layer && l.get('baselayer'))
+        { l.setVisible(false); }
+    });
+  };
+  
+  // go through each layer, render control and set handlers:
+  $.each(layers, function(i,l){
+    var BL = l.get('baselayer');
+    var $li = $('<div class="check">');
+      l.getVisible() ? $li.addClass('checked') : $li.removeClass('checked') ;
+      BL ? $li.addClass('radiobutton') : $li.addClass('checkbox') ;
+    var $ll = $('<label>'+l.get('title')+'</label>');
+    var $ld = $('<div class="LayerClickDiv">').click(function(){ 
+      l.setVisible(!l.getVisible());
+      l.get('baselayer') ? otherBLoff(l) :0;
+    }); //toggle viz on click
+    $ld.append($li,$ll);
+    BL ? $baseDiv.append($ld) : $overDiv.append($ld) ;
+    // bind checkbox state to layer event:
+    l.on('change:visible', function(e){
+      this.getVisible() ? $li.addClass('checked') : $li.removeClass('checked') ;
+    }); // bind
+  }); // each
+  if($baseDiv.children()[0] && $overDiv.children()[0]){
+    $baseDiv.after('<div class="Separator">');
+  }
+  
+}; // LayerSwitcher
 var msg = "Test d'une nouvelle app actualisée !";
 
 
@@ -34452,8 +34513,14 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'olData', function($scope
 	$scope.refScale = 'dep';
     var map; 
 	var vectorSource = new ol.source.Vector();
+  var quartierSource = new ol.source.Vector();
+  var bordureSource = new ol.source.Vector();
+  var zusSource = new ol.source.Vector();
+
 	var featureOverlay;
 	var layerVector;
+
+  
 
 
 var getGeoJsonData = function(){
@@ -34470,37 +34537,95 @@ var getGeoJsonData = function(){
         
     };
 
+  var getGeoJsonQuartier = function(){
+
+
+        GeoJsonData.getGeoData($scope.refCode, "border", $scope.refDep).then(function(result){
+
+            var featureCollection = JSON.parse(result.data[0].row_to_json);
+            var geojsonFormat = new ol.format.GeoJSON();
+            var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
+            bordureSource.addFeatures(allFeatures);
+            buildMap(featureCollection);
+
+            GeoJsonData.getGeoData($scope.refCode, "quartier", $scope.refDep).then(function(result){
+
+                var featureCollection = JSON.parse(result.data[0].row_to_json);
+                var geojsonFormat = new ol.format.GeoJSON();
+                var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
+                quartierSource.addFeatures(allFeatures);
+                buildMap(featureCollection);
+
+              GeoJsonData.getGeoData($scope.refCode, "zus", $scope.refDep).then(function(result){
+
+                    var featureCollection = JSON.parse(result.data[0].row_to_json);
+                    var geojsonFormat = new ol.format.GeoJSON();
+                    var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
+                    zusSource.addFeatures(allFeatures);
+                    buildMap(featureCollection);
+               });//---end zus
+
+
+            });//--end pru
+
+
+        });//----end border
+
+        
+    };
+
 
    var buildLayers = function(){
 
-	   	var baseLayer = new ol.layer.Group({'title': 'Base maps',layers: [new ol.layer.Tile({title: 'Stamen toner', opacity: 0.4, source: new ol.source.Stamen({layer: 'toner'})})]});
+	   	var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})]});
+
+      baseLayer.set('name', 'fond de plan');
+      baseLayer.set('baselayer', true);
 
 	   	layerVector = new ol.layer.Vector({
 	            source: vectorSource,
 	            style: new ol.style.Style({
-	                stroke: new ol.style.Stroke({color: "rgba(0,82,101,0.61)", lineDash: null, width: 2}),
-	                fill: new ol.style.Fill({color: "rgba(0,239,217,0.11)"})
+	                stroke: new ol.style.Stroke({color: "rgba(11,113,127,0.8)", lineDash: [5, 10 ], width: 2}),
+	                fill: new ol.style.Fill({color: "rgba(200,200,200,0.11)"})
 	            }),
-	            title: "données vectorielles",
+	            title: "Limites de territoires",
 	            name : "vector"
 	        });
 
+      var borderLayer =  new ol.layer.Vector({
+              source: bordureSource,
+              style: new ol.style.Style({
+                  stroke: new ol.style.Stroke({color: "rgba(50,122,128,0.1)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(50,100,196,0.1)"})
+              }),
+              title: "Bordures 500",
+              name : "vector_border"
+          });
+      var quartierLayer =  new ol.layer.Vector({
+              source: quartierSource,
+              style: new ol.style.Style({
+                  stroke: new ol.style.Stroke({color: "rgba(94,26,1,0.51)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.7)"})
+              }),
+              title: "Quartiers PRU",
+              name : "vector_pru"
+      });
+
+      var zusLayer =  new ol.layer.Vector({
+              source: zusSource,
+              style: new ol.style.Style({
+                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.6)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.6)"})
+              }),
+              title: "ZUS IDF",
+              name : "vector_zus"
+      });
+
 	   	layerVector.setVisible(true);
 
-	   	select = new ol.interaction.Select({
-	   		condition: ol.events.condition.pointerMove,
-            layer : layerVector,
-            style : new ol.style.Style({
-                stroke: new ol.style.Stroke({color: "rgba(211,246,0,0.51)", lineDash:null, width: 4}),
-                fill: new ol.style.Fill({color: "rgba(50,239,217,0.21)"}),
-            }),
-            wrapX: false
-        });
-
-	   	var layersStack = [baseLayer, layerVector];
+	   	var layersStack = [baseLayer, layerVector, borderLayer, quartierLayer, zusLayer];
 
 	   	return layersStack;
-
 
    }
 
@@ -34534,6 +34659,16 @@ var getGeoJsonData = function(){
                 view: new ol.View({
                 })
             });
+
+          //########## LAYER SWITCHER #######
+          new LayerSwitcher({
+              map: map, 
+              div: 'layerSwitcher',
+              cssPath: 'css/app.css'
+          });
+
+         //######### END LAYER SWITCHER ########
+
 
             var extent = layersStack[1].getSource().getExtent();
 
@@ -34586,7 +34721,13 @@ var getGeoJsonData = function(){
                     break;
                case  'comselect':
                    $scope.refDep = feature.get('code').substring(0, 2);
-                   $scope.refScale= 'frange';
+                   $scope.refScale= 'quartier';
+                    break;
+              case  'quart':
+                   var code = feature.get('code');
+
+                   window.location = "/thema/offre/"+code;
+                   
                     break;
             }
 
@@ -34625,7 +34766,7 @@ var getGeoJsonData = function(){
             if (feature) {
 
                 info.tooltip('hide')
-                    .attr('data-original-title', feature.get('label'))
+                    .attr('data-original-title', (feature.get('label')+" ("+feature.get('code')+")") )
                     .tooltip('fixTitle')
                     .tooltip('show');
             }else{
@@ -34658,38 +34799,46 @@ var getGeoJsonData = function(){
    		 if(!inited){
 
    		 	initMap();
-            
-        }
 
+        
+        }//--end if
 
    }
 
 
    var searchData = function(){
 
-    
+      if($scope.refScale== 'quartier'){
+
+
+      };
+
       clearVectorLayer();
       getGeoJsonData();
 
    }
 
+   getGeoJsonQuartier();
    getGeoJsonData();
 
 
 
 }])
 
-app.controller('OffreCtrl', ['$scope', 'GeoJsonData', 'PGData', '$q', function($scope,  GeoJsonData, PGData, $q){
+app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q', function($scope, $window,  GeoJsonData, PGData, $q){
 
 	$scope.offreCtrlMsg = "Message Offre Controller";
 
 
-	$scope.codeRef = '005';
+	$scope.codeRef = $window._convent;
+
 	$scope.refScale = 'quart';
 
 	$scope.dt1 = {};
 	$scope.dt2 = {};
 	$scope.dt3 = {};
+
+
 
 	
 	var getPGData = function(code, scale ){
@@ -34699,9 +34848,7 @@ app.controller('OffreCtrl', ['$scope', 'GeoJsonData', 'PGData', '$q', function($
 		PGData.getPGData(code, scale).then(function(result){
 
 			console.log(result);
-
 			
-
 			 defered.resolve(result.data);
 
 		});
@@ -34709,20 +34856,21 @@ app.controller('OffreCtrl', ['$scope', 'GeoJsonData', 'PGData', '$q', function($
 		return defered.promise;
 	}
 
-	 getPGData( '005', 'quart').then(function(result1){
+	 getPGData( $scope.codeRef, 'quart').then(function(result1){
 
 	 		$scope.ter1Label = result1[0].nom_terr;
-			$scope.codeDep= result1[0].code_dep;
-			$scope.codeDep= result1[0].code_dep;
+			$scope.codeDep   = result1[0].code_dep;
+			$scope.codecom   = result1[0].code_com;
 	 		$scope.dt1 = result1;
 
-		getPGData('93005_R500', 'border').then(function(result2){
+		getPGData($scope.codecom+'_R500', 'border').then(function(result2){
 
 			$scope.dt2 = result2;
 
-			getPGData('93005', 'horq').then(function(result3){
+			getPGData( $scope.codecom , 'horq').then(function(result3){
 
 				$scope.dt3 = result3;
+				console.log($scope.dt3[0].ta)
 
 			});
 		});
@@ -34757,6 +34905,16 @@ app.service('GeoJsonData',['$http', function($http){
                 geom_query = " ST_AsGeoJSON(ST_TRANSFORM(lg.geom,4326),5)::json As geometry, ";
                 filter_query = " FROM geocom15 As lg WHERE insee like '"+refCode+"' AND geom IS NOT NULL  ORDER BY nom ";
                 break; 
+            case 'border':
+                prop_query = " SELECT id_convent AS code, nom AS label ";
+                geom_query = " ST_AsGeoJSON(ST_TRANSFORM(lg.geom,4326),5)::json As geometry, ";
+                filter_query = " FROM border500_16 As lg WHERE geom IS NOT NULL  ORDER BY nom ";
+                break;
+            case 'zus':
+                prop_query = " SELECT zus_id AS code, nomzus AS label ";
+                geom_query = " ST_AsGeoJSON(lg.geom,5)::json As geometry, ";
+                filter_query = " FROM idf_zus As lg WHERE zus_id IN ('01100010','01100020','01100040','01100080','01100090','01100110','01100160','01100270','01100280','01100290','01100310','01100350','01100380','01100390','01100400','01100440','01100450','01100460','01104010','01108010','01108030','01108040','01109010','01110050','01110070','01111030','01112030','01113030','01114010','01114030','01120020','01120030','01124010','01126020','01127010','01133030','01133040','01135010','01135020','01137010','01145020','01145030','01146010','01146030','01147010','01150020','01150030','01151010','01152040','01152050','01155090','01155110','01156020','01156040','01156070','01157050','01157080','01157090') AND  geom IS NOT NULL  ORDER BY zus_id ";
+                break;  
             default:
                prop_query = "  SELECT 'quart' AS scale ,id_convent AS code, nom AS label  ";
                 geom_query = " ST_AsGeoJSON(ST_TRANSFORM(lg.geom,4326),5)::json As geometry, ";
@@ -34781,7 +34939,7 @@ app.service('GeoJsonData',['$http', function($http){
 app.service('PGData',['$http', function($http){
 
     return {
-       
+    
         getPGData: function(refCode, refScale){
 
             var prop_query, filter_query, geom_query = '';
@@ -34791,7 +34949,7 @@ app.service('PGData',['$http', function($http){
             switch(refScale){
 
             case 'quart':
-                prop_query = " SELECT milesim,code_conv, nom_terr_np as nom_terr,code_dep_cn AS code_dep, code_comm_pru_zus_np, territoire_np as type_ter, q_hors_q, (a1::DEC)+(a75::DEC) AS a0, a1, a2, a3, a4, a5, a18, a19, a20, a21, a22, a60, a61, a62, a63, a66, a67, a68, b60, b61, ((a18::DEC)+(a19::DEC)+(a20::DEC)+(a21::DEC)+(a22::DEC)) AS t18_22, ((a66::DEC)+(a67::DEC)+(a68 ::DEC))AS ta66_a68 ";
+                prop_query = " SELECT milesim,code_conv, nom_terr_np as nom_terr,code_dep_cn AS code_dep, code_comm_pru_zus_np as code_com, territoire_np as type_ter, q_hors_q, (a1::DEC)+(a75::DEC) AS a0, a1, a2, a3, a4, a5, a18, a19, a20, a21, a22, a60, a61, a62, a63, a66, a67, a68, b60, b61, ((a18::DEC)+(a19::DEC)+(a20::DEC)+(a21::DEC)+(a22::DEC)) AS t18_22, ((a66::DEC)+(a67::DEC)+(a68 ::DEC))AS ta66_a68 ";
                 from_query = " FROM filoq ";
                 filter_query = " WHERE code_conv ='"+refCode+"' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') ORDER BY milesim ";
                 break;

@@ -4601,6 +4601,44 @@ a.bg-danger:focus, a.bg-danger:hover {
   .hidden-print {
     display: none !important; } }
 
+.LayerSwitcher {
+  border: 1px solid #C3D0CE;
+  width: 20em;
+  margin: 0.4em;
+  padding: 0.4em;
+  font-size: 0.8em;
+  line-height: 0.8em; }
+
+.LayerSwitcher .LayerClickDiv, .LayerSwitcher .LayerClickDiv * {
+  cursor: pointer; }
+
+.LayerClickDiv {
+  margin: 0.1em; }
+
+.LayerSwitcher .Separator {
+  border-bottom: 1px solid #C3D0CE;
+  margin: 0.5em; }
+
+.LayerSwitcher .check {
+  border: 1px solid #C3D0CE;
+  height: 1em;
+  width: 1em;
+  background: transparent;
+  float: left;
+  margin: 0 0.5em 0 0; }
+
+.LayerSwitcher .checkbox {
+  /* border-radius:0.2em; */ }
+
+.LayerSwitcher .checkbox.checked {
+  background: #BBBBBB; }
+
+.LayerSwitcher .radiobutton {
+  border-radius: 1em; }
+
+.LayerSwitcher .radiobutton.checked {
+  background: #BBBBBB; }
+
 .fbm-title {
   color: #C136B4; }
 

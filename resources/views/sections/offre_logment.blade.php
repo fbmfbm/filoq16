@@ -2,11 +2,14 @@
 
 @section('content')
 <br>
-<div class="container container-fluid" ng-controller="OffreCtrl">
+<div class="container container-fluid" ng-controller="OffreCtrl" >
+<script type="text/javascript">
+    var _convent = '{{$convent}}';
+</script>
     <div class="row">
         <div class="col-md-12">
             <div class="card ">
-             <div class="card-header">THÉMATIQUES :</div>
+             <div class="card-header">THÉMATIQUES : </div>
                 <div class="card-block">
                    
                     <h4 class="card-title">Structure de l'offre de logement et profil démographique</h4>

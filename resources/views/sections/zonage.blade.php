@@ -11,11 +11,17 @@
                    
                     <h4 class="card-title">Selection d'un territoire</h4>
                     <h6 class="card-subtitle text-muted">Définition d'un territoire d'étude</h6>
+                                          
+                            <div class="btn btn-info btn-sm pull-right" ng-click="displayLegend=!displayLegend"><i class="fa fa-list" aria-hidden="true"></i></div>
+                            <div class="pull-right" ng-show="displayLegend">
+                                <div id="layerSwitcher"></div>
+                            </div>
 
                         <br>
                         <div class="card-text">
                        
                         
+
                        <div id="map">
                             <div id="info"></div>
                         </div>

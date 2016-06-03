@@ -17,11 +17,11 @@ class ThemaController extends Controller
 	}
 
 
-	public function offre_logmt()
+	public function offre_logmt($convent)
 	{
 
 
-		return view('sections/offre_logment');
+		return view('sections/offre_logment')->with('convent',$convent);
 	}
 
 }
