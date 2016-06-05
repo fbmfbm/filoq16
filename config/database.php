@@ -81,6 +81,18 @@ return [
             'prefix' => '',
             'schema' => 'public',
         ],
+        'pgsql2' => [
+            'driver' => 'pgsql',
+            'host' => env('DB_BIS_HOST', 'localhost'),
+            'port' => env('DB_BIS_PORT', '5432'),
+            'database' => env('DB_BIS_DATABASE', 'forge'),
+            'username' => env('DB_BIS_USERNAME', 'forge'),
+            'password' => env('DB_BIS_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+        ],
+
 
     ],
 

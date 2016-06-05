@@ -15,9 +15,20 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.sass('app.scss')
     .scripts([
+    	'/../../../node_modules/openlayers/dist/ol.js',
     	'/../../../node_modules/angular/angular.js',
+    	'/../../../node_modules/angular-sanitize/angular-sanitize.min.js',
+        '/../../../node_modules/angular-openlayers-directive/dist/angular-openlayers-directive.js',
+        //'/../../../node_modules/canvas-to-blob/index.js',
+    	'/../../../node_modules/file-saver/FileSaver.js',
+
+        'lib/layerswitcher.js',
     	'app.js',
     	'controllers/main_ctrl.js',
+        'controllers/zonage_ctrl.js',
+        'controllers/offre_ctrl.js',
+        'services/geojson_data_service.js',
+    	'services/pg_data_service.js'
     	])
     .version(['/css/app.css', '/js/all.js']);
 });

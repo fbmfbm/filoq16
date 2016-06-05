@@ -1,27 +1,62 @@
-$brand-primary:   #C136B4; 
-$brand-info: #00EFD9;
+//$brand-primary:   			#C136B4; 
+$brand-primary:   			#279C8D; 
+$brand-info: 				#00EFD9;
+
+$enable-flex:               true;
+$enable-rounded:            false;
 
 //@import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,800);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.min.css);
 @import "node_modules/bootstrap/scss/bootstrap-flex.scss";
+@import url(http://openlayers.org/en/v3.16.0/css/ol.css);
+
+@import "modules/layerswitcher.scss";
 
 @import "pages/home.scss";
+@import "pages/welcom.scss";
+
+@import "modules/typo.scss";
+@import "modules/block.scss";
+@import "modules/map.scss";
+@import "modules/table.scss";
 
 
- 
-$primaryColor: red;
 
 body{
 	margin-top: 80px;
 	font-family: 'Roboto';
 }
 
+@media print {
+  body {
+    font-size: 11px;
+    line-height: 9px;
+  }
+  .col-md-6,.col-md-3{
+  	padding-left: .4em;
+  	padding-right:.4em;
+  } 
+}
+
+.text-pru{
+  color : rgb(255,82,45);
+}
+
+.text-border{
+  color : rgb(122,121,232);
+}
+
+.text-horsq{
+  color : rgb(157,252,242);
+}
 
 .jumbotron{
 
     height: 100vh;
-    background-color: $brand-primary;
+    background-color: darken($brand-primary, 3%);
     color: #FFF;
 }
+
+
 

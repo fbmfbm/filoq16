@@ -1,11 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,800);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.min.css);
 /*!
  * Bootstrap v4.0.0-alpha.2 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url(http://openlayers.org/en/v3.16.0/css/ol.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -4603,13 +4604,58 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fbm-title {
   color: #C136B4; }
 
+.fbm-picto-block {
+  font-size: 2.8em;
+  display: block;
+  float: left;
+  padding-right: 0.1em;
+  margin-right: 0.1em;
+  line-height: 2.5em;
+  border-right: 1px solid #FFF; }
+
+.fbm-font-light {
+  font-weight: 100; }
+
+.fbm-card-negative {
+  border: solid 1px #F521E1;
+  padding: 10px;
+  width: 200px;
+  /* text-align: center; */
+  font-size: .95em;
+  line-height: 1.2em;
+  /* background-color: #9C2290; */
+  /* font-weight: 100; */
+  /* margin-right: 25px; */
+  margin-bottom: 25px !important; }
+
+.tooltip.in {
+  opacity: 1;
+  filter: alpha(opacity=100); }
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: red; }
+
+.tooltip-inner {
+  border: 2px solid blue; }
+
+#map {
+  height: 900px;
+  width: 50%;
+  border: solid #FF0000 10px; }
+
+#info {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  z-index: 100; }
+
 body {
   margin-top: 80px;
   font-family: 'Roboto'; }
 
 .jumbotron {
   height: 100vh;
-  background-color: #C136B4;
+  background-color: #b533a9;
   color: #FFF; }
 
-/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=main.css.map */
