@@ -11,14 +11,24 @@
             <div class="card ">
              <div class="card-header">THÉMATIQUES : </div>
                 <div class="card-block">
-                   
-                    <h4 class="card-title">Structure de l'offre de logement et profil démographique</h4>
-                    <h6 class="card-subtitle text-muted">FILOCOM au Quartier - Premiers effets de la rénovation urbaine</h6>
-
+                   <div class="row">
+                     <div class="col-md-8">
+                        <h4 class="card-title">Structure de l'offre de logement et profil démographique</h4>
+                        <h6 class="card-subtitle text-muted">FILOCOM au Quartier - Premiers effets de la rénovation urbaine</h6>
                         <br>
-                        <div class="card-text">
-                            @{{offreCtrlMsg}}
-                          </div>
+                        <h1 class='lead'>
+                           <span class="text-muted">Quartier PRU :</span>
+                           <p>@{{ter1Label}} <span class='text-muted'>(@{{codeDep}})</span></p>
+                        </h1>
+                     </div>
+                     <div class="col-md-4 text-md-right">
+                        <div id="map" class="right-text" style="width:300px;height:300px;border:1px solid #CCC;"> </div>
+                     </div>
+                   </div>
+                        <br>
+                        <div class="card-text ">
+                            
+                        </div>
                                 </div>
                             </div>
                              </div>
@@ -29,7 +39,7 @@
                                 <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                                 <tr>
-                                  <th colspan="5" class="fbm-table-right">@{{ter1Label}} (@{{codeDep}})</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" >
                                   <th></th>
@@ -56,7 +66,7 @@
                                      <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                               <tr>
-                                  <th colspan="5" class="fbm-table-right">Environnement (frange 500m)</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" > 
                                   <th colspan="2">2003</th>
@@ -81,7 +91,7 @@
                                     <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                                 <tr>
-                                  <th colspan="5" class="fbm-table-right">Commune hors ZUS et QPV</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" >
                                   <th colspan="2">2003</th>
@@ -115,7 +125,7 @@
                                 <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                                 <tr>
-                                  <th colspan="5" class="fbm-table-right">@{{ter1Label}} (@{{codeDep}})</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" >
                                   <th></th>
@@ -144,7 +154,7 @@
                                      <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                               <tr>
-                                  <th colspan="5" class="fbm-table-right">Environnement (frange 500m)</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i>Environnement (frange 500m)</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" > 
                                   <th colspan="2">2003</th>
@@ -171,7 +181,7 @@
                                     <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                                 <tr>
-                                  <th colspan="5" class="fbm-table-right">Commune hors ZUS et QPV</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" >
                                   <th colspan="2">2003</th>
@@ -207,7 +217,7 @@
                                 <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                                 <tr>
-                                  <th colspan="5" class="fbm-table-right">@{{ter1Label}} (@{{codeDep}})</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" >
                                   <th></th>
@@ -236,7 +246,7 @@
                                      <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                               <tr>
-                                  <th colspan="5" class="fbm-table-right">Environnement (frange 500m)</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" > 
                                   <th colspan="2">2003</th>
@@ -263,7 +273,7 @@
                                     <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                                 <tr>
-                                  <th colspan="5" class="fbm-table-right">Commune hors ZUS et QPV</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" >
                                   <th colspan="2">2003</th>
@@ -299,7 +309,7 @@
                                 <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                                 <tr>
-                                  <th colspan="5" class="fbm-table-right">@{{ter1Label}} (@{{codeDep}})</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" >
                                   <th></th>
@@ -327,7 +337,7 @@
                                      <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                               <tr>
-                                  <th colspan="5" class="fbm-table-right">Environnement (frange 500m)</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" > 
                                   <th colspan="2">2003</th>
@@ -353,7 +363,7 @@
                                     <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
                                 <tr>
-                                  <th colspan="5" class="fbm-table-right">Commune hors ZUS et QPV</th>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
                                 </tr>
                                 <tr class="table-inverse text-center fbm-table-header" >
                                   <th colspan="2">2003</th>

@@ -34418,6 +34418,191 @@ angular.module('openlayers-directive').factory('olMapDefaults', ["$q", "olHelper
 }]);
 
 }));
+/* FileSaver.js
+ * A saveAs() FileSaver implementation.
+ * 1.3.0
+ *
+ * By Eli Grey, http://eligrey.com
+ * License: MIT
+ *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
+ */
+
+/*global self */
+/*jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
+
+/*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
+
+var saveAs = saveAs || (function(view) {
+	"use strict";
+	// IE <10 is explicitly unsupported
+	if (typeof view === "undefined" || typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
+		return;
+	}
+	var
+		  doc = view.document
+		  // only get URL when necessary in case Blob.js hasn't overridden it yet
+		, get_URL = function() {
+			return view.URL || view.webkitURL || view;
+		}
+		, save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+		, can_use_save_link = "download" in save_link
+		, click = function(node) {
+			var event = new MouseEvent("click");
+			node.dispatchEvent(event);
+		}
+		, is_safari = /constructor/i.test(view.HTMLElement)
+		, throw_outside = function(ex) {
+			(view.setImmediate || view.setTimeout)(function() {
+				throw ex;
+			}, 0);
+		}
+		, force_saveable_type = "application/octet-stream"
+		// the Blob API is fundamentally broken as there is no "downloadfinished" event to subscribe to
+		, arbitrary_revoke_timeout = 1000 * 40 // in ms
+		, revoke = function(file) {
+			var revoker = function() {
+				if (typeof file === "string") { // file is an object URL
+					get_URL().revokeObjectURL(file);
+				} else { // file is a File
+					file.remove();
+				}
+			};
+			setTimeout(revoker, arbitrary_revoke_timeout);
+		}
+		, dispatch = function(filesaver, event_types, event) {
+			event_types = [].concat(event_types);
+			var i = event_types.length;
+			while (i--) {
+				var listener = filesaver["on" + event_types[i]];
+				if (typeof listener === "function") {
+					try {
+						listener.call(filesaver, event || filesaver);
+					} catch (ex) {
+						throw_outside(ex);
+					}
+				}
+			}
+		}
+		, auto_bom = function(blob) {
+			// prepend BOM for UTF-8 XML and text/* types (including HTML)
+			// note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
+			if (/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+				return new Blob([String.fromCharCode(0xFEFF), blob], {type: blob.type});
+			}
+			return blob;
+		}
+		, FileSaver = function(blob, name, no_auto_bom) {
+			if (!no_auto_bom) {
+				blob = auto_bom(blob);
+			}
+			// First try a.download, then web filesystem, then object URLs
+			var
+				  filesaver = this
+				, type = blob.type
+				, force = type === force_saveable_type
+				, object_url
+				, dispatch_all = function() {
+					dispatch(filesaver, "writestart progress write writeend".split(" "));
+				}
+				// on any filesys errors revert to saving with object URLs
+				, fs_error = function() {
+					if (force && is_safari && view.FileReader) {
+						// Safari doesn't allow downloading of blob urls
+						var reader = new FileReader();
+						reader.onloadend = function() {
+							var base64Data = reader.result;
+							view.location.href = "data:attachment/file" + base64Data.slice(base64Data.search(/[,;]/));
+							filesaver.readyState = filesaver.DONE;
+							dispatch_all();
+						};
+						reader.readAsDataURL(blob);
+						filesaver.readyState = filesaver.INIT;
+						return;
+					}
+					// don't create more object URLs than needed
+					if (!object_url) {
+						object_url = get_URL().createObjectURL(blob);
+					}
+					if (force) {
+						view.location.href = object_url;
+					} else {
+						var opened = view.open(object_url, "_blank");
+						if (!opened) {
+							// Apple does not allow window.open, see https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/WorkingwithWindowsandTabs/WorkingwithWindowsandTabs.html
+							view.location.href = object_url;
+						}
+					}
+					filesaver.readyState = filesaver.DONE;
+					dispatch_all();
+					revoke(object_url);
+				}
+			;
+			filesaver.readyState = filesaver.INIT;
+
+			if (can_use_save_link) {
+				object_url = get_URL().createObjectURL(blob);
+				setTimeout(function() {
+					save_link.href = object_url;
+					save_link.download = name;
+					click(save_link);
+					dispatch_all();
+					revoke(object_url);
+					filesaver.readyState = filesaver.DONE;
+				});
+				return;
+			}
+
+			fs_error();
+		}
+		, FS_proto = FileSaver.prototype
+		, saveAs = function(blob, name, no_auto_bom) {
+			return new FileSaver(blob, name || blob.name || "download", no_auto_bom);
+		}
+	;
+	// IE 10+ (native saveAs)
+	if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+		return function(blob, name, no_auto_bom) {
+			name = name || blob.name || "download";
+
+			if (!no_auto_bom) {
+				blob = auto_bom(blob);
+			}
+			return navigator.msSaveOrOpenBlob(blob, name);
+		};
+	}
+
+	FS_proto.abort = function(){};
+	FS_proto.readyState = FS_proto.INIT = 0;
+	FS_proto.WRITING = 1;
+	FS_proto.DONE = 2;
+
+	FS_proto.error =
+	FS_proto.onwritestart =
+	FS_proto.onprogress =
+	FS_proto.onwrite =
+	FS_proto.onabort =
+	FS_proto.onerror =
+	FS_proto.onwriteend =
+		null;
+
+	return saveAs;
+}(
+	   typeof self !== "undefined" && self
+	|| typeof window !== "undefined" && window
+	|| this.content
+));
+// `self` is undefined in Firefox for Android content script context
+// while `this` is nsIContentFrameMessageManager
+// with an attribute `content` that corresponds to the window
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports.saveAs = saveAs;
+} else if ((typeof define !== "undefined" && define !== null) && (define.amd !== null)) {
+  define([], function() {
+    return saveAs;
+  });
+}
+
 // Create a simple layer switcher in element div:
 var LayerSwitcher = function(options){
   var o = this.options = options || {};
@@ -34463,11 +34648,15 @@ var LayerSwitcher = function(options){
       l.getVisible() ? $li.addClass('checked') : $li.removeClass('checked') ;
       BL ? $li.addClass('radiobutton') : $li.addClass('checkbox') ;
     var $ll = $('<label>'+l.get('title')+'</label>');
+    var $bloccolor='';
+    if(l.get('bloccolor')){
+       $bloccolor = $('<i style="color:'+l.get('bloccolor')+';" class="fa '+l.get('blocpicto')+'"></i>');
+    }  
     var $ld = $('<div class="LayerClickDiv">').click(function(){ 
       l.setVisible(!l.getVisible());
       l.get('baselayer') ? otherBLoff(l) :0;
     }); //toggle viz on click
-    $ld.append($li,$ll);
+    $ld.append($li, $bloccolor, ' ' ,$ll);
     BL ? $baseDiv.append($ld) : $overDiv.append($ld) ;
     // bind checkbox state to layer event:
     l.on('change:visible', function(e){
@@ -34503,7 +34692,7 @@ app.controller('MainCtrl', ['$scope', function($scope){
 
 	
 }])
-app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'olData', function($scope, GeoJsonData, olData){
+app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope, GeoJsonData, PGData){
 
 	$scope.zonageCtrlMsg = "Message du Zonage Controller";
 
@@ -34511,73 +34700,71 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'olData', function($scope
 
 	var inited = false;
 	$scope.refScale = 'dep';
-    var map; 
+  var map; 
 	var vectorSource = new ol.source.Vector();
   var quartierSource = new ol.source.Vector();
   var bordureSource = new ol.source.Vector();
   var zusSource = new ol.source.Vector();
 
+  var quartierLayer;
+
 	var featureOverlay;
 	var layerVector;
+  $scope.refPru  = [];
 
-  
 
+
+ var getRefPru = function(){
+
+    PGData.getRefCode('pru').then(function(result){
+
+      $scope.refPru = result.data;
+
+      console.log(result);
+
+      getGeoJsonQuartier();
+      getGeoJsonData();
+
+    })
+ } ;
 
 var getGeoJsonData = function(){
 
-
         GeoJsonData.getGeoData($scope.refCode, $scope.refScale, $scope.refDep).then(function(result){
 
-            var featureCollection = JSON.parse(result.data[0].row_to_json);
-            var geojsonFormat = new ol.format.GeoJSON();
-            var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
-           	vectorSource.addFeatures(allFeatures);
-            buildMap(featureCollection);
+           	vectorSource.addFeatures(result);
         });
-        
     };
 
-  var getGeoJsonQuartier = function(){
+  var getGeoJsonQuartier = function(refCode){
+    
+        (!refCode)?refCode='':refCode=refCode;
 
+        GeoJsonData.getGeoData($scope.refCode, "border",refCode).then(function(result){
 
-        GeoJsonData.getGeoData($scope.refCode, "border", $scope.refDep).then(function(result){
+            bordureSource.addFeatures(result);
 
-            var featureCollection = JSON.parse(result.data[0].row_to_json);
-            var geojsonFormat = new ol.format.GeoJSON();
-            var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
-            bordureSource.addFeatures(allFeatures);
-            buildMap(featureCollection);
+            GeoJsonData.getGeoData($scope.refCode, "quartier", refCode).then(function(result){
 
-            GeoJsonData.getGeoData($scope.refCode, "quartier", $scope.refDep).then(function(result){
+                quartierSource.addFeatures(result);
 
-                var featureCollection = JSON.parse(result.data[0].row_to_json);
-                var geojsonFormat = new ol.format.GeoJSON();
-                var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
-                quartierSource.addFeatures(allFeatures);
-                buildMap(featureCollection);
+              GeoJsonData.getGeoData($scope.refCode, "zus", refCode).then(function(result){
 
-              GeoJsonData.getGeoData($scope.refCode, "zus", $scope.refDep).then(function(result){
-
-                    var featureCollection = JSON.parse(result.data[0].row_to_json);
-                    var geojsonFormat = new ol.format.GeoJSON();
-                    var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
-                    zusSource.addFeatures(allFeatures);
-                    buildMap(featureCollection);
+                    zusSource.addFeatures(result);
+                    buildMap();
                });//---end zus
-
-
             });//--end pru
-
-
-        });//----end border
-
-        
+        });//----end border       
     };
-
 
    var buildLayers = function(){
-
-	   	var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})]});
+    
+      //var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [new ol.layer.Tile({source: new ol.source.OSM()}),new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})]});
+      var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [
+          new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })})
+          //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'AerialWithLabels' })})
+        ]});
+     
 
       baseLayer.set('name', 'fond de plan');
       baseLayer.set('baselayer', true);
@@ -34585,7 +34772,7 @@ var getGeoJsonData = function(){
 	   	layerVector = new ol.layer.Vector({
 	            source: vectorSource,
 	            style: new ol.style.Style({
-	                stroke: new ol.style.Stroke({color: "rgba(11,113,127,0.8)", lineDash: [5, 10 ], width: 2}),
+	                stroke: new ol.style.Stroke({color: "rgba(200,200,200,0.5)", lineDash: [5, 10 ], width: 2}),
 	                fill: new ol.style.Fill({color: "rgba(200,200,200,0.11)"})
 	            }),
 	            title: "Limites de territoires",
@@ -34595,35 +34782,41 @@ var getGeoJsonData = function(){
       var borderLayer =  new ol.layer.Vector({
               source: bordureSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(50,122,128,0.1)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(50,100,196,0.1)"})
+                  stroke: new ol.style.Stroke({color: "rgba(50,122,128,0.6)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(50,100,196,0.3)"})
               }),
               title: "Bordures 500",
-              name : "vector_border"
+              name : "vector_border",
+              bloccolor: "rgb(90,150,230)",
+              blocpicto: "fa-square"
           });
-      var quartierLayer =  new ol.layer.Vector({
+      quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(94,26,1,0.51)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.7)"})
+                  stroke: new ol.style.Stroke({color: "rgba(194,26,1,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.4)"})
               }),
               title: "Quartiers PRU",
-              name : "vector_pru"
+              name : "vector_pru",
+              bloccolor: "rgb(194,26,1)",
+              blocpicto: "fa-square"
       });
 
       var zusLayer =  new ol.layer.Vector({
               source: zusSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.6)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.6)"})
+                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.3)"})
               }),
               title: "ZUS IDF",
-              name : "vector_zus"
+              name : "vector_zus",
+              bloccolor: "rgb(255,127,0)",
+              blocpicto: "fa-square"
       });
 
 	   	layerVector.setVisible(true);
 
-	   	var layersStack = [baseLayer, layerVector, borderLayer, quartierLayer, zusLayer];
+	   	var layersStack = [baseLayer, layerVector, borderLayer, zusLayer, quartierLayer];
 
 	   	return layersStack;
 
@@ -34645,13 +34838,14 @@ var getGeoJsonData = function(){
 	   		layer : layerVector,
 	   		style : new ol.style.Style({
                 stroke: new ol.style.Stroke({color: "rgba(211,246,0,0.51)", lineDash:null, width: 4}),
-                fill: new ol.style.Fill({color: "rgba(50,255,98,0.41)"}),
+                //fill: new ol.style.Fill({color: "rgba(50,255,98,0.0)"}),
             }),
 	   	})
 
    			var layersStack = buildLayers();
    			map = new ol.Map({
-                controls: ol.control.defaults().extend([]),
+                logo: false,
+                controls: ol.control.defaults({ attribution: false }).extend([]),
                 interactions: ol.interaction.defaults().extend([select, over]),
                 target: document.getElementById('map'),
                 renderer: 'canvas',
@@ -34664,7 +34858,7 @@ var getGeoJsonData = function(){
           new LayerSwitcher({
               map: map, 
               div: 'layerSwitcher',
-              cssPath: '/build/css/app-2b30786d1c.css'
+              cssPath: '/build/css/app-9328515463.css'
           });
 
          //######### END LAYER SWITCHER ########
@@ -34734,7 +34928,7 @@ var getGeoJsonData = function(){
             $scope.refCode = feature.get('code');
 
             console.log( $scope.refCode,  $scope.refScale, $scope.refDep);
-              if(feature.get('scale')!='pars') { searchData() };
+              //if(feature.get('scale')!='pars') { searchData() };
         });
 
 
@@ -34776,10 +34970,26 @@ var getGeoJsonData = function(){
 
         };
 
+  $scope.zoomOnFeature = function(codeFeature){
 
+    if(codeFeature && codeFeature!=''){
 
+    var features = quartierLayer.getSource().getFeatures();
 
-   var buildVectorOverlay = function(){
+        for(var i=0;i<features.length;i++){
+
+            if(features[i].get('code')== codeFeature){
+
+                var featureExtent = ol.extent.createEmpty(); 
+                ol.extent.extend(featureExtent, features[i].getGeometry().getExtent()); 
+                map.getView().fit(featureExtent, map.getSize());
+            };
+        };
+     }//--if feature
+ 
+  };
+
+  var buildVectorOverlay = function(){
 
 
    	
@@ -34794,7 +35004,7 @@ var getGeoJsonData = function(){
     };
 
 
-   var buildMap = function(geoJsonDataFeature){
+   var buildMap = function(){
 
    		 if(!inited){
 
@@ -34810,16 +35020,27 @@ var getGeoJsonData = function(){
 
       if($scope.refScale== 'quartier'){
 
-
+      }else{
+        clearVectorLayer();
+        getGeoJsonData();
       };
-
-      clearVectorLayer();
-      getGeoJsonData();
-
    }
 
-   getGeoJsonQuartier();
-   getGeoJsonData();
+     $scope.exportPNG = function () {
+
+    canvas = document.getElementsByTagName('canvas')[0];
+    canvas.toBlob(function (blob) {
+        saveAs(blob, 'map.png');
+    });
+  };
+
+
+  //#################### RUN ########### 
+
+
+   getRefPru();
+
+
 
 
 
@@ -34837,17 +35058,19 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 	$scope.dt1 = {};
 	$scope.dt2 = {};
 	$scope.dt3 = {};
+	var comSource = new ol.source.Vector();
+  	var quartierSource = new ol.source.Vector();
+  	var bordureSource = new ol.source.Vector();
+  	var zusSource = new ol.source.Vector();
 
-
-
-	
+	//############# GET STAT DATA ##########################
 	var getPGData = function(code, scale ){
 
 		var defered = $q.defer();
 
 		PGData.getPGData(code, scale).then(function(result){
 
-			console.log(result);
+			//console.log(result);
 			
 			 defered.resolve(result.data);
 
@@ -34856,7 +35079,8 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 		return defered.promise;
 	}
 
-	 getPGData( $scope.codeRef, 'quart').then(function(result1){
+
+	getPGData( $scope.codeRef, 'quart').then(function(result1){
 
 	 		$scope.ter1Label = result1[0].nom_terr;
 			$scope.codeDep   = result1[0].code_dep;
@@ -34870,11 +35094,127 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 			getPGData( $scope.codecom , 'horq').then(function(result3){
 
 				$scope.dt3 = result3;
-				console.log($scope.dt3[0].ta)
-
+				getGeoJsonQuartier()//----------- build map !!
 			});
 		});
 	});
+
+	//############### END GET STAT DATA ###########
+
+	 //################### MAP ###################
+	  
+	 var getGeoJsonQuartier = function(refCode){
+
+        (!refCode)?refCode='':refCode=refCode;
+
+         GeoJsonData.getGeoData($scope.codecom , 'comselect',refCode).then(function(result){
+
+            comSource.addFeatures(result);
+
+	        GeoJsonData.getGeoData($scope.refCode, "border",refCode).then(function(result){
+
+	            bordureSource.addFeatures(result);
+
+	            GeoJsonData.getGeoData($scope.refCode, "quartier", refCode).then(function(result){
+
+	                quartierSource.addFeatures(result);
+
+	              	GeoJsonData.getGeoData($scope.refCode, "zus", refCode).then(function(result){
+
+	                    zusSource.addFeatures(result);
+	                    initMap();
+
+               	});//---end zus
+            });//--end pru
+        });//----end border       
+     });//----end com 
+
+    };
+
+	var initMap = function(){
+
+	 	var layersStack = buildLayers();
+
+	 	console.log(layersStack.length);
+
+		map = new ol.Map({
+            logo: false,
+            controls: ol.control.defaults({ attribution: false,zoom: false}).extend([]),
+            interactions: ol.interaction.defaults({ zoomWheelEnabled: false, dragPan: false}).extend([]),
+            target: document.getElementById('map'),
+            renderer: 'canvas',
+            layers: layersStack,
+            view: new ol.View({
+            })
+        });
+
+		var zoomCenter = layersStack[1].getSource().getExtent();
+		map.getView().fit(zoomCenter	, map.getSize());
+        		
+		layersStack[1].getSource().on("change", function(evt){
+			var extent = layersStack[1].getSource().getExtent();	
+    		console.log(extent);
+    		map.getView().fit(extent, map.getSize());
+    	});
+     }
+
+     var buildLayers = function(){
+
+     	var baseLayer = new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })});
+
+     	var comLayer =  new ol.layer.Vector({
+              source: comSource,
+              style: new ol.style.Style({
+                  stroke: new ol.style.Stroke({color: "rgba(90,200,230,0.7)", lineDash: null, width: 1}),
+                  fill: new ol.style.Fill({color: "rgba(90,200,250,0.3)"})
+              }),
+              title: "zone hors q",
+              name : "vector_horsq",
+              bloccolor: "rgb(90,200,230)",
+              blocpicto: "fa-square"
+          });
+     	
+     	var borderLayer =  new ol.layer.Vector({
+              source: bordureSource,
+              style: new ol.style.Style({
+                  stroke: new ol.style.Stroke({color: "rgba(50,122,128,0.7)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(50,100,196,0.3)"})
+              }),
+              title: "Bordures 500",
+              name : "vector_border",
+              bloccolor: "rgb(90,150,230)",
+              blocpicto: "fa-square"
+          });
+      	var quartierLayer =  new ol.layer.Vector({
+              source: quartierSource,
+              style: new ol.style.Style({
+                  stroke: new ol.style.Stroke({color: "rgba(194,26,1,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.4)"})
+              }),
+              title: "Quartiers PRU",
+              name : "vector_pru",
+              bloccolor: "rgb(194,26,1)",
+              blocpicto: "fa-square"
+      });
+
+      var zusLayer =  new ol.layer.Vector({
+              source: zusSource,
+              style: new ol.style.Style({
+                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.3)"})
+              }),
+              title: "ZUS IDF",
+              name : "vector_zus",
+              bloccolor: "rgb(255,127,0)",
+              blocpicto: "fa-square"
+      });
+
+	   	var layersStack = [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
+	   	return layersStack;
+     }
+ 
+
+	 //############## END MAP ####################
 	
 
 }]);
@@ -34904,7 +35244,12 @@ app.service('GeoJsonData',['$http', function($http){
                 prop_query = " SELECT 'comselect' AS scale, insee AS code, nom AS label ";
                 geom_query = " ST_AsGeoJSON(ST_TRANSFORM(lg.geom,4326),5)::json As geometry, ";
                 filter_query = " FROM geocom15 As lg WHERE insee like '"+refCode+"' AND geom IS NOT NULL  ORDER BY nom ";
-                break; 
+                break;
+            case 'horsq':
+                prop_query = " SELECT 'comselect' AS scale, lg.insee AS code, lg.nom AS label ";
+                geom_query = " ST_AsGeoJSON(ST_TRANSFORM(ST_Difference(st_transform(lg.geom,'2154'), q.geom),4326),5)::json As geometry, ";
+                filter_query = " FROM geocom15 As lg, qru16 AS q WHERE lg.insee like '"+refCode+"' AND lg.geom IS NOT NULL  ORDER BY lg.nom ";
+                break;      
             case 'border':
                 prop_query = " SELECT id_convent AS code, nom AS label ";
                 geom_query = " ST_AsGeoJSON(ST_TRANSFORM(lg.geom,4326),5)::json As geometry, ";
@@ -34923,8 +35268,13 @@ app.service('GeoJsonData',['$http', function($http){
 
 
             var promise = $http.post('/jx/geojson', {refScale: refScale, refCode: refCode, geomQuery : geom_query, propQuery : prop_query, filterQuery : filter_query}).then(function(response){
+ 
+               
+                var featureCollection = JSON.parse(response.data.data[0].row_to_json);
+                var geojsonFormat = new ol.format.GeoJSON();
+                var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
 
-                return response.data;
+                return allFeatures;
             });
 
 
@@ -34939,7 +35289,21 @@ app.service('GeoJsonData',['$http', function($http){
 app.service('PGData',['$http', function($http){
 
     return {
-    
+        getRefCode : function(typeRef){
+
+           prop_query = " SELECT distinct code_conv as code, nom_terr_np as nom_conv,code_dep_cn AS code_dep, code_comm_pru_zus_np as code_com, territoire_np as type_ter, q_hors_q ";
+           from_query = " FROM filoq ";
+           filter_query = " WHERE territoire_np = '"+typeRef+"'  ORDER BY nom_conv ";
+
+           filter_query =   prop_query +  from_query +  filter_query;
+
+            var promise = $http.post('/jx/pgdata', {refScale: '', refCode: '',  filterQuery : filter_query}).then(function(response){
+
+                return response.data;
+            });
+
+            return promise;
+        },  
         getPGData: function(refCode, refScale){
 
             var prop_query, filter_query, geom_query = '';
@@ -34967,7 +35331,7 @@ app.service('PGData',['$http', function($http){
 
             filter_query =   prop_query +  from_query +  filter_query;
 
-            console.log(filter_query);
+            //console.log(filter_query);
 
             var promise = $http.post('/jx/pgdata', {refScale: refScale, refCode: refCode,  filterQuery : filter_query}).then(function(response){
 

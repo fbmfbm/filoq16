@@ -18,7 +18,10 @@ elixir(function(mix) {
     	'/../../../node_modules/openlayers/dist/ol.js',
     	'/../../../node_modules/angular/angular.js',
     	'/../../../node_modules/angular-sanitize/angular-sanitize.min.js',
-    	'/../../../node_modules/angular-openlayers-directive/dist/angular-openlayers-directive.js',
+        '/../../../node_modules/angular-openlayers-directive/dist/angular-openlayers-directive.js',
+        //'/../../../node_modules/canvas-to-blob/index.js',
+    	'/../../../node_modules/file-saver/FileSaver.js',
+
         'lib/layerswitcher.js',
     	'app.js',
     	'controllers/main_ctrl.js',

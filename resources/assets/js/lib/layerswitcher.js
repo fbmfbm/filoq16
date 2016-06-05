@@ -43,11 +43,15 @@ var LayerSwitcher = function(options){
       l.getVisible() ? $li.addClass('checked') : $li.removeClass('checked') ;
       BL ? $li.addClass('radiobutton') : $li.addClass('checkbox') ;
     var $ll = $('<label>'+l.get('title')+'</label>');
+    var $bloccolor='';
+    if(l.get('bloccolor')){
+       $bloccolor = $('<i style="color:'+l.get('bloccolor')+';" class="fa '+l.get('blocpicto')+'"></i>');
+    }  
     var $ld = $('<div class="LayerClickDiv">').click(function(){ 
       l.setVisible(!l.getVisible());
       l.get('baselayer') ? otherBLoff(l) :0;
     }); //toggle viz on click
-    $ld.append($li,$ll);
+    $ld.append($li, $bloccolor, ' ' ,$ll);
     BL ? $baseDiv.append($ld) : $overDiv.append($ld) ;
     // bind checkbox state to layer event:
     l.on('change:visible', function(e){

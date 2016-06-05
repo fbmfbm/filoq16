@@ -1,4 +1,4 @@
-app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'olData', function($scope, GeoJsonData, olData){
+app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope, GeoJsonData, PGData){
 
 	$scope.zonageCtrlMsg = "Message du Zonage Controller";
 
@@ -6,73 +6,71 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'olData', function($scope
 
 	var inited = false;
 	$scope.refScale = 'dep';
-    var map; 
+  var map; 
 	var vectorSource = new ol.source.Vector();
   var quartierSource = new ol.source.Vector();
   var bordureSource = new ol.source.Vector();
   var zusSource = new ol.source.Vector();
 
+  var quartierLayer;
+
 	var featureOverlay;
 	var layerVector;
+  $scope.refPru  = [];
 
-  
 
+
+ var getRefPru = function(){
+
+    PGData.getRefCode('pru').then(function(result){
+
+      $scope.refPru = result.data;
+
+      console.log(result);
+
+      getGeoJsonQuartier();
+      getGeoJsonData();
+
+    })
+ } ;
 
 var getGeoJsonData = function(){
 
-
         GeoJsonData.getGeoData($scope.refCode, $scope.refScale, $scope.refDep).then(function(result){
 
-            var featureCollection = JSON.parse(result.data[0].row_to_json);
-            var geojsonFormat = new ol.format.GeoJSON();
-            var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
-           	vectorSource.addFeatures(allFeatures);
-            buildMap(featureCollection);
+           	vectorSource.addFeatures(result);
         });
-        
     };
 
-  var getGeoJsonQuartier = function(){
+  var getGeoJsonQuartier = function(refCode){
+    
+        (!refCode)?refCode='':refCode=refCode;
 
+        GeoJsonData.getGeoData($scope.refCode, "border",refCode).then(function(result){
 
-        GeoJsonData.getGeoData($scope.refCode, "border", $scope.refDep).then(function(result){
+            bordureSource.addFeatures(result);
 
-            var featureCollection = JSON.parse(result.data[0].row_to_json);
-            var geojsonFormat = new ol.format.GeoJSON();
-            var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
-            bordureSource.addFeatures(allFeatures);
-            buildMap(featureCollection);
+            GeoJsonData.getGeoData($scope.refCode, "quartier", refCode).then(function(result){
 
-            GeoJsonData.getGeoData($scope.refCode, "quartier", $scope.refDep).then(function(result){
+                quartierSource.addFeatures(result);
 
-                var featureCollection = JSON.parse(result.data[0].row_to_json);
-                var geojsonFormat = new ol.format.GeoJSON();
-                var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
-                quartierSource.addFeatures(allFeatures);
-                buildMap(featureCollection);
+              GeoJsonData.getGeoData($scope.refCode, "zus", refCode).then(function(result){
 
-              GeoJsonData.getGeoData($scope.refCode, "zus", $scope.refDep).then(function(result){
-
-                    var featureCollection = JSON.parse(result.data[0].row_to_json);
-                    var geojsonFormat = new ol.format.GeoJSON();
-                    var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
-                    zusSource.addFeatures(allFeatures);
-                    buildMap(featureCollection);
+                    zusSource.addFeatures(result);
+                    buildMap();
                });//---end zus
-
-
             });//--end pru
-
-
-        });//----end border
-
-        
+        });//----end border       
     };
-
 
    var buildLayers = function(){
-
-	   	var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})]});
+    
+      //var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [new ol.layer.Tile({source: new ol.source.OSM()}),new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})]});
+      var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [
+          new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })})
+          //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'AerialWithLabels' })})
+        ]});
+     
 
       baseLayer.set('name', 'fond de plan');
       baseLayer.set('baselayer', true);
@@ -80,7 +78,7 @@ var getGeoJsonData = function(){
 	   	layerVector = new ol.layer.Vector({
 	            source: vectorSource,
 	            style: new ol.style.Style({
-	                stroke: new ol.style.Stroke({color: "rgba(11,113,127,0.8)", lineDash: [5, 10 ], width: 2}),
+	                stroke: new ol.style.Stroke({color: "rgba(200,200,200,0.5)", lineDash: [5, 10 ], width: 2}),
 	                fill: new ol.style.Fill({color: "rgba(200,200,200,0.11)"})
 	            }),
 	            title: "Limites de territoires",
@@ -90,35 +88,41 @@ var getGeoJsonData = function(){
       var borderLayer =  new ol.layer.Vector({
               source: bordureSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(50,122,128,0.1)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(50,100,196,0.1)"})
+                  stroke: new ol.style.Stroke({color: "rgba(50,122,128,0.6)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(50,100,196,0.3)"})
               }),
               title: "Bordures 500",
-              name : "vector_border"
+              name : "vector_border",
+              bloccolor: "rgb(90,150,230)",
+              blocpicto: "fa-square"
           });
-      var quartierLayer =  new ol.layer.Vector({
+      quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(94,26,1,0.51)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.7)"})
+                  stroke: new ol.style.Stroke({color: "rgba(194,26,1,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.4)"})
               }),
               title: "Quartiers PRU",
-              name : "vector_pru"
+              name : "vector_pru",
+              bloccolor: "rgb(194,26,1)",
+              blocpicto: "fa-square"
       });
 
       var zusLayer =  new ol.layer.Vector({
               source: zusSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.6)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.6)"})
+                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.3)"})
               }),
               title: "ZUS IDF",
-              name : "vector_zus"
+              name : "vector_zus",
+              bloccolor: "rgb(255,127,0)",
+              blocpicto: "fa-square"
       });
 
 	   	layerVector.setVisible(true);
 
-	   	var layersStack = [baseLayer, layerVector, borderLayer, quartierLayer, zusLayer];
+	   	var layersStack = [baseLayer, layerVector, borderLayer, zusLayer, quartierLayer];
 
 	   	return layersStack;
 
@@ -140,13 +144,14 @@ var getGeoJsonData = function(){
 	   		layer : layerVector,
 	   		style : new ol.style.Style({
                 stroke: new ol.style.Stroke({color: "rgba(211,246,0,0.51)", lineDash:null, width: 4}),
-                fill: new ol.style.Fill({color: "rgba(50,255,98,0.41)"}),
+                //fill: new ol.style.Fill({color: "rgba(50,255,98,0.0)"}),
             }),
 	   	})
 
    			var layersStack = buildLayers();
    			map = new ol.Map({
-                controls: ol.control.defaults().extend([]),
+                logo: false,
+                controls: ol.control.defaults({ attribution: false }).extend([]),
                 interactions: ol.interaction.defaults().extend([select, over]),
                 target: document.getElementById('map'),
                 renderer: 'canvas',
@@ -229,7 +234,7 @@ var getGeoJsonData = function(){
             $scope.refCode = feature.get('code');
 
             console.log( $scope.refCode,  $scope.refScale, $scope.refDep);
-              if(feature.get('scale')!='pars') { searchData() };
+              //if(feature.get('scale')!='pars') { searchData() };
         });
 
 
@@ -271,10 +276,26 @@ var getGeoJsonData = function(){
 
         };
 
+  $scope.zoomOnFeature = function(codeFeature){
 
+    if(codeFeature && codeFeature!=''){
 
+    var features = quartierLayer.getSource().getFeatures();
 
-   var buildVectorOverlay = function(){
+        for(var i=0;i<features.length;i++){
+
+            if(features[i].get('code')== codeFeature){
+
+                var featureExtent = ol.extent.createEmpty(); 
+                ol.extent.extend(featureExtent, features[i].getGeometry().getExtent()); 
+                map.getView().fit(featureExtent, map.getSize());
+            };
+        };
+     }//--if feature
+ 
+  };
+
+  var buildVectorOverlay = function(){
 
 
    	
@@ -289,7 +310,7 @@ var getGeoJsonData = function(){
     };
 
 
-   var buildMap = function(geoJsonDataFeature){
+   var buildMap = function(){
 
    		 if(!inited){
 
@@ -305,16 +326,27 @@ var getGeoJsonData = function(){
 
       if($scope.refScale== 'quartier'){
 
-
+      }else{
+        clearVectorLayer();
+        getGeoJsonData();
       };
-
-      clearVectorLayer();
-      getGeoJsonData();
-
    }
 
-   getGeoJsonQuartier();
-   getGeoJsonData();
+     $scope.exportPNG = function () {
+
+    canvas = document.getElementsByTagName('canvas')[0];
+    canvas.toBlob(function (blob) {
+        saveAs(blob, 'map.png');
+    });
+  };
+
+
+  //#################### RUN ########### 
+
+
+   getRefPru();
+
+
 
 
 

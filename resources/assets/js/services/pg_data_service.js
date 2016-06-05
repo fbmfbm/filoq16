@@ -2,7 +2,21 @@
 app.service('PGData',['$http', function($http){
 
     return {
-    
+        getRefCode : function(typeRef){
+
+           prop_query = " SELECT distinct code_conv as code, nom_terr_np as nom_conv,code_dep_cn AS code_dep, code_comm_pru_zus_np as code_com, territoire_np as type_ter, q_hors_q ";
+           from_query = " FROM filoq ";
+           filter_query = " WHERE territoire_np = '"+typeRef+"'  ORDER BY nom_conv ";
+
+           filter_query =   prop_query +  from_query +  filter_query;
+
+            var promise = $http.post('/jx/pgdata', {refScale: '', refCode: '',  filterQuery : filter_query}).then(function(response){
+
+                return response.data;
+            });
+
+            return promise;
+        },  
         getPGData: function(refCode, refScale){
 
             var prop_query, filter_query, geom_query = '';
@@ -30,7 +44,7 @@ app.service('PGData',['$http', function($http){
 
             filter_query =   prop_query +  from_query +  filter_query;
 
-            console.log(filter_query);
+            //console.log(filter_query);
 
             var promise = $http.post('/jx/pgdata', {refScale: refScale, refCode: refCode,  filterQuery : filter_query}).then(function(response){
 

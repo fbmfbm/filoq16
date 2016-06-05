@@ -4728,6 +4728,15 @@ body {
     padding-left: .4em;
     padding-right: .4em; } }
 
+.text-pru {
+  color: #ff522d; }
+
+.text-border {
+  color: #7a79e8; }
+
+.text-horsq {
+  color: #9dfcf2; }
+
 .jumbotron {
   height: 100vh;
   background-color: #249082;
