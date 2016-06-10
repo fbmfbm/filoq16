@@ -1,38 +1,80 @@
 @media print {
- 	.fbm-table-header{
-		background-color: darken($brand-info, 5%);
-		color: #FFF;
+
+	.fbm-table{
+
+		background-color: #00FFFF;
 	}
-}
 
-.fbm-table{
+ 	.fbm-table-header th {
+		background-color: #000;
+		color: $brand-primary;
+		text-align: center;
+	}
+	.fbm-table tr td{
+		font-size: .90em;
+	}
 
-}
-
-.fbm-table th{
-	line-height: .9;
-}
-
-.fbm-table tr td{
-	font-size: .95em;
-}
-
-.fbm-table tr td+td{
-	text-align: right;
 }
 
 
 
-.fbm-table-right{
-	text-align: right;
+
+@media screen {
+
+	.fbm-table{
+
+		font-size: .9em;
+
+	}
+
+
+	.fbm-table tr td{
+		font-size: .95em;
+	}
+
+	.fbm-table tr td+td{
+		text-align: right;
+	}
+
+
+
+	.fbm-table-right{
+		text-align: right;
+	}
+
+	.fbm-table-header{
+		background-color: #637F85;
+		color : #FFF;
+	}
+
+	.fbm-table-enphase{
+
+		 color: darken($brand-primary, 5%);
+	    font-style: italic;
+	    font-size: 1.15em;
+	}
+
+
+	.fbm-chiffre-cle{
+
+		font-size: .90em;
+	}
+
 }
 
-.fbm-table-header{
-	background-color: darken($brand-info, 5%);;
-}
 
-.fbm-table-enphase{
+	.fbm-table th{
+		line-height: .9;
+		text-align: center;
+	}
+	.fbm-table tr:nth-child(3) th{
+		text-align: center;
+		line-height: .9;
+		font-size:.7em;
+		font-weight:600;
+	}
 
-	color : $brand-primary;
-	font-style : italic;
-}
+	.fbm-evol{
+		font-weight: 900;
+		color: darken($brand-info, 10%);
+	}

@@ -21,3 +21,21 @@
 		cursor: pointer;
 
 	}
+
+
+.fbm-encart{
+	display: inline-block;
+	border: 1px solid lighten($brand-primary, 50%);
+	width: 60%;
+    padding: 10px;
+    font-size: 0.8em;
+    background-color: lighten($brand-primary, 60%);
+    vertical-align: top;
+}
+
+
+.fbm-encart h4{
+	font-size: 1.35em;
+    color: $brand-info;
+    font-weight: 200;
+}

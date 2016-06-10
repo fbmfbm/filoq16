@@ -11,10 +11,11 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 	$scope.dt1 = {};
 	$scope.dt2 = {};
 	$scope.dt3 = {};
+
 	var comSource = new ol.source.Vector();
-  	var quartierSource = new ol.source.Vector();
-  	var bordureSource = new ol.source.Vector();
-  	var zusSource = new ol.source.Vector();
+  var quartierSource = new ol.source.Vector();
+  var bordureSource = new ol.source.Vector();
+  var zusSource = new ol.source.Vector();
 
 	//############# GET STAT DATA ##########################
 	var getPGData = function(code, scale ){
@@ -38,7 +39,10 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 	 		$scope.ter1Label = result1[0].nom_terr;
 			$scope.codeDep   = result1[0].code_dep;
 			$scope.codecom   = result1[0].code_com;
+
 	 		$scope.dt1 = result1;
+
+      console.log(result1);
 
 		getPGData($scope.codecom+'_R500', 'border').then(function(result2){
 
@@ -46,7 +50,9 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 
 			getPGData( $scope.codecom , 'horq').then(function(result3){
 
-				$scope.dt3 = result3;
+				$scope.nomcom   = result3[0].nom_com;
+        
+        $scope.dt3 = result3;
 				getGeoJsonQuartier()//----------- build map !!
 			});
 		});
@@ -94,7 +100,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
             logo: false,
             controls: ol.control.defaults({ attribution: false,zoom: false}).extend([]),
             interactions: ol.interaction.defaults({ zoomWheelEnabled: false, dragPan: false}).extend([]),
-            target: document.getElementById('map'),
+            target: document.getElementById('map2'),
             renderer: 'canvas',
             layers: layersStack,
             view: new ol.View({

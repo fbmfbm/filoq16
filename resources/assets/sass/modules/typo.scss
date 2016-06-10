@@ -1,4 +1,73 @@
-.fbm-font-light{
+@media print{
 
+	.fbm-chiffre-cle{
+		font-size: .70em;
+	    line-height: 1.4em;
+	    font-weight: 500;
+	    color: #000;
+
+	}
+
+	.fbm-badge{
+    background-color: $brand-primary;
+	    text-align: center;
+	    color: white;
+	    padding: .9% 3%;
+	    margin-top: .3em;
+	    font-weight: lighter;
+	    display: inline-block;
+	    @include rounded(1em);
+	}
+
+	.fbm-tab-sec-title{
+	color: $brand-primary;
+	width:100%;
+	font-weight: 200;
+	line-height: 1.4em;
+	font-size: 1.3em;
+	margin-bottom: 1em;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	}
+}
+
+
+
+@media screen{
+
+	.fbm-chiffre-cle{
+		 font-size: .90em;
+	    line-height: 1.6em;
+	    font-weight: 500;
+	    color: #000;
+
+	}
+
+	.fbm-badge{
+	    background-color: $brand-primary;
+	    text-align: center;
+	    color: white;
+	    padding: .3% 1%;
+	    margin-top: .3em;
+	    font-weight: lighter;
+	    display: inline-block;
+	    @include rounded(1em);
+	}
+
+	.fbm-tab-sec-title{
+	color: $brand-primary;
+	font-weight: 200;
+	font-size: 1.3em;
+	margin-bottom: 1em;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	}
+
+}
+
+.fbm-font-light{
 	font-weight: 100
 }
+
+
+
