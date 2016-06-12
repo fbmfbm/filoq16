@@ -27,6 +27,7 @@ elixir(function(mix) {
     	'controllers/main_ctrl.js',
         'controllers/zonage_ctrl.js',
         'controllers/offre_ctrl.js',
+        'controllers/construct_ctrl.js',
         'services/geojson_data_service.js',
     	'services/pg_data_service.js'
     	])
