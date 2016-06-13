@@ -40,7 +40,7 @@ class HomeControllerTest extends TestCase
     public function testExample()
     {
         $this->visit('/')
-             ->see('Laravel');
+             ->see('onnectez-vous');
     }
 
 
