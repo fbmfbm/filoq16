@@ -40,7 +40,18 @@ class HomeControllerTest extends TestCase
     public function testExample()
     {
         $this->visit('/')
-             ->see('onnectez-vous');
+             ->see('Connectez-vous');
+    }
+
+
+    public function testLogin()
+    {
+        
+        $this->visit('/login')
+        ->submitForm('Connexion', array('email'=>'fabien@fmaison.com', 'password'=>'fbmfbm68'))
+        ->seePageIs('/')
+        ->see('Bienvenue');
+
     }
 
 
