@@ -10,6 +10,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 	$scope.dt1 = {};
 	$scope.dt2 = {};
 	$scope.dt3 = {};
+  $scope.dt4 = {};
 
 	var comSource = new ol.source.Vector();
   var quartierSource = new ol.source.Vector();
@@ -24,7 +25,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 		PGData.getPGData(code, scale).then(function(result){
 
 			//console.log(result);
-			
+
 			 defered.resolve(result.data);
 
 		});
@@ -33,7 +34,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 	}
 
 
-	getPGData( $scope.codeRef, 'quart').then(function(result1){
+	getPGData( $scope.codeRef, 'quart_dyna1').then(function(result1){
 
 	 		$scope.ter1Label = result1[0].nom_terr;
 			$scope.codeDep   = result1[0].code_dep;
@@ -52,19 +53,25 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
         }
       }
 
-      
-      console.log(result1);
+      //console.log(result1);
 
-		getPGData($scope.codecom+'_R500', 'border').then(function(result2){
+		getPGData($scope.codecom+'_R500', 'border_dyna1').then(function(result2){
 
 			$scope.dt2 = result2;
 
-			getPGData( $scope.codecom , 'horq').then(function(result3){
+			getPGData( $scope.codecom , 'horq_dyna1').then(function(result3){
 
-				$scope.nomcom   = result3[0].nom_com;
-        
-        $scope.dt3 = result3;
-				getGeoJsonQuartier()//----------- build map !!
+				//$scope.nomcom   = result3[0].nom_com;
+
+          $scope.dt3 = result3;
+          console.log($scope.dt3)
+
+          getPGData( $scope.codeRef, 'evol_tot').then(function(result4){
+
+            $scope.dt4 = result4;
+            
+				    getGeoJsonQuartier()//----------- build map !!
+          });
 			});
 		});
 	});

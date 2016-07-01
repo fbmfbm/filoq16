@@ -10,13 +10,13 @@
         <div class="col-md-12">
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link active" ng-href="">L'offre de logement </a>
+            <a class="nav-link active" ng-href=""><i class="fa fa-th-list text-info" aria-hidden="true"></i> L'offre de logement </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/thema/construct/@{{codeRef}}">La dynamique de construction</a>
+            <a class="nav-link" href="/thema/construct/@{{codeRef}}"><i class="fa fa-th-list text-info" aria-hidden="true"></i> La dynamique de construction</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ng-href="">Les PRU</a>
+            <a class="nav-link" ng-href=""><i class="fa fa-th-list text-info" aria-hidden="true"></i> Les PRU</a>
           </li>
         </ul>
             <div class="card ">
