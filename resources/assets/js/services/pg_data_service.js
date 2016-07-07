@@ -101,7 +101,7 @@ app.service('PGData',['$http', function($http){
                 prop_query = "  SELECT tb2.*, tb1.* FROM (SELECT milesim,  ";
                 prop_query += queryDynamique;
                 from_query = " FROM "+tbleFiloq;
-                filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM filoq WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2"; 
+                filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM filoq WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
                 break;
              case 'evol_tot':
                prop_query = " SELECT CASE WHEN t13.v0 / t03.v1 > 1.05 then 'Fragilistation' WHEN t13.v0 / t03.v1 < 0.95 then 'Diversification' else 'sans effet' END as tot_status,  CASE  WHEN t13.v2 / t03.v3 > 1.05 then 'Fragilistation'  WHEN t13.v2 / t03.v3 < 0.95 then 'Diversification' else 'sans effet' END as pp_status ,  CASE  WHEN t13.v4 / t03.v5 > 1.05 then 'Fragilistation'  WHEN t13.v4 / t03.v5 < 0.95 then 'Diversification' else 'sans effet' END as ps_status ";
@@ -111,6 +111,14 @@ app.service('PGData',['$http', function($http){
                from_query = " ";
                filter_query = " FROM "+tbleFiloq+" WHERE code_conv = '"+refCode+"' AND territoire_np = 'pru' AND milesim LIKE '__003') t03 ";
                break;
+               case 'evol_exist':
+                prop_query = " SELECT CASE WHEN t13.v0 / t03.v1 > 1.05 then 'Fragilistation' WHEN t13.v0 / t03.v1 < 0.95 then 'Diversification' else 'sans effet' END as tot_status,  CASE  WHEN t13.v2 / t03.v3 > 1.05 then 'Fragilistation'  WHEN t13.v2 / t03.v3 < 0.95 then 'Diversification' else 'sans effet' END as pp_status , CASE  WHEN t13.v4 / t03.v5 > 1.05 then 'Fragilistation'  WHEN t13.v4 / t03.v5 < 0.95 then 'Diversification' else 'sans effet' END as ps_status ";
+                prop_query += " FROM (SELECT (sum(c40::DEC)+sum(c41::DEC) + sum(C18::DEC))/(sum(c40::DEC) + sum(c41::DEC) + sum(C18::DEC)+sum(c45::DEC) + sum(c46::DEC) + sum(C19::DEC)+sum(c50::DEC) + sum(c51::DEC) + sum(c20::DEC)+sum(c55::DEC) + sum(c56::DEC) + sum(c21::DEC)) as v0, (sum(C40::DEC)+sum(C41::DEC)+sum(C42::DEC))/(sum(C40::DEC)+sum(C41::DEC)+sum(C42::DEC)+sum(c45::DEC)+sum(c46::DEC)+sum(C47::DEC)+sum(c50::DEC)+sum(c51::DEC)+sum(C52::DEC)+sum(c55::DEC)+sum(c56::DEC)+sum(C57::DEC)) AS v2, (sum(C18::DEC))/(sum(C18::DEC)+sum(C19::DEC)+sum(C20::DEC)+sum(C21::DEC)) AS v4 ";
+                prop_query += " FROM "+tbleFiloq+" WHERE code_conv = '"+refCode+"' AND territoire_np = 'pru' AND  milesim LIKE '__013') t13, ";
+                prop_query += " (SELECT  (sum(c40::DEC)+sum(c41::DEC))/(sum(c40::DEC)+sum(c41::DEC)+sum(c4::DEC)+sum(c46::DEC)+sum(c50::DEC)+sum(c51::DEC)+sum(c55::DEC)+sum(c56::DEC)) as v1, (sum(c40::DEC)+sum(c41::DEC))/(sum(c40::DEC)+sum(c41::DEC)+sum(c45::DEC)+sum(c46::DEC)+sum(c50::DEC)+sum(c51::DEC)+sum(c55::DEC)+sum(c56::DEC)) AS v3, sum(C42::DEC)/(sum(C42::DEC)+sum(C47::DEC)+sum(C52::DEC)+sum(C57::DEC)) AS v5 ";
+                from_query = " ";
+                filter_query = " FROM "+tbleFiloq+" WHERE code_conv = '"+refCode+"' AND territoire_np = 'pru' AND milesim LIKE '__003') t03 ";
+                break;
 
             };
 
