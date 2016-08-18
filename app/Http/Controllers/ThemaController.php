@@ -22,6 +22,13 @@ class ThemaController extends Controller
 
 
 		return view('sections/offre_logment')->with('convent',$convent);
+	}	
+
+	public function construct_logmt($convent)
+	{
+
+
+		return view('sections/construct_logment')->with('convent',$convent);
 	}
 
 }

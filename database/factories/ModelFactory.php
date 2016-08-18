@@ -14,7 +14,7 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->userName,
-        'email' => $faker->email,
+        'email' => $faker->unique()->email,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
@@ -24,7 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Role::class, function (Faker\Generator $faker) {
 
     return [
-        'name' => $faker->domainWord,
+        'name' => $faker->unique()->domainWord,
         'display_name' => $faker->word($nb=2,$asText=false),
         'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
     ];
@@ -33,7 +33,7 @@ $factory->define(App\Role::class, function (Faker\Generator $faker) {
 $factory->define(App\Permission::class, function (Faker\Generator $faker) {
 
     return [
-        'name' => $faker->domainWord,
+        'name' => $faker->unique()->word(),
         'display_name' => $faker->word($nb=2,$asText=false),
         'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
     ];

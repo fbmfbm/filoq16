@@ -1,9 +1,15 @@
 //$brand-primary:   			#C136B4; 
-$brand-primary:   			#279C8D; 
-$brand-info: 				#00EFD9;
+$brand-primary:   			#B3C50F; 
+$brand-info: 				#C31C95;//#00EFD9;
 
 $enable-flex:               true;
 $enable-rounded:            false;
+
+@mixin rounded($radius: 0.5em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
 
 //@import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,800);
@@ -36,8 +42,26 @@ body{
   .col-md-6,.col-md-3{
   	padding-left: .4em;
   	padding-right:.4em;
-  } 
+  }
+  .dont-break { page-break-inside:avoid; } 
+
+  .container{
+    margin-top: -250px;
+  }
+  .fbm-print-remove{
+    display: none;
+  }
 }
+@media screen{
+  .fbm-print-remove{
+    
+  }
+}
+
+.text-black{
+  color : rgb(0,0,0);
+}
+
 
 .text-pru{
   color : rgb(255,82,45);
@@ -54,7 +78,7 @@ body{
 .jumbotron{
 
     height: 100vh;
-    background-color: darken($brand-primary, 3%);
+    background-color: darken($brand-primary, 10%);
     color: #FFF;
 }
 

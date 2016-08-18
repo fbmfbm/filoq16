@@ -22,14 +22,16 @@ class HomeControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        Artisan::call('migrate:reset');
         Artisan::call('migrate');
         Artisan::call('db:seed');
     }
 
     public function tearDown()
     {
-        Artisan::call('migrate:reset');
+        
         parent::tearDown();
+        //Artisan::call('migrate:reset');
     }
 
     /**
@@ -40,7 +42,18 @@ class HomeControllerTest extends TestCase
     public function testExample()
     {
         $this->visit('/')
-             ->see('Laravel');
+             ->see('Connectez-vous');
+    }
+
+
+    public function testLogin()
+    {
+        
+        $this->visit('/login')
+        ->submitForm('Connexion', array('email'=>'fabien@fmaison.com', 'password'=>'fbmfbm68'))
+        ->seePageIs('/')
+        ->see('Bienvenue');
+
     }
 
 
