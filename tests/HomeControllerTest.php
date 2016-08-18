@@ -28,8 +28,8 @@ class HomeControllerTest extends TestCase
 
     public function tearDown()
     {
-        Artisan::call('migrate:reset');
-        parent::tearDown();
+        //Artisan::call('migrate:reset');
+        //parent::tearDown();
     }
 
     /**
