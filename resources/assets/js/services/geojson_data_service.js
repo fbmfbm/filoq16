@@ -23,7 +23,12 @@ app.service('GeoJsonData',['$http', function($http){
                 prop_query = " SELECT 'comselect' AS scale, insee AS code, nom AS label ";
                 geom_query = " ST_AsGeoJSON(ST_TRANSFORM(lg.geom,4326),5)::json As geometry, ";
                 filter_query = " FROM geocom15 As lg WHERE insee like '"+refCode+"' AND geom IS NOT NULL  ORDER BY nom ";
-                break; 
+                break;
+            case 'horsq':
+                prop_query = " SELECT 'comselect' AS scale, lg.insee AS code, lg.nom AS label ";
+                geom_query = " ST_AsGeoJSON(ST_TRANSFORM(ST_Difference(st_transform(lg.geom,'2154'), q.geom),4326),5)::json As geometry, ";
+                filter_query = " FROM geocom15_5m As lg, qru16 AS q WHERE lg.insee like '"+refCode+"' AND lg.geom IS NOT NULL  ORDER BY lg.nom ";
+                break;      
             case 'border':
                 prop_query = " SELECT id_convent AS code, nom AS label ";
                 geom_query = " ST_AsGeoJSON(ST_TRANSFORM(lg.geom,4326),5)::json As geometry, ";
@@ -42,8 +47,13 @@ app.service('GeoJsonData',['$http', function($http){
 
 
             var promise = $http.post('/jx/geojson', {refScale: refScale, refCode: refCode, geomQuery : geom_query, propQuery : prop_query, filterQuery : filter_query}).then(function(response){
+ 
+               
+                var featureCollection = JSON.parse(response.data.data[0].row_to_json);
+                var geojsonFormat = new ol.format.GeoJSON();
+                var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
 
-                return response.data;
+                return allFeatures;
             });
 
 

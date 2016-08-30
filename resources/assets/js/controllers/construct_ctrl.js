@@ -1,7 +1,5 @@
 
-app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q', function($scope, $window,  GeoJsonData, PGData, $q){
-
-	$scope.offreCtrlMsg = "Message Offre Controller";
+app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q', function($scope, $window,  GeoJsonData, PGData, $q){
 
 
 	$scope.codeRef = $window._convent;
@@ -12,6 +10,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 	$scope.dt1 = {};
 	$scope.dt2 = {};
 	$scope.dt3 = {};
+  $scope.dt4 = {};
 
 	var comSource = new ol.source.Vector();
   var quartierSource = new ol.source.Vector();
@@ -26,7 +25,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 		PGData.getPGData(code, scale).then(function(result){
 
 			//console.log(result);
-			
+
 			 defered.resolve(result.data);
 
 		});
@@ -35,7 +34,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 	}
 
 
-	getPGData( $scope.codeRef, 'quart').then(function(result1){
+	getPGData( $scope.codeRef, 'quart_dyna1').then(function(result1){
 
 	 		$scope.ter1Label = result1[0].nom_terr;
 			$scope.codeDep   = result1[0].code_dep;
@@ -43,18 +42,41 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 
 	 		$scope.dt1 = result1;
 
-      console.log(result1);
+      for( x in result1[0]){  
+        if(result1[0][x]){
+          result1[0][x] = Number(result1[0][x]); 
+        }
+      }
+      for( x in result1[1]){  
+        if(result1[1][x]){
+          result1[1][x] = Number(result1[1][x]); 
+        }
+      }
 
-		getPGData($scope.codecom+'_R500', 'border').then(function(result2){
+      //console.log(result1);
+
+		getPGData($scope.codecom+'_R500', 'border_dyna1').then(function(result2){
 
 			$scope.dt2 = result2;
 
-			getPGData( $scope.codecom , 'horq').then(function(result3){
+			getPGData( $scope.codecom , 'horq_dyna1').then(function(result3){
 
-				$scope.nomcom   = result3[0].nom_com;
-        
-        $scope.dt3 = result3;
-				getGeoJsonQuartier()//----------- build map !!
+				//$scope.nomcom   = result3[0].nom_com;
+
+          $scope.dt3 = result3;
+          console.log($scope.dt3)
+
+          getPGData( $scope.codeRef, 'evol_tot').then(function(result4){
+
+            $scope.dt4 = result4;
+
+            getPGData( $scope.codeRef, 'evol_exist').then(function(result5){
+
+                  $scope.dt5 = result5;
+                  
+                  getGeoJsonQuartier()//----------- build map !!
+             });
+          });
 			});
 		});
 	});
