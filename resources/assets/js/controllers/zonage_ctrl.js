@@ -4,6 +4,7 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope
 
 	console.log("ok pour test");
 
+
 	var inited = false;
 	$scope.refScale = 'dep';
   var map; 
@@ -25,8 +26,7 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope
     PGData.getRefCode('pru').then(function(result){
 
       $scope.refPru = result.data;
-
-      console.log(result);
+  
 
       getGeoJsonQuartier();
       getGeoJsonData();
@@ -267,7 +267,6 @@ var getGeoJsonData = function(){
 
                 info.tooltip('hide')
                     .attr('data-original-title', (feature.get('label')+" ("+feature.get('code')+")") )
-                    .tooltip('fixTitle')
                     .tooltip('show');
             }else{
 

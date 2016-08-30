@@ -8,15 +8,14 @@
 </script>
     <div class="row">
         <div class="col-md-12">
+        <a href="{{ url('/zonage') }}"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Selectionner un autre territoire</a>
+        <hr>
         <ul class="nav nav-pills">
           <li class="nav-item">
             <a class="nav-link active" ng-href=""><i class="fa fa-th-list text-info" aria-hidden="true"></i> L'offre de logement </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/thema/construct/@{{codeRef}}"><i class="fa fa-th-list text-info" aria-hidden="true"></i> La dynamique de construction</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ng-href=""><i class="fa fa-th-list text-info" aria-hidden="true"></i> Les PRU</a>
           </li>
         </ul>
             <div class="card ">
@@ -58,13 +57,13 @@
 
         <ul class="nav nav-tabs fbm-print-remove" role="tablist">
           <li class="nav-item">
-            <a class="nav-link" ng-class="{active : setTab === 1}"  data-toggle="tab" href="#sec1" role="tab" ng-click="setTab=1">Offre de logement et profil démographique</a>
+            <a class="nav-link" ng-class="{active : setTab === 1}"  data-toggle="tab" href="#sec1" role="tab" >Offre de logement et profil démographique</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ng-class="{active : setTab === 2}" data-toggle="tab" href="#sec2" role="tab" ng-click="setTab=2">Revenus des ménages et programmaton PRU</a>
+            <a class="nav-link" ng-class="{active : setTab === 2}" data-toggle="tab" href="#sec2" role="tab" >Revenus des ménages et programmaton PRU</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ng-class="{active : setTab === 3}" data-toggle="tab" href="#sec3" role="tab" ng-click="setTab=3">Dynamique de construction et mobilté</a>
+            <a class="nav-link" ng-class="{active : setTab === 3}" data-toggle="tab" href="#sec3" role="tab" >Dynamique de construction et mobilté</a>
           </li>
         </ul>
 

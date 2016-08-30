@@ -16,7 +16,7 @@
                     <div class="card-text fbm-title">
                         Vous êtes connecté !
 
-                       <h5><i class="fa fa-btn fa-commenting"></i> @{{mainCtrlMsg}}</h5>
+                       <h4><a href="{{ url('/zonage') }}">  <i class="fa fa-sign-in" aria-hidden="true"></i>  @{{mainCtrlMsg}} </a></h4>
                     </div>
                 </div>
             </div>

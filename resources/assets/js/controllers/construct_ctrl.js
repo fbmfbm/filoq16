@@ -73,8 +73,12 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
             getPGData( $scope.codeRef, 'evol_exist').then(function(result5){
 
                   $scope.dt5 = result5;
-                  
-                  getGeoJsonQuartier()//----------- build map !!
+
+                  getPGData( $scope.codeRef, 'programm_pru').then(function(result6){
+
+                        $scope.dt6 = result6;                 
+                        getGeoJsonQuartier()//----------- build map !!
+                  });
              });
           });
 			});
