@@ -2,6 +2,7 @@
 app.service('PGData',['$http', function($http){
 
     var tbleFiloq = " filoq ";
+    var tblFiloqEnquete = " filoq_enquete ";
 
     var queryDynamique = "";
     queryDynamique += " sum(a1::DEC)+sum(a75::DEC) AS a0, sum(a4::DEC) a4,  sum(c18::DEC) c18, sum(c19::DEC) c19, sum(c20::DEC) c20, sum(c21::DEC) c21, sum(c22::DEC) c22, sum(c23::DEC) c23, sum(c24::DEC) c24, sum(c25::DEC) c25, sum(c30::DEC) c30, sum(c31::DEC) c31, sum(c32::DEC) c32, sum(c33::DEC) c33, sum(c40::DEC) c40, sum(c41::DEC) c41, sum(c42::DEC) c42, sum(c43::DEC) c43, sum(c44::DEC) c44, sum(c45::DEC) c45, sum(c46::DEC) c46, sum(c47::DEC) c47, sum(c50::DEC) c50, sum(c51::DEC) c51, sum(c52::DEC) c52, sum(c55::DEC) c55, sum(c56::DEC) c56, sum(c57::DEC) c57, sum(b6::DEC) b6, sum(b7::DEC) b7, sum(b8::DEC) b8, sum(b9::DEC) b9, sum(b10::DEC) b10, sum(b11::DEC) b11, sum(b12::DEC) b12, sum(b13::DEC) b13, sum(b18::DEC) b18, sum(b19::DEC) b19, sum(b20::DEC) b20, sum(b21::DEC) b21, sum(b22::DEC) b22, sum(b61::DEC) b61, ";
@@ -44,7 +45,7 @@ app.service('PGData',['$http', function($http){
 
            var promise = $http.post('/jx/pgdata', {refScale: '', refCode: '',  filterQuery : filter_query}).then(function(response){
 
-               console.log("promise1", response);
+               //console.log("promise1", response);
                 return response.data;
             });
 
@@ -111,7 +112,7 @@ app.service('PGData',['$http', function($http){
                from_query = " ";
                filter_query = " FROM "+tbleFiloq+" WHERE code_conv = '"+refCode+"' AND territoire_np = 'pru' AND milesim LIKE '__003') t03 ";
                break;
-               case 'evol_exist':
+            case 'evol_exist':
                 prop_query = " SELECT CASE WHEN t13.v0 / t03.v1 > 1.05 then 'Fragilistation' WHEN t13.v0 / t03.v1 < 0.95 then 'Diversification' else 'sans effet' END as tot_status,  CASE  WHEN t13.v2 / t03.v3 > 1.05 then 'Fragilistation'  WHEN t13.v2 / t03.v3 < 0.95 then 'Diversification' else 'sans effet' END as pp_status , CASE  WHEN t13.v4 / t03.v5 > 1.05 then 'Fragilistation'  WHEN t13.v4 / t03.v5 < 0.95 then 'Diversification' else 'sans effet' END as ps_status ";
                 prop_query += " FROM (SELECT (sum(c40::DEC)+sum(c41::DEC) + sum(C18::DEC))/(sum(c40::DEC) + sum(c41::DEC) + sum(C18::DEC)+sum(c45::DEC) + sum(c46::DEC) + sum(C19::DEC)+sum(c50::DEC) + sum(c51::DEC) + sum(c20::DEC)+sum(c55::DEC) + sum(c56::DEC) + sum(c21::DEC)) as v0, (sum(C40::DEC)+sum(C41::DEC)+sum(C42::DEC))/(sum(C40::DEC)+sum(C41::DEC)+sum(C42::DEC)+sum(c45::DEC)+sum(c46::DEC)+sum(C47::DEC)+sum(c50::DEC)+sum(c51::DEC)+sum(C52::DEC)+sum(c55::DEC)+sum(c56::DEC)+sum(C57::DEC)) AS v2, (sum(C18::DEC))/(sum(C18::DEC)+sum(C19::DEC)+sum(C20::DEC)+sum(C21::DEC)) AS v4 ";
                 prop_query += " FROM "+tbleFiloq+" WHERE code_conv = '"+refCode+"' AND territoire_np = 'pru' AND  milesim LIKE '__013') t13, ";
@@ -119,12 +120,17 @@ app.service('PGData',['$http', function($http){
                 from_query = " ";
                 filter_query = " FROM "+tbleFiloq+" WHERE code_conv = '"+refCode+"' AND territoire_np = 'pru' AND milesim LIKE '__003') t03 ";
                 break;
+            case 'programm_pru':
+                prop_query = " SELECT sum(a19::DEC) a19,sum(a20::DEC) a20,sum(a21::DEC) a21, sum(a22::DEC) a22,sum(a23::DEC) a23, sum(a24::DEC) a24, sum(a25::DEC) a25,  sum(a26::DEC) a26,  sum(a27::DEC) a27, sum(a28::DEC) a28, sum(a29::DEC) a29, sum(a30::DEC) a30, sum(a35::DEC) a35, sum(a36::DEC) a36, sum(a37::DEC) a37, sum(a38::DEC) a38, sum(a41::DEC) a41 ";
+                from_query = " FROM "+tblFiloqEnquete; 
+                filter_query = "  WHERE code_projet = '"+refCode+"' ";
+                break;
 
             };
 
             filter_query =   prop_query +  from_query +  filter_query;
 
-            console.log(filter_query);
+            //console.log(filter_query);
 
             var promise = $http.post('/jx/pgdata', {refScale: refScale, refCode: refCode,  filterQuery : filter_query}).then(function(response){
 

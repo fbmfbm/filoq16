@@ -1,6 +1,6 @@
 app.controller('MainCtrl', ['$scope', function($scope){
 
-	$scope.mainCtrlMsg = "Message du Main Controller";
+	$scope.mainCtrlMsg = "Rejoindre la sélection par zonage de territoire";
 
 	console.log("ok pour test");
 
@@ -8,7 +8,6 @@ app.controller('MainCtrl', ['$scope', function($scope){
 	$scope.goToURL = function(url){
 
 		window.location = "zonage/"
-
 	}
 
 	
