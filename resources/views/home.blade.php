@@ -7,7 +7,9 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="card ">
              <div class="card-header">Tableau de bord</div>
-                <div class="card-block">
+                
+            
+            <div class="card-block">
                    
                     <h4 class="card-title">Gestionnaire</h4>
                     <h6 class="card-subtitle text-muted">Gestion de vos données en ligne</h6>
@@ -16,10 +18,15 @@
                     <div class="card-text fbm-title">
                         Vous êtes connecté !
 
-                       <h5><i class="fa fa-btn fa-commenting"></i> @{{mainCtrlMsg}}</h5>
+                       <h4><a href="{{ url('/zonage') }}">  <i class="fa fa-sign-in" aria-hidden="true"></i>  Accéder directement à la section de  selection de territoires </a></h4>
+
                     </div>
+                    
                 </div>
-            </div>
+
+                <div class="card-footer">
+                        <a class="btn btn-outline-primary" href="{{ url('/logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> deconnection</a>
+                </div>
         </div>
     </div>
 </div>

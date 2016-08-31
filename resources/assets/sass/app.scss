@@ -3,7 +3,7 @@ $brand-primary:   			#B3C50F;
 $brand-info: 				#C31C95;//#00EFD9;
 
 $enable-flex:               true;
-$enable-rounded:            false;
+$enable-rounded:            true;
 
 @mixin rounded($radius: 0.5em) {
   -webkit-border-radius: $radius;
@@ -26,6 +26,7 @@ $enable-rounded:            false;
 @import "modules/block.scss";
 @import "modules/map.scss";
 @import "modules/table.scss";
+
 
 
 

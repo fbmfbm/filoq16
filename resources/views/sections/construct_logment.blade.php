@@ -8,15 +8,14 @@
 </script>
     <div class="row">
         <div class="col-md-12">
+        <a href="{{ url('/zonage') }}"><i class="fa fa-hand-o-left text-info" aria-hidden="true"></i> Selectionner un autre territoire</a>
+        <hr>
          <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link " href="/thema/offre/@{{codeRef}}"> <i class="fa fa-th-list text-info" aria-hidden="true"></i> L'offre de logement </a>
+            <a class="nav-link " ng-href="/thema/offre/@{{codeRef}}"><i class="fa fa-th-list text-info" aria-hidden="true"></i> Structure de l'offre et profil des ménages </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/thema/construct/@{{codeRef}}"><i class="fa fa-th-list text-info" aria-hidden="true"></i> La dynamique de construction</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href=""><i class="fa fa-th-list text-info" aria-hidden="true"></i> Les PRU</a>
+            <a class="nav-link active" href=""><i class="fa fa-th-list text-info" aria-hidden="true"></i> Dynamique de construction et mobilités</a>
           </li>
         </ul>
             <div class="card ">
@@ -57,23 +56,115 @@
     <!-- start tabs-->
 
         <ul class="nav nav-tabs fbm-print-remove" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link" ng-class="{active : setTab === 1}"  data-toggle="tab" href="#sec1" role="tab" ng-click="setTab=1">Dynamique de construction</a>
+        <li class="nav-item">
+            <a class="nav-link" ng-class="{active : setTab === 1}" data-toggle="tab" href="#sec1" role="tab" >Programmation et avancement du PRU</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ng-class="{active : setTab === 2}" data-toggle="tab" href="#sec2" role="tab" ng-click="setTab=2">Rien</a>
+            <a class="nav-link" ng-class="{active : setTab === 2}"  data-toggle="tab" href="#sec2" role="tab" >Dynamique de construction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ng-class="{active : setTab === 3}"  data-toggle="tab" href="#sec3" role="tab" >Revenus des ménages : occupants et nouveaux ménages</a>
           </li>
         </ul>
 
      <!-- end tabs-->
      <!-- Tab panes -->
      <div class="tab-content ">
-         <div  class="tab-pane fade in active"  id="sec1" role="tabpanel"><!-- tab sec 1 -->
+
+         <div  class="tab-pane fade in active"  id="sec1" role="tabpanel"><!-- tab sec 1-->
             <div class="row">
-                
+              <div class="col-md-12">
+                  <br>
+                 <h3 class="fbm-tab-sec-title">PROGRAMMATION ET AVANCEMENT DU PRU</h3>
+                 <i>(<i class="fa fa-line-chart text-info" aria-hidden="true"></i><span class="text-muted"> = Données en taux d'évolution</span>)</i>
+              </div>
+            </div><!-- end row -->
+            <div class="row">
+                <div class="col-md-12">
+                  <table class="table table-sm table-bordered fbm-table" >
+                              <thead>
+                                <tr>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
+                                </tr>
+                                <tr class=" text-center fbm-table-header" >
+                                  <th></th>
+                                  <th >Livré</th>
+                                  <th >À livrer</th>
+                                  <th >Programmé</th>
+                                  <th >Tx de réalisation</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr><td scope="row">Démolition</td><td>@{{dt6[0].a25 | number:0}}</td><td>@{{dt6[0].a26 | number:0}}</td><td>@{{dt6[0].a27 | number:0}}</td><td>@{{dt6[0].a19 | number:1}}%</td></tr>
+                                <tr><td scope="row">Reconstitution de l'offre sur site</td><td>@{{dt6[0].a28 | number:0}}</td><td>@{{dt6[0].a29 | number:0}}</td><td>@{{dt6[0].a30 | number:0}}</td><td>@{{dt6[0].a20 | number:1}}%</td></tr>
+                                <tr><td scope="row">Diversification de l'offre</td><<td>@{{dt6[0].a35 | number:0}}</td><td>@{{dt6[0].a36 | number:0}}</td><td>@{{dt6[0].a37 | number:0}}</td><td>@{{dt6[0].a21 | number:1}}%</td></tr>
+                               </tbody>
+                         </table> 
+                         <br>
+                         <div class="col-md-5">
+                          <table class="table fbm-table-enphase table-sm table-bordered fbm-table">
+                                <tbody>
+                                  <tr><td scope="row">Taux de réalisation (démol. + construct.)</td><td>@{{dt6[0].a38 | number:1}}%</td></tr>
+                                  <tr><td scope="row">Taux de renouvellement au terme du PRU</td><td>@{{dt6[0].a23 | number:1}}%</td></tr>
+                                  <tr><td scope="row">Taux de diversification au terme du PRU</td><<td>@{{dt6[0].a24 | number:1}}%</td></tr>
+                                </tbody>
+                          </table>
+                          <br>
+                          <span class="fbm-table-enphase">Taux de LLS au terme du PRU : <i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> 2003 = @{{ dt6[0].a41 | number:1}}%  </span>
+                          <hr>
+                         </div>  
+
+                </div>
+            </div>
+        </div> <!-- end tab sec 1 -->
+        <div  class="tab-pane fade"  id="sec2" role="tabpanel"><!-- tab sec 2-->
+         
+                  <div class="row">
+                    <br>
+                    <div class="col-md-12">
+                        <br>
+                         <h3 class="fbm-tab-sec-title">DYNAMIQUE DE CONSTRUCTION</h3>
+                         <i>(<i class="fa fa-line-chart text-info" aria-hidden="true"></i><span class="text-muted"> = Données en taux d'évolution</span>)</i>
+                     </div>
+                  </div><!-- end row -->
+                    <div class="row">
+                        <div class="col-md-6">
+                          <table class="table table-sm table-bordered fbm-table" >
+                              <thead>
+                                <tr>
+                                  <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
+                                </tr>
+                                <tr class=" text-center fbm-table-header" >
+                                  <th></th>
+                                  <th colspan="2">Parc d'avant 2006</th>
+                                  <th colspan="2">Parc d'après 2006</th>
+                                </tr>
+                                <tr  class="table-active">
+                                  <th></th>
+                                  <th class="text-center">Nbr.</th>
+                                  <th class="text-center">%</th>
+                                  <th class="text-center">Nbr.</th>
+                                  <th class="text-center">%</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr><td scope="row">Total</td><td>@{{dt10[1].c1 | number:0}}</td><td></td><td>@{{dt10[1].b1 | number:0}}</td><td></td></tr>
+                                <tr><td scope="row">Privé</td><td>@{{dt10[1].c2*1 + dt10[1].c3*1  | number:0}}</td><td>@{{((dt10[1].c2*1 + dt10[1].c3*1)  / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b2*1 + dt10[1].b3*1 | number:0}}</td><td>@{{((dt10[1].b2*1 + dt10[1].b3*1)  / dt10[1].b1)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Dont PO.</td><td>@{{dt10[1].c2 | number:0}}</td><td>@{{(dt10[1].c2 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b2 | number:0}}</td><td>@{{(dt10[1].b2 / dt10[1].b1)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Dont LP.</td><td>@{{dt10[1].c3 | number:0}}</td><td>@{{(dt10[1].c3 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b3 | number:0}}</td><td>@{{(dt10[1].b3 / dt10[1].b1)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">HLM</td><td>@{{dt10[1].c4  | number:0}}</td><td>@{{(dt10[1].c4 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b4  | number:0}}</td><td>@{{(dt10[1].b4 / dt10[1].b1)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Autres</td><td>@{{dt10[1].c5  | number:0}}</td><td>@{{(dt10[1].c5 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b5  | number:0}}</td><td>@{{(dt10[1].b5 / dt10[1].b1)*100 | number:1}}%</td></tr>
+                               </tbody>
+                         </table> 
+                        </div>             
+                    </div><!-- end row -->
+          </div> <!-- end tab sec 2 -->
+         <div  class="tab-pane fade "  id="sec3" role="tabpanel"><!-- tab sec 3 -->
+            <div class="row">
                 <div class="col-md-12">
                   <br>
-                 <h3 class="fbm-tab-sec-title">DYNAMIQUE DE CONSTRUCTIN ET MOBILTÉ</h3>
+                 <h3 class="fbm-tab-sec-title">REVENUS DES MÉNAGES : OCCUPANTS ET NOUVEAUX MÉNAGES</h3>
+                 <i>(<i class="fa fa-line-chart text-info" aria-hidden="true"></i><span class="text-muted"> = Données en taux d'évolution</span>)</i>
                  </div>
             </div><!-- end row -->
             <div class="row">
@@ -356,11 +447,9 @@
 
                           <br>
                           <br>
-                          
-
                 </div>
               </div>
-          </div> <!-- end tab sec 1 -->
+          </div> <!-- end tab sec 3 -->
   </div><!-- end tabs content -->
 </div>
 @endsection
