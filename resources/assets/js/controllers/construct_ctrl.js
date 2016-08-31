@@ -5,7 +5,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 	$scope.codeRef = $window._convent;
 
 	$scope.refScale = 'quart';
-  $scope.setTab = 1;
+    $scope.setTab = 1;
 
 	$scope.dt1 = {};
 	$scope.dt2 = {};
@@ -32,6 +32,15 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 
 		return defered.promise;
 	}
+
+    getPGData( $scope.codeRef, 'quart').then(function(result10){
+
+	 		$scope.ter1Label = result10[0].nom_terr;
+			$scope.codeDep   = result10[0].code_dep;
+			$scope.codecom   = result10[0].code_com;
+
+	 		$scope.dt10 = result10;
+    });
 
 
 	getPGData( $scope.codeRef, 'quart_dyna1').then(function(result1){
