@@ -36286,9 +36286,8 @@ app.service('GeoJsonData',['$http', function($http){
             }
 
 
-            var promise = $http.post('/jx/geojson', {refScale: refScale, refCode: refCode, geomQuery : geom_query, propQuery : prop_query, filterQuery : filter_query}).then(function(response){
- 
-               
+            var promise = $http.post('/jx/geojson', {refScale: refScale, refCode: refCode, geomQuery : geom_query, propQuery : prop_query, filterQuery : filter_query}).then(function(response){    
+
                 var featureCollection = JSON.parse(response.data.data[0].row_to_json);
                 var geojsonFormat = new ol.format.GeoJSON();
                 var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
