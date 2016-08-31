@@ -12,7 +12,7 @@ app.service('GeoJsonData',['$http', function($http){
             case 'dep':
                 prop_query = " SELECT 'dep' AS scale, codegeo AS code, libgeo AS label ";
                 geom_query = " ST_AsGeoJSON(ST_UNION(ST_TRANSFORM(lg.geom,4326)),5)::json As geometry, ";
-                filter_query = " FROM geodep15 As lg WHERE  geom IS NOT NULL  GROUP BY codegeo, libgeo ";
+                filter_query = " FROM geodep15 As lg WHERE codegeo IN ('75', '92', '93', '94') AND geom IS NOT NULL  GROUP BY codegeo, libgeo ";
                 break;
             case 'com':
                 prop_query = " SELECT 'com' AS scale, insee AS code, nom AS label ";
@@ -46,9 +46,8 @@ app.service('GeoJsonData',['$http', function($http){
             }
 
 
-            var promise = $http.post('/jx/geojson', {refScale: refScale, refCode: refCode, geomQuery : geom_query, propQuery : prop_query, filterQuery : filter_query}).then(function(response){
- 
-               
+            var promise = $http.post('/jx/geojson', {refScale: refScale, refCode: refCode, geomQuery : geom_query, propQuery : prop_query, filterQuery : filter_query}).then(function(response){    
+
                 var featureCollection = JSON.parse(response.data.data[0].row_to_json);
                 var geojsonFormat = new ol.format.GeoJSON();
                 var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
