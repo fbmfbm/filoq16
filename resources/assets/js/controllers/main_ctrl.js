@@ -1,9 +1,16 @@
 app.controller('MainCtrl', ['$scope', function($scope){
 
-	$scope.mainCtrlMsg = "Rejoindre la sélection par zonage de territoire";
 
-	console.log("ok pour test");
+	$scope.msgMain = "Hello le monde";
+	
+	$scope.showLogin = true;
 
+
+	$scope.toggleLogin = function(){
+
+		console.log("Hrlp");	
+		$scope.showLogin = !$scope.showLogin;
+	}
 
 	$scope.goToURL = function(url){
 
