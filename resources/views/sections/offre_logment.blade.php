@@ -78,7 +78,7 @@
                  
             </div><!-- end row -->
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" >
                    <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Total logements et vacance </span>
                       <table class="table table-sm table-bordered table-striped fbm-table">
                               <thead>
@@ -101,8 +101,8 @@
                               <tbody class="">
                                 <tr><td scope="row">Nombre total de lgts</td><td>@{{dt1[0].a0 | number:0}}</td><td></td><td>@{{dt1[1].a0 | number:0}}</td><td class="fbm-evol"><i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a0*1)-(dt1[0].a0*1))/(dt1[1].a0*1)*100 | number:1}}%</td></tr>
                                 <tr><td scope="row">Dt lgts vacants</td><td>@{{(dt1[0].a62*1) + (dt1[0].a63*1)| number:0 }}</td><td>@{{(((dt1[0].a62*1) + (dt1[0].a63*1))/dt1[0].a0*1)*100| number:1 }}%</td><td>@{{(dt1[1].a62*1) + (dt1[1].a63*1)| number:0 }}</td><td>@{{(((dt1[1].a62*1) + (dt1[1].a63*1))/dt1[1].a0*1)*100| number:1 }}%</td></tr>
-                                <tr><td scope="row">dt privé </td><td>@{{dt1[0].a62  | number:0}}</td><td>@{{((dt1[0].a62*1)/((dt1[0].a62*1)+(dt1[0].a2*1)+(dt1[0].a3*1)))*100 | number:1 }}%</td><td>@{{dt1[1].a62  | number:0}}</td><td>@{{((dt1[1].a62*1)/((dt1[1].a62*1)+(dt1[1].a2*1)+(dt1[1].a3*1)))*100 | number:1 }}%</td></tr>
-                                <tr><td scope="row">dt public </td><td>@{{dt1[0].a63 | number:0}}</td><td>@{{(dt1[0].a63*1) /((dt1[0].a4*1)+(dt1[0].a63*1))*100| number:1 }}%</td><td>@{{dt1[1].a63 | number:0}}</td><td>@{{(dt1[1].a63*1) /((dt1[1].a4*1)+(dt1[1].a63*1))*100| number:1 }}%</td></tr>
+                                <tr><td scope="row">dt privé (% / parc priv.)</td><td>@{{dt1[0].a62  | number:0}}</td><td>@{{((dt1[0].a62*1)/((dt1[0].a62*1)+(dt1[0].a2*1)+(dt1[0].a3*1)))*100 | number:1 }}%</td><td>@{{dt1[1].a62  | number:0}}</td><td>@{{((dt1[1].a62*1)/((dt1[1].a62*1)+(dt1[1].a2*1)+(dt1[1].a3*1)))*100 | number:1 }}%</td></tr>
+                                <tr><td scope="row">dt public (% / parc HLM)</td><td>@{{dt1[0].a63 | number:0}}</td><td>@{{(dt1[0].a63*1) /((dt1[0].a4*1)+(dt1[0].a63*1))*100| number:1 }}%</td><td>@{{dt1[1].a63 | number:0}}</td><td>@{{(dt1[1].a63*1) /((dt1[1].a4*1)+(dt1[1].a63*1))*100| number:1 }}%</td></tr>
                                </tbody>
                           </table>
                    </div>
@@ -433,7 +433,7 @@
                  </div>
                   <div class="col-md-12">
                       <span class="fbm-table-enphase">Taux de ménages de 60 ans et plus :
-                                  <i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> 2003 = @{{(((dt1[0].a21/ dt1[0].ta18_a22))+((dt1[0].a22/ dt1[0].ta18_a22)))*100 | number:1}}%   
+                                  <i class="fa fa-arrow-circle-right " aria-hidden="true"></i> 2003 = @{{(((dt1[0].a21/ dt1[0].ta18_a22))+((dt1[0].a22/ dt1[0].ta18_a22)))*100 | number:1}}%   
                                   <i class="fa fa-arrow-circle-right " aria-hidden="true"></i> 2013 = @{{(((dt1[1].a21/ dt1[1].ta18_a22))+((dt1[1].a22/ dt1[1].ta18_a22)))*100 | number:1}}%
                        </span>
                        <hr>    
@@ -474,9 +474,9 @@
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td scope="row">Revenu médian par ucm</td><td>@{{dt1[0].a15 | number:0}}</td><td></td><td>@{{dt1[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a15 - dt1[0].a15)/dt1[1].a15)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">1<sup>er</sup> décile revenus par ucm</td><td>@{{dt1[0].a16 | number:0}}</td><td></td><td>@{{dt1[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a16 - dt1[0].a16)/dt1[1].a16)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">Dernier décile revenus par ucm</td><td>@{{dt1[0].a17 | number:0}}</td><td></td><td>@{{dt1[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a17 - dt1[0].a17)/dt1[1].a17)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Revenu médian par ucm</td><td>@{{dt1[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a15 - dt1[0].a15)/dt1[0].a15)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">1<sup>er</sup> décile revenus par ucm</td><td>@{{dt1[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a16 - dt1[0].a16)/dt1[0].a16)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Dernier décile revenus par ucm</td><td>@{{dt1[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a17 - dt1[0].a17)/dt1[0].a17)*100 | number:1}}%</td></tr>
                                 <tr><td scope="row">Rapport interdécile</td><td>@{{dt1[0].a17 / dt1[0].a16 | number:2}}</td><td></td><td>@{{dt1[1].a17 / dt1[1].a16 | number:2}}</td><td class="fbm-evol"></td></tr>
                                </tbody>
               </table>
@@ -499,9 +499,9 @@
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td>@{{dt2[0].a15 | number:0}}</td><td></td><td>@{{dt2[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a15 - dt2[0].a15)/dt2[1].a15)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt2[0].a16 | number:0}}</td><td></td><td>@{{dt2[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a16 - dt2[0].a16)/dt2[1].a16)*100 | number:1}}%</td></tr>
-                                <tr><<td>@{{dt2[0].a17 | number:0}}</td><td></td><td>@{{dt2[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a17 - dt2[0].a17)/dt2[1].a17)*100 | number:1}}%</td></tr>
+                                <tr><td>@{{dt2[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a15 - dt2[0].a15)/dt2[0].a15)*100 | number:1}}%</td></tr>
+                                <tr><td>@{{dt2[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a16 - dt2[0].a16)/dt2[0].a16)*100 | number:1}}%</td></tr>
+                                <tr><<td>@{{dt2[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a17 - dt2[0].a17)/dt2[0].a17)*100 | number:1}}%</td></tr>
                                 <tr><td>@{{dt2[0].a17 / dt2[0].a16 | number:2}}</td><td></td><td>@{{dt2[1].a17 / dt2[1].a16 | number:2}}</td><td class="fbm-evol"> </td></tr>
                                </tbody>
                             </table>
@@ -525,9 +525,9 @@
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td>@{{dt3[0].a15 | number:0}}</td><td></td><td>@{{dt3[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a15 - dt3[0].a15)/dt3[1].a15)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt3[0].a16 | number:0}}</td><td></td><td>@{{dt3[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a16 - dt3[0].a16)/dt3[1].a16)*100 | number:1}}%</td></tr>
-                                <tr><<td>@{{dt3[0].a17 | number:0}}</td><td></td><td>@{{dt3[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a17 - dt3[0].a17)/dt3[1].a17)*100 | number:1}}%</td></tr>
+                                <tr><td>@{{dt3[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a15 - dt3[0].a15)/dt3[0].a15)*100 | number:1}}%</td></tr>
+                                <tr><td>@{{dt3[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a16 - dt3[0].a16)/dt3[0].a16)*100 | number:1}}%</td></tr>
+                                <tr><<td>@{{dt3[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a17 - dt3[0].a17)/dt3[0].a17)*100 | number:1}}%</td></tr>
                                 <tr><td>@{{dt3[0].a17 / dt3[0].a16 | number:2}}</td><td></td><td>@{{dt3[1].a17 / dt3[1].a16 | number:2}}</td><td class="fbm-evol"></td></tr>
                                </tbody>
                             </table>
