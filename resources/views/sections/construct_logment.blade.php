@@ -44,7 +44,6 @@
                                   <p><strong>Commune hors QPV :</strong> Les données diffusées concernent l’ensemble de la commune hors PRU et hors ZUS.</p>
                                   <p><i>Attention en cas de PRU intercommunal les données de référence (bordure et commune) ne concernent que la commune principale (commune sur laquelle le PRU est implanté le plus largement).</i></p>
                               </div>
-                          
                               <div id="map2" class=""> </div>
                           </div>
                       </div><!-- end row -->
@@ -54,16 +53,15 @@
         </div>
     </div><!-- end row -->
     <!-- start tabs-->
-
         <ul class="nav nav-tabs fbm-print-remove" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link" ng-class="{active : setTab === 1}" data-toggle="tab" href="#sec1" role="tab" >Programmation et avancement du PRU</a>
+        <li class="nav-item ">
+            <a class="nav-link" ng-class="{active : setTab == 1}" data-toggle="tab" href="#sec1" role="tab" ngclick="{setTab=1;}">Programmation et avancement du PRU</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ng-class="{active : setTab === 2}"  data-toggle="tab" href="#sec2" role="tab" >Dynamique de construction</a>
+            <a class="nav-link" ng-class="{active : setTab == 2}"  data-toggle="tab" href="#sec2" role="tab" ngclick="{setTab=2;}">Dynamique de construction</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ng-class="{active : setTab === 3}"  data-toggle="tab" href="#sec3" role="tab" >Revenus des ménages : occupants et nouveaux ménages</a>
+            <a class="nav-link" ng-class="{active : setTab == 3}"  data-toggle="tab" href="#sec3" role="tab" ngclick="{setTab=3;}">Revenus des ménages : occupants et nouveaux ménages</a>
           </li>
         </ul>
 
@@ -76,7 +74,7 @@
               <div class="col-md-12">
                   <br>
                  <h3 class="fbm-tab-sec-title">PROGRAMMATION ET AVANCEMENT DU PRU</h3>
-                 <i>(<i class="fa fa-line-chart text-info" aria-hidden="true"></i><span class="text-muted"> = Données en taux d'évolution</span>)</i>
+                
               </div>
             </div><!-- end row -->
             <div class="row">
@@ -110,7 +108,7 @@
                                 </tbody>
                           </table>
                           <br>
-                          <span class="fbm-table-enphase">Taux de LLS au terme du PRU : <i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> 2003 = @{{ dt6[0].a41 | number:1}}%  </span>
+                          <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right " aria-hidden="true"></i> Taux de LLS au terme du PRU :  @{{ dt6[0].a41 | number:1}}%  </span>
                           <hr>
                          </div>  
 
@@ -124,7 +122,7 @@
                     <div class="col-md-12">
                         <br>
                          <h3 class="fbm-tab-sec-title">DYNAMIQUE DE CONSTRUCTION</h3>
-                         <i>(<i class="fa fa-line-chart text-info" aria-hidden="true"></i><span class="text-muted"> = Données en taux d'évolution</span>)</i>
+                        
                      </div>
                   </div><!-- end row -->
                     <div class="row">
@@ -150,8 +148,8 @@
                               <tbody>
                                 <tr><td scope="row">Total</td><td>@{{dt10[1].c1 | number:0}}</td><td></td><td>@{{dt10[1].b1 | number:0}}</td><td></td></tr>
                                 <tr><td scope="row">Privé</td><td>@{{dt10[1].c2*1 + dt10[1].c3*1  | number:0}}</td><td>@{{((dt10[1].c2*1 + dt10[1].c3*1)  / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b2*1 + dt10[1].b3*1 | number:0}}</td><td>@{{((dt10[1].b2*1 + dt10[1].b3*1)  / dt10[1].b1)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">Dont PO.</td><td>@{{dt10[1].c2 | number:0}}</td><td>@{{(dt10[1].c2 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b2 | number:0}}</td><td>@{{(dt10[1].b2 / dt10[1].b1)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">Dont LP.</td><td>@{{dt10[1].c3 | number:0}}</td><td>@{{(dt10[1].c3 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b3 | number:0}}</td><td>@{{(dt10[1].b3 / dt10[1].b1)*100 | number:1}}%</td></tr>
+                                <tr style="color:#999;"><td scope="row"><small> - Dont PO.</small></td><td>@{{dt10[1].c2 | number:0}}</td><td>@{{(dt10[1].c2 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b2 | number:0}}</td><td>@{{(dt10[1].b2 / dt10[1].b1)*100 | number:1}}%</td></tr>
+                                <tr style="color:#999;"><td scope="row"><small> - Dont LP.</small></td><td>@{{dt10[1].c3 | number:0}}</td><td>@{{(dt10[1].c3 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b3 | number:0}}</td><td>@{{(dt10[1].b3 / dt10[1].b1)*100 | number:1}}%</td></tr>
                                 <tr><td scope="row">HLM</td><td>@{{dt10[1].c4  | number:0}}</td><td>@{{(dt10[1].c4 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b4  | number:0}}</td><td>@{{(dt10[1].b4 / dt10[1].b1)*100 | number:1}}%</td></tr>
                                 <tr><td scope="row">Autres</td><td>@{{dt10[1].c5  | number:0}}</td><td>@{{(dt10[1].c5 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b5  | number:0}}</td><td>@{{(dt10[1].b5 / dt10[1].b1)*100 | number:1}}%</td></tr>
                                </tbody>
@@ -164,7 +162,7 @@
                 <div class="col-md-12">
                   <br>
                  <h3 class="fbm-tab-sec-title">REVENUS DES MÉNAGES : OCCUPANTS ET NOUVEAUX MÉNAGES</h3>
-                 <i>(<i class="fa fa-line-chart text-info" aria-hidden="true"></i><span class="text-muted"> = Données en taux d'évolution</span>)</i>
+                
                  </div>
             </div><!-- end row -->
             <div class="row">
@@ -173,11 +171,11 @@
                       <table class="table table-sm table-bordered fbm-table">
                               <thead>
                               <tr class="info">
-                                  <th colspan="16" class="info" style="background-color:#dee0cb;" >FILTRE PRU</th>
+                                  <th colspan="16" class="info"  ><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
                                 </tr>
-                                <tr>
+                                <tr style="background-color:#dee0cb;">
                                   <th colspan="6" class="fbm-table-right">ENEMBLE DES MÉNAGES</th>
-                                  <th colspan="5" class="fbm-table-right">PARC PRIVÉ</th>
+                                  <th colspan="5" class="fbm-table-right" style="background-color:#f6f9db;">PARC PRIVÉ</th>
                                   <th colspan="5" class="fbm-table-right">PARC SOCIAL</th>
                                 </tr>
                                 <tr  class="table-active">
@@ -251,9 +249,9 @@
                                 <td>@{{ ((dt1[1].c50*1) + (dt1[1].b8*1) + (dt1[1].c51*1) + (dt1[1].b12*1))/ (dt1[1].pp_occ_13*1)*100| number:1}}%</td>
                                 <td>@{{ ((dt1[1].c50*1) + (dt1[1].c51*1))/ (dt1[1].pp_occ_parc_inf06*1)*100| number:1}}%</td>
                                 <td>@{{ ((dt1[1].c32*1))/ (dt1[1].pp_occ_er_parc_inf06*1)*100| number:1}}%</td>
-                                <td>@{{ ((dt1[1].b8*1) + (dt1[1].b11*1))/ (dt1[1].pp_occ_parc_sup06*1)*100| number:1}}%</td>
+                                <td>@{{ ((dt1[1].b8*1) + (dt1[1].b12*1))/ (dt1[1].pp_occ_parc_sup06*1)*100| number:1}}%</td>
 
-                                <td>@{{ (((dt1[0].c51*1)) / (dt1[0].ps_occ_03*1))*100 | number:1 }}%</td>
+                                <td>@{{ (((dt1[0].c52*1)) / (dt1[0].ps_occ_03*1))*100 | number:1 }}%</td>
                                 <td>@{{ ((dt1[1].c20*1) + (dt1[1].b20*1))/ (dt1[1].ps_occ_13*1)*100| number:1}}%</td>
                                 <td>@{{ ((dt1[1].c20*1))/ (dt1[1].ps_occ_parc_inf06*1)*100| number:1}}%</td>
                                 <td>@{{ ((dt1[1].c24*1))/ (dt1[1].ps_er_parc_inf06*1)*100| number:1}}%</td>
@@ -271,9 +269,9 @@
                                 <td>@{{ ((dt1[1].c55*1) + (dt1[1].b9*1) + (dt1[1].c51*1) + (dt1[1].b12*1))/ (dt1[1].pp_occ_13*1)*100| number:1}}%</td>
                                 <td>@{{ ((dt1[1].c55*1) + (dt1[1].c56*1))/ (dt1[1].pp_occ_parc_inf06*1)*100| number:1}}%</td>
                                 <td>@{{ ((dt1[1].c33*1))/ (dt1[1].pp_occ_er_parc_inf06*1)*100| number:1}}%</td>
-                                <td>@{{ ((dt1[1].b9*1) + (dt1[1].b11*1))/ (dt1[1].pp_occ_parc_sup06*1)*100| number:1}}%</td>
+                                <td>@{{ ((dt1[1].b9*1) + (dt1[1].b13*1))/ (dt1[1].pp_occ_parc_sup06*1)*100| number:1}}%</td>
 
-                                <td>@{{ (((dt1[0].c56*1)) / (dt1[0].ps_occ_03*1))*100 | number:1 }}%</td>
+                                <td>@{{ (((dt1[0].c57*1)) / (dt1[0].ps_occ_03*1))*100 | number:1 }}%</td>
                                 <td>@{{ ((dt1[1].c21*1) + (dt1[1].b21*1))/ (dt1[1].ps_occ_13*1)*100| number:1}}%</td>
                                 <td>@{{ ((dt1[1].c21*1))/ (dt1[1].ps_occ_parc_inf06*1)*100| number:1}}%</td>
                                 <td>@{{ ((dt1[1].c25*1))/ (dt1[1].ps_er_parc_inf06*1)*100| number:1}}%</td>
@@ -283,17 +281,17 @@
                           </table>
                           <br>
 
-                          <p><span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Référence ménages < PLAI </span></p>
+                          <p><span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info " aria-hidden="true"></i> Référence ménages < PLAI </span></p>
 
 
                            <table class="table table-sm table-bordered fbm-table">
                               <thead>
                                <tr class="info">
-                                  <th colspan="16" class="info" style="background-color:#dee0cb;" >FILTRE BORDURE 500M</th>
+                                  <th colspan="16" class="info" ><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
                                 </tr>
-                                <tr>
+                                <tr style="background-color:#dee0cb;">
                                   <th colspan="6" class="fbm-table-right">ENEMBLE DES MÉNAGES</th>
-                                  <th colspan="5" class="fbm-table-right">PARC PRIVÉ</th>
+                                  <th colspan="5" class="fbm-table-right" style="background-color:#f6f9db;">PARC PRIVÉ</th>
                                   <th colspan="5" class="fbm-table-right">PARC SOCIAL</th>
                                 </tr>
                                 <tr  class="table-active">
@@ -341,11 +339,11 @@
                            <table class="table table-sm table-bordered fbm-table">
                               <thead>
                                <tr class="info">
-                                  <th colspan="16" class="info" style="background-color:#dee0cb;" >FILTRE COMMUNE HORS QPV</th>
+                                  <th colspan="16" class="info"  ><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
                                 </tr>
-                                <tr>
+                                <tr style="background-color:#dee0cb;">
                                   <th colspan="6" class="fbm-table-right">ENEMBLE DES MÉNAGES</th>
-                                  <th colspan="5" class="fbm-table-right">PARC PRIVÉ</th>
+                                  <th colspan="5" class="fbm-table-right" style="background-color:#f6f9db;">PARC PRIVÉ</th>
                                   <th colspan="5" class="fbm-table-right">PARC SOCIAL</th>
                                 </tr>
                                 <tr  class="table-active">

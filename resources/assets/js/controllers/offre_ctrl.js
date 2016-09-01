@@ -145,28 +145,29 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
               bloccolor: "rgb(90,150,230)",
               blocpicto: "fa-square"
           });
-      	var quartierLayer =  new ol.layer.Vector({
+      	quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(194,26,1,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.4)"})
+                  stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"})
               }),
               title: "Quartiers PRU",
               name : "vector_pru",
-              bloccolor: "rgb(194,26,1)",
+              bloccolor: "rgb(255,127,0)",
               blocpicto: "fa-square"
       });
 
       var zusLayer =  new ol.layer.Vector({
               source: zusSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.3)"})
+                  stroke: new ol.style.Stroke({color: "rgba(224,117,80,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(224,117,100,0.3)"})
               }),
               title: "ZUS IDF",
               name : "vector_zus",
-              bloccolor: "rgb(255,127,0)",
-              blocpicto: "fa-square"
+              bloccolor: "rgb(224,117,100)",
+              blocpicto: "fa-square",
+              visible: false
       });
 
 	   	var layersStack = [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
