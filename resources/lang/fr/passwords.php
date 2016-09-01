@@ -18,5 +18,6 @@ return [
     'sent' => 'Nous vous avons envoyé un Email avec un lien de renouvellement de mot de passe!',
     'token' => 'Cette clé de demande de renouvellement de mot de pass n\'est pas valide.',
     'user' => "Impossible de localise un utilisateur avec cette adresse Email.",
+    
 
 ];

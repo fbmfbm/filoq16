@@ -1,7 +1,7 @@
  <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                    <li class="sidebar-brand"> <a href="#"> App Laravel51 </a> </li>
+                    <li class="sidebar-brand"> <a href="#"> Filocom au quartier </a> </li>
 
                     <li class="active"><a href="/"><i class="fa fa-home"></i> Accueil</a></li>
                     <li role="separator" class="divider"><hr></li>
@@ -12,7 +12,7 @@
                     <li role="separator" class="divider"><hr></li>
                     @endcan
                      @can('users_add')
-                    <li><a href="/admin/user"><i class="fa fa-users" aria-hidden="true"></i> Utilisateur</a></li>
+                    <li><a href="/admin/user"><i class="fa fa-users" aria-hidden="true"></i> Utilisateurs</a></li>
                     <li role="separator" class="divider"><hr></li>
                     @endcan
                  </ul>

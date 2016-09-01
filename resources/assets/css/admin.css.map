@@ -1,0 +1,1 @@
+{"version":3,"sources":["admin.scss"],"names":[],"mappings":"AACA;EACC,iBAAiB;EACjB,0BAA0B,EAC1B","file":"admin.css","sourcesContent":["\nbody{\n\tmargin-top: 80px;\n\tbackground-color: #FF0000;\n}\n"],"sourceRoot":"/source/"}
