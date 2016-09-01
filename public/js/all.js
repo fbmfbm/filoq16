@@ -36104,7 +36104,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 
 			getPGData( $scope.codecom , 'horq_dyna1').then(function(result3){
 
-				//$scope.nomcom   = result3[0].nom_com;
+				$scope.nomcom   = result3[0].nom_com;
 
           $scope.dt3 = result3;
           console.log($scope.dt3)
