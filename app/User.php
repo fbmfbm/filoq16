@@ -30,6 +30,16 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
+
+     /**
+     *
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+
+
     
 
 
@@ -54,7 +64,7 @@ class User extends Authenticatable
             $permission = Permission::where('name','=', $permission)->first();
         }
 
-        $roles = $this->role;
+        $roles = $this->roles;
 
         foreach ($roles as $role ) {
 
