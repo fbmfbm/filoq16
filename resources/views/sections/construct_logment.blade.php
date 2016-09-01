@@ -26,7 +26,8 @@
                           <h1 class='lead'>
                              <span class="text-muted">Quartier PRU :</span>
                              <p><strong class="text-info">@{{ter1Label}}</strong> <span class='text-muted'>(@{{codeRef}})</span><br>
-                             Commune : <strong>@{{nomcom}}</strong> <span class='text-muted'>(@{{dt1[0].code_com}})</span></p>
+                             Commune : <br>
+                             <strong>@{{nomcom}}</strong> <span class='text-muted'>(@{{dt1[0].code_com}})</span></p>
                             <p class="text-info">Poids du quartier dans la commune :</p>
                              <span class="fbm-chiffre-cle"><i class="fa fa-home" aria-hidden="true"></i> Logement :  <span class="fbm-badge">  @{{(dt1[1].a0 / dt3[0].a0_com)*100 | number:1}} % </span> </span><br>
                              <span class="fbm-chiffre-cle"><i class="fa fa-building" aria-hidden="true"></i> HLM : <span class="fbm-badge">   @{{(dt1[1].a4 / dt3[0].a4_com)*100 | number:1}} % </span></span><br>
