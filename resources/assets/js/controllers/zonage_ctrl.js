@@ -2,8 +2,6 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope
 
 	$scope.zonageCtrlMsg = "Message du Zonage Controller";
 
-	console.log("ok pour test");
-
 
 	var inited = false;
 	$scope.refScale = 'dep';
@@ -99,25 +97,27 @@ var getGeoJsonData = function(){
       quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(194,26,1,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.4)"})
+                  stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"})
               }),
               title: "Quartiers PRU",
               name : "vector_pru",
-              bloccolor: "rgb(194,26,1)",
+              bloccolor: "rgb(255,127,0)",
               blocpicto: "fa-square"
       });
 
       var zusLayer =  new ol.layer.Vector({
               source: zusSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.3)"})
+                  stroke: new ol.style.Stroke({color: "rgba(100,217,80,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(100,217,100,0.3)"})
               }),
               title: "ZUS IDF",
               name : "vector_zus",
-              bloccolor: "rgb(255,127,0)",
-              blocpicto: "fa-square"
+              bloccolor: "rgb(100,217,100)",
+              blocpicto: "fa-square",
+              visible: false
+
       });
 
 	   	layerVector.setVisible(true);
@@ -244,6 +244,15 @@ var getGeoJsonData = function(){
 
    }
 
+   // Function to rdisplay data from direct link on button searche
+   $scope.displayDataDirectLink = function(code){
+
+       console.log(code);
+       if(code && code != '' && code !=' '){
+           window.location = "/thema/offre/"+code;
+       }
+
+   }
 
    var displayFeatureInfo = function(pixel) {
 

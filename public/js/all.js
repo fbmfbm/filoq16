@@ -35493,8 +35493,6 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope
 
 	$scope.zonageCtrlMsg = "Message du Zonage Controller";
 
-	console.log("ok pour test");
-
 
 	var inited = false;
 	$scope.refScale = 'dep';
@@ -35590,25 +35588,27 @@ var getGeoJsonData = function(){
       quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(194,26,1,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.4)"})
+                  stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"})
               }),
               title: "Quartiers PRU",
               name : "vector_pru",
-              bloccolor: "rgb(194,26,1)",
+              bloccolor: "rgb(255,127,0)",
               blocpicto: "fa-square"
       });
 
       var zusLayer =  new ol.layer.Vector({
               source: zusSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.3)"})
+                  stroke: new ol.style.Stroke({color: "rgba(100,217,80,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(100,217,100,0.3)"})
               }),
               title: "ZUS IDF",
               name : "vector_zus",
-              bloccolor: "rgb(255,127,0)",
-              blocpicto: "fa-square"
+              bloccolor: "rgb(100,217,100)",
+              blocpicto: "fa-square",
+              visible: false
+
       });
 
 	   	layerVector.setVisible(true);
@@ -35735,6 +35735,15 @@ var getGeoJsonData = function(){
 
    }
 
+   // Function to rdisplay data from direct link on button searche
+   $scope.displayDataDirectLink = function(code){
+
+       console.log(code);
+       if(code && code != '' && code !=' '){
+           window.location = "/thema/offre/"+code;
+       }
+
+   }
 
    var displayFeatureInfo = function(pixel) {
 
@@ -35988,28 +35997,29 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
               bloccolor: "rgb(90,150,230)",
               blocpicto: "fa-square"
           });
-      	var quartierLayer =  new ol.layer.Vector({
+      	quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(194,26,1,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.4)"})
+                  stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"})
               }),
               title: "Quartiers PRU",
               name : "vector_pru",
-              bloccolor: "rgb(194,26,1)",
+              bloccolor: "rgb(255,127,0)",
               blocpicto: "fa-square"
       });
 
       var zusLayer =  new ol.layer.Vector({
               source: zusSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.3)"})
+                  stroke: new ol.style.Stroke({color: "rgba(224,117,80,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(224,117,100,0.3)"})
               }),
               title: "ZUS IDF",
               name : "vector_zus",
-              bloccolor: "rgb(255,127,0)",
-              blocpicto: "fa-square"
+              bloccolor: "rgb(224,117,100)",
+              blocpicto: "fa-square",
+              visible: false
       });
 
 	   	var layersStack = [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
@@ -36204,28 +36214,29 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
               bloccolor: "rgb(90,150,230)",
               blocpicto: "fa-square"
           });
-      	var quartierLayer =  new ol.layer.Vector({
+      	quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(194,26,1,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(223,14,70,0.4)"})
+                  stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"})
               }),
               title: "Quartiers PRU",
               name : "vector_pru",
-              bloccolor: "rgb(194,26,1)",
+              bloccolor: "rgb(255,127,0)",
               blocpicto: "fa-square"
       });
 
       var zusLayer =  new ol.layer.Vector({
               source: zusSource,
               style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(255,127,0,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.3)"})
+                  stroke: new ol.style.Stroke({color: "rgba(100,217,80,0.9)", lineDash: null, width: 2}),
+                  fill: new ol.style.Fill({color: "rgba(100,217,100,0.3)"})
               }),
               title: "ZUS IDF",
               name : "vector_zus",
-              bloccolor: "rgb(255,127,0)",
-              blocpicto: "fa-square"
+              bloccolor: "rgb(100,217,100)",
+              blocpicto: "fa-square",
+              visible: false
       });
 
 	   	var layersStack = [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
@@ -36411,7 +36422,7 @@ app.service('PGData',['$http', function($http){
                 break;
              case 'evol_tot':
                prop_query = " SELECT CASE WHEN t13.v0 / t03.v1 > 1.05 then 'Fragilistation' WHEN t13.v0 / t03.v1 < 0.95 then 'Diversification' else 'sans effet' END as tot_status,  CASE  WHEN t13.v2 / t03.v3 > 1.05 then 'Fragilistation'  WHEN t13.v2 / t03.v3 < 0.95 then 'Diversification' else 'sans effet' END as pp_status ,  CASE  WHEN t13.v4 / t03.v5 > 1.05 then 'Fragilistation'  WHEN t13.v4 / t03.v5 < 0.95 then 'Diversification' else 'sans effet' END as ps_status ";
-               prop_query += " FROM (SELECT (sum(C40::DEC) + sum(B6::DEC) + sum(C41::DEC) + sum(B10::DEC) + sum(C18::DEC) + sum(B18::DEC)) / (sum(C40::DEC) + sum(B6::DEC) + sum(C41::DEC) + sum(B10::DEC) + sum(C18::DEC) + sum(B18::DEC) +sum(C45::DEC) + sum(B7::DEC)+ sum(C46::DEC) + sum(B11::DEC) + sum(C19::DEC) + sum(B19::DEC)+sum(C50::DEC) + sum(B8::DEC) + sum(C51::DEC) + sum(C20::DEC) + sum(C20::DEC) + sum(B20::DEC)+sum(C55::DEC) + sum(B9::DEC) + sum(C56::DEC) + sum(B13::DEC)+ sum(C21::DEC) + sum(B21::DEC)) AS v0,  (sum(C40::DEC) + sum(B6::DEC) + sum(C41::DEC) + sum(B10::DEC))/(sum(C40::DEC) + sum(B6::DEC) + sum(C41::DEC) + sum(B10::DEC)+ sum(C45::DEC) + sum(B7::DEC) + sum(C46::DEC) + sum(B11::DEC)+sum(C50::DEC) + sum(B8::DEC) + sum(C51::DEC) + sum(B12::DEC)+sum(C55::DEC) + sum(B9::DEC) + sum(C56::DEC) + sum(B13::DEC)) AS v2, (sum(C18::DEC) + sum(B18::DEC))/(sum(C18::DEC) + sum(B18::DEC)+sum(C19::DEC) + sum(B19::DEC)+sum(C20::DEC) + sum(B20::DEC)+sum(C21::DEC) + sum(B21::DEC)) AS v4   ";
+               prop_query += " FROM (SELECT (sum(C40::DEC) + sum(B6::DEC) + sum(C41::DEC) + sum(B10::DEC) + sum(C18::DEC) + sum(B18::DEC)) / (sum(C40::DEC) + sum(B6::DEC) + sum(C41::DEC) + sum(B10::DEC) + sum(C18::DEC) + sum(B18::DEC) +sum(C45::DEC) + sum(B7::DEC)+ sum(C46::DEC) + sum(B11::DEC) + sum(C19::DEC) + sum(B19::DEC)+sum(C50::DEC) + sum(B8::DEC) + sum(C51::DEC) + sum(B12::DEC) + sum(C20::DEC) + sum(B20::DEC)+sum(C55::DEC) + sum(B9::DEC) + sum(C56::DEC) + sum(B13::DEC)+ sum(C21::DEC) + sum(B21::DEC)) AS v0,  (sum(C40::DEC) + sum(B6::DEC) + sum(C41::DEC) + sum(B10::DEC))/(sum(C40::DEC) + sum(B6::DEC) + sum(C41::DEC) + sum(B10::DEC)+ sum(C45::DEC) + sum(B7::DEC) + sum(C46::DEC) + sum(B11::DEC)+sum(C50::DEC) + sum(B8::DEC) + sum(C51::DEC) + sum(B12::DEC)+sum(C55::DEC) + sum(B9::DEC) + sum(C56::DEC) + sum(B13::DEC)) AS v2, (sum(C18::DEC) + sum(B18::DEC))/(sum(C18::DEC) + sum(B18::DEC)+sum(C19::DEC) + sum(B19::DEC)+sum(C20::DEC) + sum(B20::DEC)+sum(C21::DEC) + sum(B21::DEC)) AS v4   ";
                prop_query += " FROM "+tbleFiloq+" WHERE code_conv = '"+refCode+"' AND territoire_np = 'pru' AND  milesim LIKE '__013') t13, ";
                prop_query += " (SELECT (sum(C40::DEC) +sum(C41::DEC) +sum(C42::DEC))/(sum(C40::DEC) + sum(C41::DEC) + sum(C42::DEC)+sum(c45::DEC)+ sum(c46::DEC) + sum(C47::DEC)+sum(c50::DEC) + sum(c51::DEC) + sum(C52::DEC)+sum(c55::DEC) + sum(c56::DEC) +sum( C57::DEC))AS  v1, (sum(c40::DEC) + sum(c41::DEC))/(sum(c40::DEC) + sum(c41::DEC)+sum(c45::DEC) + sum(c46::DEC)+sum(c50::DEC) + sum(c51::DEC)+sum(c55::DEC) + sum(c56::DEC)) AS v3,  (sum(C42::DEC))/(sum(C42::DEC)+sum(C47::DEC)+sum(C52::DEC)+ sum(C57::DEC)) AS v5   ";
                from_query = " ";

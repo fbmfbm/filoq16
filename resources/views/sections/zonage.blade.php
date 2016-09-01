@@ -23,7 +23,7 @@
                                 <option value="" selected>sélectionnez</option>
                                 <option ng-repeat="pru in refPru| filter:{nom_conv:search.nom} | filter:{code_dep:search.dep, code:search.code} " value="@{{pru.code}}">@{{pru.nom_conv}} ( @{{pru.code}} )</option>
                     </select>
-                    <button  class="btn btn-info" ng-click="zoomOnFeature(selectedPru)"> <i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button  class="btn btn-info" ng-click="displayDataDirectLink(selectedPru)"> <i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </form>
             <br/>
@@ -31,12 +31,12 @@
              <div class="card-header">
              Zonage
                     <div class="btn btn-info btn-sm pull-right" ng-click="displayLegend=!displayLegend" data-toggle="tooltip" data-placement="top" title="Légende et affichage des calques de la carte"><i class="fa fa-list" aria-hidden="true"></i></div>
-                    <div class="pull-right" ng-show="displayLegend">
+                    <div class="pull-right" ng-hide="displayLegend">
                         <div id="layerSwitcher"></div>
                     </div>
              </div>
                 <div class="card-block">
-                    <h4 class="card-title"><i class="fa fa-map-marker text-info" aria-hidden="true"></i> Cliquez sur un territoire pour accéder aux données</h4>    
+                    <h4 class="card-title"><i class="fa fa-map-marker text-info" aria-hidden="true"></i> Cliquez sur un territoire (quartiers PRU) pour accéder aux données</h4>    
                         <br>
                      <div id="map">
                         <div id="info"></div>
