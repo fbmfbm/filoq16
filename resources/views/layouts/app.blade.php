@@ -9,7 +9,6 @@
 
  <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 
-
 </head>
 <body id="app-layout" ng-app="app">
     <nav class="navbar navbar-fixed-top navbar-dark bg-primary">
