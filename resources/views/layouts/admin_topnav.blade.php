@@ -1,23 +1,18 @@
-<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
+<nav class="navbar navbar-dark navbar-fixed-top bg-inverse">
+<button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Afficher le menu  de navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="#menu-toggle" class="" id="menu-toggle"><i class="fa fa-bars"></i></a></li>
-        <li class="active"><a href="/" target="_blank"><i class="fa fa-building"></i>  Visualiser le FrontEnd du site </a></li>
-      </ul>
-     @if (Auth::check())
-        <ul class="nav navbar-nav navbar-right">
+</button>
+ <a class="navbar-brand" href="#">@yield('title')</a>
+      <div id="navbar">
+        <nav class="nav navbar-nav pull-xs-left">
+          <a class="nav-item nav-link" href="#">Tableau de bord</a>
+          <a class="nav-item nav-link" href="#">Visualiser le site</a>
+        </nav>
+        <div class="pull-xs-right">
+          <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -29,11 +24,10 @@
             </ul>
           </li>
         </ul>
-      @else
-        <ul class="nav navbar-nav navbar-right">
-          <li><a type="submit" class="" href="/login"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
-        </ul>
-      @endif
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+        </div>
+      </div>
+  </nav>
+
+
+
+  

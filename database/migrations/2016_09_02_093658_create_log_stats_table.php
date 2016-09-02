@@ -18,6 +18,7 @@ class CreateLogStatsTable extends Migration
             $table->string('type',25);
             $table->text('description');
             $table->integer('user_id');
+            $table->string('user_name',100);
             $table->string('user_ip', 25);
             $table->timestamps();
         });

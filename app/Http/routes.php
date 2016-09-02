@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin','middleware'=>['web','auth']], function () {
 	Route::get('/', ['as'=>'dasboard','uses'=>'Admin\\DashboardController@index']);
 	Route::resource('role', 'Admin\\RoleController');
 	Route::resource('user', 'Admin\\UserController');
+	Route::resource('logstat', 'Admin\\LogStatController');
 });
 
 Route::get('/home', 'HomeController@index');
