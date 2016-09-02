@@ -40,6 +40,7 @@ class LogSuccessfulLogin
         $logUser->name = "Login_Success";
         $logUser->type = "login";
         $logUser->description = "Connection de l'utilisateur ".$this->user->name;
+        $logUser->user_name = $this->user->name;
         $logUser->user_id = $this->user->id;
         $logUser->user_ip = $_SERVER['REMOTE_ADDR'];
 
