@@ -5070,54 +5070,24 @@ a.text-danger:focus, a.text-danger:hover {
   .hidden-print {
     display: none !important; } }
 
-.LayerSwitcher {
-  border: 1px solid #C3D0CE;
-  width: 20em;
-  margin: 0.4em;
-  padding: 0.4em;
-  font-size: 0.8em;
-  line-height: 0.8em; }
+.card-img-top span {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em; }
 
-.LayerSwitcher .LayerClickDiv, .LayerSwitcher .LayerClickDiv * {
-  cursor: pointer; }
+.cn {
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100px;
+  -ms-flex-pack: center;
+  justify-content: center; }
 
-.LayerClickDiv {
-  margin: 0.1em; }
-
-.LayerSwitcher .Separator {
-  border-bottom: 1px solid #C3D0CE;
-  margin: 0.5em; }
-
-.LayerSwitcher .check {
-  border: 1px solid #C3D0CE;
-  height: 1em;
-  width: 1em;
-  background: transparent;
-  float: left;
-  margin: 0 0.5em 0 0; }
-
-.LayerSwitcher .checkbox {
-  /* border-radius:0.2em; */ }
-
-.LayerSwitcher .checkbox.checked {
-  background: #BBBBBB; }
-
-.LayerSwitcher .radiobutton {
-  border-radius: 1em; }
-
-.LayerSwitcher .radiobutton.checked {
-  background: #BBBBBB; }
-
-body {
-  padding-top: 80px;
-  font-size: 0.85rem; }
-
-/*
- * Global add-ons
- */
-.sub-header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee; }
+.inner {
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 3.5em; }
 
 /*
  * Top navigation
@@ -5165,23 +5135,29 @@ body {
   color: #fff;
   background-color: #8fca42; }
 
-.card-img-top span {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1em;
-  margin-bottom: 1em; }
+body {
+  padding-top: 80px;
+  font-size: 0.85rem;
+  margin-bottom: 60px; }
 
-.cn {
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 100px;
-  -ms-flex-pack: center;
-  justify-content: center; }
+html {
+  position: relative;
+  min-height: 100%; }
 
-.inner {
-  -ms-flex-item-align: center;
-  align-self: center;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 3.5em; }
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10000;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5; }
+
+/*
+ * Global add-ons
+ */
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee; }
 
 /*# sourceMappingURL=admin.css.map */

@@ -1,11 +1,12 @@
 <nav class="navbar navbar-dark navbar-fixed-top bg-inverse">
+
 <button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Afficher le menu  de navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
 </button>
- <a class="navbar-brand" href="#">@yield('title')</a>
+ <a class="navbar-brand" href="#">Administration : @yield('title')</a>
       <div id="navbar">
         <nav class="nav navbar-nav pull-xs-left">
           <a class="nav-item nav-link" href="#">Tableau de bord</a>

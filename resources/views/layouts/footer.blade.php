@@ -1,16 +1,5 @@
 <footer class="footer">
-<div class="container-fluid">
-	<div class="row" style="background-color: #666; color:#FFF;">
-		<div class="col-md-4 text-center">
-			Pied gauche
-			
-		</div>
-		<div class="col-md-4 text-center">
-			Pied Centre
-		</div>
-		<div class="col-md-4 text-center">
-			Pied Droit
-		</div>
+	<div class="container">
+		<p class="text-muted">Place sticky footer content here.</p>
 	</div>
-</div>
 </footer>

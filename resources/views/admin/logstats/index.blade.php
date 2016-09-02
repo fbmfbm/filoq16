@@ -1,6 +1,6 @@
 @extends('layouts.admin_main')
 
-@section('title','Log de l\'application')
+@section('title','Logs de l\'application')
 
 @section('content')
 
@@ -8,13 +8,8 @@
         <div class="row text-center">
             <div class="col-md-12">
     
-    <h2 class="page-title">Statistiques</h2>
-
-    <p>
-
-        <a href="{{ route('admin.logstat.create') }}" class="btn btn-default">Créer un enregistrement</a>
-
-    </p>
+    <h2 class="page-title">Log et usages</h2>
+     <p>Les traces sont stockées en base de données.</p>
 
     @if(count($stats) > 0)
 
