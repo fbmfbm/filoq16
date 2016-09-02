@@ -32,7 +32,7 @@
                     @else
                         <li class="nav-item ">
                             <div class="dropdown">
-                            <a  href="#" class="btn btn-outline-success dropdown-toggle" id="dropdownMenuLink" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a  href="#" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuLink" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">
