@@ -17,6 +17,13 @@ Route::get('/', function () {
 
 Route::auth();
 
+Route::group(['prefix' => 'admin','middleware'=>['web','auth']], function () {
+	
+	Route::get('/', ['as'=>'dasboard','uses'=>'Admin\\DashboardController@index']);
+	Route::resource('role', 'Admin\\RoleController');
+	Route::resource('user', 'Admin\\UserController');
+});
+
 Route::get('/home', 'HomeController@index');
 Route::get('/zonage', 'ZonageController@index');
 Route::get('/thema/offre/{convent}', 'ThemaController@offre_logmt');
