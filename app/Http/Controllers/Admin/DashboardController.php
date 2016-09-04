@@ -38,7 +38,7 @@ class DashboardController extends Controller
         if($user->cannot("backend_display",$user))
         {
             //abort(403);
-            return "Vous n'avez pas les droits pour accéder à cette page !!";
+            return view ('no_access');
         }
     	
         return view ('admin/home');
