@@ -1,6 +1,7 @@
 var elixir = require('laravel-elixir');
 
 
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -14,7 +15,8 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass(['app.scss'], 'public/css/app.css')
-    .sass(['admin.scss'], 'public/css/admin.css')
+    .sass([
+        'admin.scss',], 'public/css/admin.css')
     .scripts([
     	'/../../../node_modules/openlayers/dist/ol.js',
     	'/../../../node_modules/angular/angular.js',
@@ -32,5 +34,12 @@ elixir(function(mix) {
         'services/geojson_data_service.js',
     	'services/pg_data_service.js'
     	])
-    .version(['/css/app.css','/css/admin.css', '/js/all.js']);
+	.scripts([
+		'/../../../node_modules/jquery/jquery.js',
+		'/../../../node_modules/tether/dist/js/tether.js',
+		'/../../../node_modules/bootstrap/dist/js/bootstrap.js',
+        '/../../../node_modules/bootbox/bootbox.js',
+		'admin/admin-main.js'
+	], 'public/js/admin-main.js')
+    .version(['/css/app.css','/css/admin.css', '/js/all.js' ]);
 });

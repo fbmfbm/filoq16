@@ -1,16 +1,8 @@
 <footer class="footer">
-<div class="container-fluid">
-	<div class="row" style="background-color: #666; color:#FFF;">
-		<div class="col-md-4 text-center">
-			Pied gauche
-			
-		</div>
-		<div class="col-md-4 text-center">
-			Pied Centre
-		</div>
-		<div class="col-md-4 text-center">
-			Pied Droit
-		</div>
+	<div class="container center-text">
+		<br>
+		<p class="text-muted text-center">
+			<a href="" class="btn btn-sm btn-outline-primary" >Info & licence fbm 2016</a>
+		</p>
 	</div>
-</div>
 </footer>
