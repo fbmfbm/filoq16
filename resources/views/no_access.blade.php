@@ -16,8 +16,9 @@
                         <br>
                         <div class="card-text">
 
-                            <div class="alert alert-warning" role="alert">
-                                <strong ><i class="fa fa-exclamation-circle fa-3x" aria-hidden="true"></i> Attention!</strong> Vous n'avez pas les droits suffisants pour accédrer à cette resource.
+                            <div class="alert alert-warning text-center" role="alert">
+                                <strong ><i class="fa fa-exclamation-circle fa-3x" aria-hidden="true"></i> </strong>
+                                <p>Vous n'avez pas les droits suffisants pour accéder à cette resource.</p>
                             </div>
                         </div>
 
