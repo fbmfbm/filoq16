@@ -32,7 +32,9 @@ class Role extends Model
     		$permission = Permission::where('name', '=', $permission)->first();
     	}
 
-    	return $this->permissions()->save($permission);
+
+
+    	return $this->permissions()->attach($permission->id);
 
     }
 
