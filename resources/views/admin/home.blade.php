@@ -1,6 +1,6 @@
 @extends('layouts.admin_main')
 
-@section('title', 'Administration Home page')
+@section('title', 'Gestion')
 
 @section('content')
     <div class="container-fluid">
@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-img-top" style="background-color:#ad9800; width:100%; min-height:100px;" src="...">
                         <div class="cn">
-                            <div &class="inner"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
+                            <div class="inner"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
                         </div>
                     </div>
                     <div class="card-block">

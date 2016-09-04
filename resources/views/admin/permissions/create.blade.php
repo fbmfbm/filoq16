@@ -1,13 +1,13 @@
 @extends('layouts.admin_main')
 
-@section('title','Gestion des roles')
+@section('title','Gestion des permissions')
 
 @section('content')
 
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class="">Création d'un Role</h3>
+                <h3 class="">Création d'une Permission</h3>
                 <hr>
             </div>
 
@@ -16,7 +16,7 @@
                 <div class="card">
 
                     <div class="card-header">
-                        <h4 class="card-title">Role</h4>
+                        <h4 class="card-title">Permission</h4>
                     </div>
                     <div class="card-block">
                         @if (session('status'))
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="card-block">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/role')}}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/permission')}}">
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -83,7 +83,7 @@
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>
                                     Enregistrer
                                 </button>
-                                <a href="{{ url('/admin/role') }}" class="btn btn-outline-secondary"><i
+                                <a href="{{ url('/admin/permission') }}" class="btn btn-outline-secondary"><i
                                             class="fa fa-undo" aria-hidden="true"></i> Annuler</a>
 
                             </div>

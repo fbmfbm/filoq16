@@ -7,54 +7,72 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class="">Affichage d'un Utilisateur</h3>
+                <h3 class="">Affichage de l'utilisateur</h3>
             </div>
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Role {{$role->name}}</div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="PUT" action="{{ url('/admin/role/'.$role->id) }}">
-                            {!! csrf_field() !!}
+            <div class="col-sm-12 col-md-6  offset-md-3">
 
-                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Nom</label>
+                <div class="card">
 
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="name" value="{{ $role->name }}">
+                    <div class="card-header">
+                        <h4 class="card-title">Utilisateur {{ $user->name }}</h4>
+                    </div>
+                    <div class="card-block">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
+                    <form class="form-horizontal" role="form" method="POST" action="{{url('/admin/user/'.$user->id)}}">
+                        {!! csrf_field() !!}
 
-                                    @if ($errors->has('name'))
-                                        <span class="help-block">
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class=" control-label">Nom</label>
+
+
+                            <input type="text" class="form-control" name="name" value="{{$user->name}}">
+
+                            @if ($errors->has('name'))
+                                <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Description</label>
+                            @endif
 
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="description" value="{{ $role->description }}">
+                        </div>
+                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                            <label for="email" class="control-label">Email</label>
 
-                                    @if ($errors->has('description'))
-                                        <span class="help-block">
+
+                            <input type="text" class="form-control" name="description" value="{{$user->email}}">
+
+                            @if ($errors->has('description'))
+                                <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
                                     </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-user"></i> Enregistrer
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                            @endif
+
+                        </div>
+                        <div class="form-group">
+
+                            <a href="{{ url('/admin/user') }}" class="btn btn-outline-secondary"><i class="fa fa-undo"
+                                                                                                    aria-hidden="true"></i>
+                                Annuler</a>
+
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
+    </div>
     </div>
     </div>
 @endsection

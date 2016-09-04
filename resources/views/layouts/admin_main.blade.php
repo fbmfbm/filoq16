@@ -5,12 +5,12 @@
     <title>Application fbm - @yield('title')</title>
     <!-- Latest compiled and minified CSS -->
     <link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
-
     @include('layouts.header')
 
 </head>
 <body>
 <div id="wrapper">
+
     @include('layouts.admin_topnav')
 
     <div class="container-fluid">
@@ -30,11 +30,7 @@
 </div>
 <!-- Latest compiled and minified JavaScript -->
 <!-- JavaScripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-<script src="{{ elixir('js/all.js') }}"></script>
-
+<script src="/js/admin-main.js"></script>
 </body>
 </html>

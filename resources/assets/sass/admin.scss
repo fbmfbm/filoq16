@@ -14,10 +14,8 @@ $enable-rounded:            true;
 //@import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,800);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.min.css);
-
 @import "node_modules/bootstrap/scss/bootstrap-flex.scss";
 
-@import url(http://openlayers.org/en/v3.16.0/css/ol.css);
 
 @import "admin/modules/fbm-card";
 @import "admin/modules/sidebare";
@@ -41,7 +39,7 @@ html {
   z-index: 10000;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: ##e8e8e1;
+  background-color: #e8e8e1;
 }
 
 /*

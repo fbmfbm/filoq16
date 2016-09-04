@@ -9,11 +9,11 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
 use Gate;
 
 use App\Role;
 use App\User;
-
 
 
 class UserController extends Controller
@@ -21,19 +21,25 @@ class UserController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        if($user->cannot("users_add"))
-        {
+        if ($user->cannot("users_add")) {
             abort(403);
         }
 
-        $users = User::all();
+        $users = User::with('role')->orderBy('name', 'asc')->get();
 
-        return view('admin.users.index')->with('users',$users);
+        return view('admin.users.index')->with('users', $users);
     }
+
 
     public function store(Request $request)
     {
-        
+        array_map('trim', $request->all());
+
+        $this->validate($request, [
+            'name' => 'bail|required|max:255',
+            'email' => 'bail|required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed'
+        ]);
 
         User::create([
             'name' => $request->name,
@@ -42,11 +48,9 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $users = User::all();
 
-        return view('admin.users.index')->with('users',$users);
+        $this->index();
     }
-
 
 
     public function create()
@@ -58,46 +62,67 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        array_map('trim', $request->all());
 
+        $this->validate($request, [
+            'name' => 'bail|required|max:255',
+            'email' => 'bail|required|email|max:255',
+        ]);
 
-        $user = User::find($id)->get();
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
 
+        if ($request->password != "") {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->role_id = $request->role_id;
         $user->save();
 
         // redirect
-        Session::flash('message', 'Mise a jour de votre utilisateur réussi !');
-        $users = User::all();
-        return Redirect::to('/admin/user')->with('users', $rusers);
+        session()->flash('status', 'Votre enregistrement à bien été actualisé !');
+
+        return \Redirect::to('/admin/user/' . $user->id)->with('users', $user);
     }
 
     public function show($id)
     {
-        $user = User::findOrFail($id)->first();
+        $roles = Rolle::all()->sortBy('display_name');
+        $user = User::findOrFail($id);
 
-        return view('admin.users.edit')->with('user', $user);
+        return view('admin.users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     public function edit($id)
     {
+        $roles = Rolle::all()->sortBy('display_name');
+        $user = User::findOrFail($id);
 
-        $user = User::findOrFail($id)->first();
-        // TO DO !!!!
-        return view('admin.users.edit')->with('user', $user);
+        return view('admin.users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
 
     public function destroy($id)
     {
-        // TODO !!!!!
-        return view('admin.users.index');
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        session()->flash('status', 'Votre enregistrement à bien été supprimé !');
+        return back();
     }
 
+    public function activeUser($id)
+    {
 
+        $user = User::findOrFail($id);
+        ($user->is_active) ? $user->is_active = false : $user_active = true;
 
+        $user->save();
 
+        return back();
 
+    }
 
 
 }

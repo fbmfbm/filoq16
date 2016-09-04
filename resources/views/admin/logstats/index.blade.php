@@ -8,7 +8,7 @@
         <div class="row text-center">
             <div class="col-md-12">
     
-    <h2 class="page-title">Log et usages</h2>
+    <h2 class="page-title"><i class="fa fa-line-chart" aria-hidden="true"></i> LOG ET USAGES</h2>
      <p>Les traces sont stockées en base de données.</p>
 
     @if(count($stats) > 0)

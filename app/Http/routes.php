@@ -17,11 +17,14 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::group(['prefix' => 'admin','middleware'=>['web','auth']], function () {
+Route::group(['prefix' => 'admin','middleware'=>['auth']], function () {
 	
 	Route::get('/', ['as'=>'dasboard','uses'=>'Admin\\DashboardController@index']);
 	Route::resource('role', 'Admin\\RoleController');
+    Route::get('role/{id}/togglperm/{permId}', 'Admin\\RoleController@togglePermission');
+	Route::resource('permission', 'Admin\\PermissionController');
 	Route::resource('user', 'Admin\\UserController');
+    Route::get('user/{id}/active', 'Admin\\UserController@activeUser');
 	Route::resource('logstat', 'Admin\\LogStatController');
 });
 

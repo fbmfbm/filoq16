@@ -1,34 +1,34 @@
-<nav class="navbar navbar-dark navbar-fixed-top bg-inverse">
 
-<button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Afficher le menu  de navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-</button>
- <a class="navbar-brand" href="#">Administration : @yield('title')</a>
-      <div id="navbar">
-        <nav class="nav navbar-nav pull-xs-left">
-          <a class="nav-item nav-link" href="#">Tableau de bord</a>
-          <a class="nav-item nav-link" href="#">Visualiser le site</a>
-        </nav>
-        <div class="pull-xs-right">
-          <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#"><i class="fa fa-users"></i>{{Auth::user()->roles()->first()->display_name}}</a></li>
-              <li><a href="#"><i class="fa fa-info-circle"></i> Info 1</a></li>
-              <li><a href="#"><i class="fa fa-info-circle"></i> Info 2</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="/logout"><i class="fa fa-sign-out"></i> Déconnexions</a></li>
-            </ul>
-          </li>
+<nav class="navbar navbar-fixed-top navbar-light" style="background-color: #e0f1d0;">
+    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#fbmCollapsingNavbar2" aria-controls="fbmCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <div class="collapse navbar-toggleable-xs" id="fbmCollapsingNavbar2">
+        <a class="navbar-brand" href="{{ url('/') }}"><i class="fa fa-cogs" aria-hidden="true"></i><span class="text-primary"> Administration :</span> @yield('title')</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item active"><a class="nav-link" href="{{ url('/admin') }}">Accueil</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Visualiser le site</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#">Ressources</a></li>
         </ul>
-        </div>
-      </div>
-  </nav>
+        <!-- Left Side Of Navbar -->
+        <!-- Right Side Of Navbar -->
+        <ul class="nav navbar-nav pull-right">
+            <!-- Authentication Links -->
 
+                <li class="nav-item ">
+                    <div class="dropdown">
+                        <a  href="#" class="btn btn-outline-primary dropdown-toggle" id="dropdownMenuLink" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">
+                            <a href class="dropdown-item"><i class="fa fa-users"></i>{{Auth::user()->roles()->first()->display_name}}</a>
+                            <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Déconnexion</a>
+                        </div>
+                    </div>
+                </li>
+        </ul>
+    </div> <!--end collapsible content fbm -->
+</nav>
 
 
   
