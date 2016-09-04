@@ -50,7 +50,7 @@
                                     <td>{{$user->id}}</td>
                                     <td><a href="{{ url('admin/user/'.$user->id) }}">{{$user->name}}</a></td>
                                     <td>
-                                        <span class="{{ ( ! empty($user->role->display_name) ? 'tag tag-info' : 'tag tag-default') }}">{{$user->role->display_name or 'Utilisateur'}}</span>
+                                        <span class="tag tag-default">{{$user->role->display_name or 'Utilisateur' }}</span>
                                     </td>
                                     <td>{{date('d F Y', strtotime($user->created_at))}}</td>
                                     <td>
