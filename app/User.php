@@ -31,48 +31,57 @@ class User extends Authenticatable
     }
 
 
-     /**
+    /**
      *
      */
+    /*
     public function roles()
     {
         return $this->belongsToMany('App\Role');
     }
-
-
-    
+    */
 
 
     public function hasRole($role)
     {
 
-        if(is_string($role))
-        {
+        /*
+        if (is_string($role)) {
 
             return $this->roles->contains('name', $role);
         }
 
-        return !! $role->intersect($this->role)->count();
+        return !!$role->intersect($this->role)->count();
+        */
+        if (is_string($role)) {
+
+            return $this->role->name == $role;
+        }
+
+        return  $this->role->nam == $role->name;
     }
 
 
     public function hasPermissionTo($permission)
     {
 
-        if(is_string($permission))
-        {
-            $permission = Permission::where('name','=', $permission)->first();
+        if (is_string($permission)) {
+            $permission = Permission::where('name', '=', $permission)->first();
         }
 
-        $roles = $this->roles;
+        //$roles = $this->roles;
+        /*
+        foreach ($roles as $role) {
 
-        foreach ($roles as $role ) {
 
-
-            if($role->hasPermissionTo($permission->name))
-            {
+            if ($role->hasPermissionTo($permission->name)) {
                 return true;
             }
+        }*/
+
+        $role = $this->role;
+        if ($role->hasPermissionTo($permission->name)) {
+            return true;
         }
         return false;
     }
