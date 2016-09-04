@@ -41,15 +41,17 @@ class UserController extends Controller
             'password' => 'required|min:6|confirmed'
         ]);
 
+        $basic_user_role = Role::where('name','user')->first();
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'role_id' => 0,
+            'role_id' => $basic_user_role->id,
             'password' => bcrypt($request->password),
         ]);
 
 
-        $this->index();
+        return redirect()->route('admin.user.index');
     }
 
 
@@ -88,7 +90,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $roles = Rolle::all()->sortBy('display_name');
+        $roles = Role::all()->sortBy('display_name');
         $user = User::findOrFail($id);
 
         return view('admin.users.edit', ['user' => $user, 'roles' => $roles]);
@@ -96,7 +98,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $roles = Rolle::all()->sortBy('display_name');
+        $roles = Role::all()->sortBy('display_name');
         $user = User::findOrFail($id);
 
         return view('admin.users.edit', ['user' => $user, 'roles' => $roles]);

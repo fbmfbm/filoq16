@@ -21,7 +21,7 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">
-                            <a href class="dropdown-item"><i class="fa fa-users"></i>{{Auth::user()->roles()->first()->display_name}}</a>
+                            <a href class="dropdown-item"><i class="fa fa-users"></i>{{Auth::user()->role()->first()->display_name}}</a>
                             <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Déconnexion</a>
                         </div>
                     </div>

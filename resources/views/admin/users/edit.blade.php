@@ -7,16 +7,16 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class="">Édition d'un Utilisateur</h3>
+                <h3 class=""><i class="fa fa-user text-primary" aria-hidden="true"></i> Édition d'un Utilisateur</h3>
                 <hr/>
             </div>
 
-            <div class="col-sm-12 col-md-6  offset-md-3">
+            <div class="col-sm-12 col-md-7  offset-md-2">
 
                 <div class="card">
 
                     <div class="card-header">
-                        <h4 class="card-title">Utilisateur <span
+                        <h4 class="card-title"><i class="fa fa-user" aria-hidden="true"></i> Utilisateur <span
                                     class="text-primary font-weight-bold">{{$user->name}}</span></h4>
                         <h6 class="card-subtitle text-muted">Données utilisateur :</h6>
                     </div>
@@ -76,9 +76,8 @@
                             <div class="form-group">
                                 <label for="role_id" class="col-sm-12 col-form-label">Role</label>
                                 <select class="form-control" name="role_id" id="role_id">
-                                    <option value="0">Utilisateur</option>
                                     @foreach( $roles as $role)
-                                        <option value="{{ $role->id }}" {{ ($role->id == $user->role_id) ? ' selected="selected"' : '' }}>{{$role->name}}</option>
+                                        <option value="{{ $role->id }}" {{ ($role->id == $user->role_id) ? ' selected="selected"' : '' }}>{{$role->display_name}}</option>
                                     @endforeach
                                 </select>
                             </div>

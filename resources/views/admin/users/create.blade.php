@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class="">Création d'un Utilisateur</h3>
+                <h3 class=""><i class="fa fa-user text-primary" aria-hidden="true"></i> Création d'un Utilisateur</h3>
                 <hr>
             </div>
 
@@ -16,7 +16,7 @@
                 <div class="card">
 
                     <div class="card-header">
-                        <h4 class="card-title">Utilisateur</h4>
+                        <h4 class="card-title"><i class="fa fa-user" aria-hidden="true"></i> Utilisateur</h4>
                     </div>
                     <div class="card-block">
                         @if (session('status'))
