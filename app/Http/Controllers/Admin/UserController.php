@@ -21,8 +21,9 @@ class UserController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        if ($user->cannot("users_add")) {
-            abort(403);
+        if ($user->cannot("display_user")) {
+
+            return view('no_access');
         }
 
         $users = User::with('role')->orderBy('name', 'asc')->get();
