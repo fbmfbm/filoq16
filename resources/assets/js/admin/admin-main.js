@@ -2,13 +2,17 @@
 
 $(document).ready(function(){
 
-
-    $('[data-toggle="tooltip"]').tooltip()
-
+    // Activation des ttoltype bootstrap
+    $('[data-toggle="tooltip"]').tooltip();
+    // Definition des options de BootstrapBox par default
 
     $('#MyButton').click(function(){
         CapacityChart();
     });
+
+
+
+
 });
 
 var togglePermission = function(rolId, permName, siteUrl){
@@ -17,11 +21,25 @@ var togglePermission = function(rolId, permName, siteUrl){
 }
 
 var confirmeDelet =  function(refName, refId){
-    bootbox.confirm("Êtes-vous sure de vouloir supprimer cet enregistrement ?", function(result) {
-        console.log(result);
-        if(result==true){
-            console.log(refName+refId);
-            document.forms[refName+refId].submit();
-        }
+
+    bootbox.setDefaults({
+
+        locale: "fr",
+        backdrop: true,
+
+    });
+
+    bootbox.confirm({
+        size: 'small',
+        message: "Êtes-vous sure de vouloir supprimer cet enregistrement ?",
+        locale: "fr",
+        callback: function(result) {
+            console.log(result);
+            if(result==true){
+                console.log(refName+refId);
+                document.forms[refName+refId].submit();
+            }
+        },
+
     });
 };

@@ -6,33 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class HomeControllerTest extends TestCase
 {
-    
 
-	 public function createApplication()
-    {
-        putenv('DB_DEFAULT=sqlite_testing');
-
-        $app = require __DIR__ . '/../bootstrap/app.php';
-
-        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
-
-        return $app;
-    }
-
-    public function setUp()
-    {
-        parent::setUp();
-        Artisan::call('migrate:reset');
-        Artisan::call('migrate');
-        Artisan::call('db:seed');
-    }
-
-    public function tearDown()
-    {
-        
-        parent::tearDown();
-        //Artisan::call('migrate:reset');
-    }
 
     /**
      * A basic test example.
@@ -45,18 +19,28 @@ class HomeControllerTest extends TestCase
              ->see('Connectez-vous');
     }
 
+    public function testThatUserFbmIsInDatabase()
+    {
+
+        $this->seeInDatabase('users', ['email' => 'fabien@fmaison.com']);
+    }
+
+    public function testToBeRedirectToLoginIfNavigateToAdmin()
+    {
+        $this->visit('/admin')
+            ->seePageIs('/login');
+    }
 
     public function testLogin()
     {
-        
-        $this->visit('/login')
-        ->submitForm('Connexion', array('email'=>'fabien@fmaison.com', 'password'=>'fbmfbm68'))
-        ->seePageIs('/')
-        ->see('Bienvenue');
-
+        $this->visit('/')
+            ->click('Connectez-vous')
+            ->see('Connexion')
+            ->see('E-mail')
+            ->type('fabien@fmaison.com', 'email')
+            ->type('fbmfbm68', 'password')
+            ->press('Connexion')
+            ->seePageIs(route('home'));
     }
 
-
-
-    
 }

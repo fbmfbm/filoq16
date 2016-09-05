@@ -18,40 +18,35 @@ class LogStatController extends Controller
 {
     public function index()
     {
+
         setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
-        $stats = LogStat::all();
+
+        $stats = LogStat::all()->sortByDesc('created_at');
 
         return view('admin.logstats.index')->with('stats',$stats);
     }
 
     public function store(Request $request)
     {
-        
 
         $stats = LogStat::all();
-
         return view('admin.logasts.index')->with('stats',$stats);
     }
 
 
-
     public function create()
     {
-
         return view('admin.logstats.index');
     }
 
-
     public function update(Request $request, $id)
     {
-
 
     }
 
     public function show($id)
     {
         $stat = LogStat::findOrFail($id)->first();
-
         return view('admin.logstats.index')->with('stat', $stat);
     }
 
@@ -60,17 +55,9 @@ class LogStatController extends Controller
 
     }
 
-
     public function destroy($id)
     {
-
         return view('admin.logstats.index');
     }
-
-
-
-
-
-
 
 }

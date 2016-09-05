@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class="">Affichage de l'utilisateur</h3>
+                <h3 class=""><i class="fa fa-users" aria-hidden="true"></i> Affichage de l'utilisateur</h3>
             </div>
             <div class="col-sm-12 col-md-6  offset-md-3">
 

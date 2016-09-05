@@ -20,7 +20,7 @@
                  <div class="card" id="login-form" ng-hide="showLogin">
              <div class="card-header text-info">Connexion</div>
              <div class="card-block">
-                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                 <form class="form-horizontal" role="form" method="POST" action="{{ url('login') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} text-primary">
                             <label for="email" class="col-md-4 control-label text-primary">E-Mail</label>

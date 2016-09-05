@@ -7,15 +7,18 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class=""><i class="fa fa-users" aria-hidden="true"></i> LISTE DES UTILISATEURS</h3>
+                <h3 class=""><i class="fa fa-users text-primary" aria-hidden="true"></i> LISTE DES UTILISATEURS</h3>
                 <hr>
             </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <a class="btn btn-outline-primary" href="/admin/user/create" data-toggle="tooltip" data-placement="top" title="Ajouter un nouvel utilisateur">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                        </a>
 
-                            <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                        <p class="pull-right"><span class="tag tag-pill tag-primary">{{count($users)}}</span> utilisateurs visualisés</p>
+
                     </div>
                     <div class="card-block">
                         @if (session('status'))
@@ -47,7 +50,7 @@
                             @foreach( $users as $user)
                                 <tr>
                                     <td><input type="checkbox" name="opp" value="0"></td>
-                                    <td>{{$user->id}}</td>
+                                    <td><span class="tag tag-pill tag-default">{{$user->id}}</span></td>
                                     <td><a href="{{ url('admin/user/'.$user->id) }}">{{$user->name}}</a></td>
                                     <td>
                                         <span class="tag tag-default">{{$user->role->display_name or 'Utilisateur' }}</span>

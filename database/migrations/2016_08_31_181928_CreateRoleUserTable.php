@@ -5,16 +5,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRoleUserTable extends Migration
 {
-     /**
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-
-
-        Schema::create('role_user', function(Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
 
             $table->increments('id');
             $table->integer('user_id')->unsigned();
@@ -22,11 +20,10 @@ class CreateRoleUserTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('cascade');
-       
+
         });
+    }
 
-
- }
 
     /**
      * Reverse the migrations.
@@ -36,12 +33,16 @@ class CreateRoleUserTable extends Migration
     public function down()
     {
 
+        /*
         Schema::table('role_user', function ($table) {
 
                 $table->dropForeign(['user_id', 'role_id']);
+
         });
+        */
 
         Schema::drop('role_user');
+
 
     }
 }

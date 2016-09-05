@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class=""><i class="fa fa-cube"></i> LISTE DES ROLES</h3>
+                <h3 class=""><i class="fa fa-cube text-primary"></i> LISTE DES ROLES</h3>
                 <hr>
             </div>
             <div class="col-md-12">

@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class="">Création d'une Permission</h3>
+                <h3 class=""><i class="fa fa-clone text-primary" aria-hidden="true"></i> Création d'une Permission</h3>
                 <hr>
             </div>
 

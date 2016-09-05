@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class=""><i class="fa fa-clone" aria-hidden="true"></i> LISTE DES PERMISSSIONS</h3>
+                <h3 class=""><i class="fa fa-clone text-primary" aria-hidden="true"></i> LISTE DES PERMISSSIONS</h3>
                 <hr>
             </div>
             <div class="col-md-12">
