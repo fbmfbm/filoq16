@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Permission;
 
 class Role extends Model
 {
@@ -31,7 +32,9 @@ class Role extends Model
     		$permission = Permission::where('name', '=', $permission)->first();
     	}
 
-    	return $this->permissions()->save($permission);
+
+
+    	return $this->permissions()->attach($permission->id);
 
     }
 
@@ -47,15 +50,19 @@ class Role extends Model
 
     }
 
-
-    public function hasPermissionTo($permision)
+    /**
+     * Check if User have permission To
+     * @param $permission
+     * @return bool
+     */
+    public function hasPermissionTo($permission)
     {
 
     	$perms = $this->permissions;
 
     	foreach ($perms as $perm) {
 
-    		if($perm->name==$permission)
+    		if($perm->name == $permission)
     		{
     			return True;
     		}	

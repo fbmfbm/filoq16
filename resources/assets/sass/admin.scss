@@ -1,0 +1,53 @@
+//$brand-primary:   			#C136B4; 
+$brand-primary:   			#B3C50F; 
+$brand-info: 				#C31C95;//#00EFD9;
+
+$enable-flex:               true;
+$enable-rounded:            true;
+
+@mixin rounded($radius: 0.5em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+//@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,800);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.min.css);
+@import "node_modules/bootstrap/scss/bootstrap-flex.scss";
+
+
+@import "admin/modules/fbm-card";
+@import "admin/modules/sidebare";
+
+
+body {
+  padding-top: 80px;
+  font-size: 0.85rem;
+  margin-bottom: 60px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10000;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #e8e8e1;
+}
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+

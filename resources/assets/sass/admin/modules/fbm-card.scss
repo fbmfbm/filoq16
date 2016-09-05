@@ -1,0 +1,20 @@
+
+.card-img-top span{
+  margin-left:auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.cn {
+  display: flex;
+  min-height: 100px;
+  justify-content: center;
+}
+
+.inner {
+  align-self: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 3.5em;
+}
+

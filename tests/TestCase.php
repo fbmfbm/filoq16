@@ -7,7 +7,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://localhost';
+    protected $baseUrl = 'http://127.0.0.1';
 
     /**
      * Creates the application.
@@ -16,11 +16,27 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        putenv('DB_DEFAULT=sqlite_testing');
+        putenv('DB_DEFAULT=sqlite');
+
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
     }
+
+    public function setUp()
+    {
+        parent::setUp();
+
+
+
+        //Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
+        Artisan::call('migrate:reset');
+        Artisan::call('migrate');
+        Artisan::call('db:seed');
+    }
+
 }
