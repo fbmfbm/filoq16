@@ -80,13 +80,14 @@
             </div><!-- end row -->
             <div class="row">
                 <div class="col-md-6" >
+                    <a href="#"  class="btn btn-success" ng-click="tableToJson(1)">Exporter en csv</a>
                    <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Total logements et vacance </span>
-                      <table class="table table-sm table-bordered table-striped fbm-table">
+                      <table class="table table-sm table-bordered table-striped fbm-table" id="table_1a">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
                                 </tr>
-                                <tr class="text-center fbm-table-header" >
+                                <tr class="text-center fbm-table-header">
                                   <th></th>
                                   <th colspan="2">2003</th>
                                   <th colspan="2">2013</th>
@@ -109,7 +110,7 @@
                    </div>
                    <div class="col-md-3">
                     <br>
-                     <table class="table table-sm table-bordered table-striped fbm-table">
+                     <table class="table table-sm table-bordered table-striped fbm-table" id="table_1b>
                        <thead>
                               <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
@@ -135,7 +136,7 @@
                     </div>
                     <div class="col-md-3">
                        <br>
-                        <table class="table table-sm table-bordered table-striped fbm-table">
+                        <table class="table table-sm table-bordered table-striped fbm-table" id="table_1c>
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>

@@ -24,6 +24,7 @@ elixir(function(mix) {
         '/../../../node_modules/angular-openlayers-directive/dist/angular-openlayers-directive.js',
         //'/../../../node_modules/canvas-to-blob/index.js',
     	'/../../../node_modules/file-saver/FileSaver.js',
+        '/../../../node_modules/table-to-json/lib/jquery.tabletojson.min.js',
 
         'lib/layerswitcher.js',
     	'app.js',
