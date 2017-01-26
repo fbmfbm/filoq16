@@ -32,6 +32,7 @@
                              <span class="fbm-chiffre-cle"><i class="fa fa-home" aria-hidden="true"></i> Logement :  <span class="fbm-badge"> @{{(dt1[1].a0 / dt3[0].a0_com)*100 | number:1}} % </span> </span><br>
                              <span class="fbm-chiffre-cle"><i class="fa fa-building" aria-hidden="true"></i> HLM : <span class="fbm-badge">  @{{(dt1[1].a4 / dt3[0].a4_com)*100 | number:1}} % </span></span><br>
                              <span class="fbm-chiffre-cle"><i class="fa fa-male" aria-hidden="true"></i> Population : <span class="fbm-badge">  @{{(dt1[1].b61 / dt3[0].b61_com)*100 | number:1}} % </span> </span>
+                              <p><span class="font-italic fbm-sm">( soit Population totale pour la commune  @{{nomcom}} : @{{ dt3[0].b61_com | number:0}} et population du territoire @{{ter1Label}} : @{{dt1[1].b61 | number:0}} )</span></p>
                           </h1>
                           <br>
                        </div>

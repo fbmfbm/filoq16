@@ -1,5 +1,5 @@
 //$brand-primary:   			#C136B4;
-$brand-primary:   			##3866b9;
+$brand-primary:   			#3866b9;
 $brand-info: 				#C31C95;//#00EFD9;
 
 $enable-flex:               true;
@@ -33,6 +33,10 @@ $enable-rounded:            true;
 body{
 	margin-top: 80px;
 	font-family: 'Roboto';
+}
+
+.fbm-sm{
+  font-size: small;
 }
 
 @media print {
