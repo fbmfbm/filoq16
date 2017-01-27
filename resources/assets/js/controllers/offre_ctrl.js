@@ -178,9 +178,13 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 	 //############## END MAP ####################
 
     $scope.tableToJson = function(idTable){
+
         var tblObj1 =  $('#table_1a').tableToJSON({
-            includeRowId: true,
+            headings: ['value', '2003_nb', '2003_pc', '2013_nb', '2013_pc']
         });
+
+
+
          console.log(tblObj1);
     }
 	

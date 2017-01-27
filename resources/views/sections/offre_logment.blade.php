@@ -85,15 +85,15 @@
                    <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Total logements et vacance </span>
                       <table class="table table-sm table-bordered table-striped fbm-table" id="table_1a">
                               <thead>
-                                <tr>
+                              <tr id="title">
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
-                                </tr>
-                                <tr class="text-center fbm-table-header">
+                              </tr>
+                              <tr class="text-center fbm-table-header" id="date">
                                   <th></th>
                                   <th colspan="2">2003</th>
                                   <th colspan="2">2013</th>
-                                </tr>
-                                <tr  class="table-active">
+                              </tr>
+                                <tr  class="table-active" id="tr_header">
                                   <th></th>
                                   <th class="text-center">Nbr.</th>
                                   <th class="text-center">%</th>
@@ -111,7 +111,7 @@
                    </div>
                    <div class="col-md-3">
                     <br>
-                     <table class="table table-sm table-bordered table-striped fbm-table" id="table_1b>
+                     <table class="table table-sm table-bordered table-striped fbm-table" id="table_1b">
                        <thead>
                               <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>

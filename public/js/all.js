@@ -36030,9 +36030,18 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 	 //############## END MAP ####################
 
     $scope.tableToJson = function(idTable){
+
+       var tablSrcTitle  = $('#table_1a #title');
+        console.log(tablSrcTitle);
+        var tableDate =  $('#table_1a #date');
+        console.log(tableDate);
+        //$('#table_1a tr:first').remove();
+        //$('#table_1a tr:first').remove();
+
         var tblObj1 =  $('#table_1a').tableToJSON({
-            includeRowId: true,
+            headings: ['value', '2003_nb', '2003_%', '2013_nb', '2013_%']
         });
+
          console.log(tblObj1);
     }
 	
