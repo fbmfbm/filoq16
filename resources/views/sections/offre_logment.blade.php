@@ -74,14 +74,13 @@
                 
                 <div class="col-md-12">
                   <br>
-                 <h3 class="fbm-tab-sec-title">OFFRE DE LOGEMENT et PROFIL DÉMOGRAPHIQUE</h3>
+                    <a href="#"  class="btn btn-info btn-sm btn-export" ng-click="tableToJson(1, 'logmt_demo')"><i class="fa fa-floppy-o" aria-hidden="true"></i> csv</a><h3 class="fbm-tab-sec-title">OFFRE DE LOGEMENT et PROFIL DÉMOGRAPHIQUE</h3>
                  <i>(<i class="fa fa-line-chart text-info" aria-hidden="true"></i><span class="text-muted"> = Données en taux d'évolution</span>)</i>
                  </div>
                  
             </div><!-- end row -->
             <div class="row">
                 <div class="col-md-6" >
-                    <a href="#"  class="btn btn-success" ng-click="tableToJson(1)">Exporter en csv</a>
                    <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Total logements et vacance </span>
                       <table class="table table-sm table-bordered table-striped fbm-table" id="table_1a">
                               <thead>
@@ -137,7 +136,7 @@
                     </div>
                     <div class="col-md-3">
                        <br>
-                        <table class="table table-sm table-bordered table-striped fbm-table" id="table_1c>
+                        <table class="table table-sm table-bordered table-striped fbm-table" id="table_1c">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
@@ -166,7 +165,7 @@
                 <div class="row">
                    <div class="col-md-6">
                                 <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Statut d'occupation</span>
-                                <table class="table table-sm table-bordered table-striped fbm-table">
+                                <table class="table table-sm table-bordered table-striped fbm-table" id="table_2a">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
@@ -196,7 +195,7 @@
                   </div>
                    <div class="col-md-3">
                                       <br>
-                                     <table class="table table-sm table-bordered table-striped fbm-table">
+                                     <table class="table table-sm table-bordered table-striped fbm-table" id="table_2b">
                               <thead>
                               <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i>Environnement (frange 500m)</th>
@@ -224,7 +223,7 @@
                </div>
                <div class="col-md-3">
                 <br>
-                   <table class="table table-sm table-bordered table-striped fbm-table">
+                   <table class="table table-sm table-bordered table-striped fbm-table" id="table_2c">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
@@ -261,7 +260,7 @@
              <div class="row">
                  <div class="col-md-6">
                                   <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Typologie</span>
-                                <table class="table table-sm table-bordered table-striped fbm-table">
+                                <table class="table table-sm table-bordered table-striped fbm-table" id="table_3a">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
@@ -291,7 +290,7 @@
            </div>
           <div class="col-md-3">
               <br>
-                 <table class="table table-sm table-bordered table-striped fbm-table">
+                 <table class="table table-sm table-bordered table-striped fbm-table" id="table_3b">
                               <thead>
                               <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
@@ -319,7 +318,7 @@
            </div>
             <div class="col-md-3">
                <br>
-                  <table class="table table-sm table-bordered table-striped fbm-table">
+                  <table class="table table-sm table-bordered table-striped fbm-table" id="table_3c">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
@@ -353,7 +352,7 @@
                  <div class="col-md-6">
 
                     <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Age personne de référence du ménage</span>
-                     <table class="table table-sm table-bordered table-striped fbm-table">
+                     <table class="table table-sm table-bordered table-striped fbm-table" id="table_4a">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
@@ -382,7 +381,7 @@
                   </div>
                   <div class="col-md-3">
                   <br>
-                     <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right">
+                     <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" id="table_4b">
                               <thead>
                               <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
@@ -409,7 +408,7 @@
                 </div>
                 <div class="col-md-3">
                    <br>
-                    <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right">
+                    <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" id="table_4c">
                        <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
@@ -451,14 +450,14 @@
             <br>
             <div class="col-md-12">
                 <br>
-                 <h3 class="fbm-tab-sec-title">REVENUS ET MOBILITÉS DES MÉNAGES </h3>
+                <a href="#"  class="btn btn-info btn-sm btn-export" ng-click="tableToJson(2,'rev_mob')"><i class="fa fa-floppy-o" aria-hidden="true"></i> csv</a><h3 class="fbm-tab-sec-title">REVENUS ET MOBILITÉS DES MÉNAGES </h3>
                  <i>(<i class="fa fa-line-chart text-info" aria-hidden="true"></i><span class="text-muted"> = Données en taux d'évolution</span>)</i>
              </div>
           </div><!-- end row -->
           <div class="row">
              <div class="col-md-6">
                   <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Revenus des ménages</span>
-               <table class="table table-sm table-bordered table-striped fbm-table">
+               <table class="table table-sm table-bordered table-striped fbm-table" id="table_5a">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
@@ -485,7 +484,7 @@
               </table>
             </div>
              <div class="col-md-3">
-                    <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right">
+                    <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" id="table_5b">
                               <thead>
                                 <tr>
                                   <th colspan="4" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
@@ -511,7 +510,7 @@
                               
              </div>
             <div class="col-md-3">
-                  <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right">
+                  <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" id="table_5c">
                               <thead>
                                 <tr>
                                   <th colspan="4" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
@@ -540,27 +539,27 @@
               <div class="row">
                   <div class="col-md-6">
                      <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Rapport quartier / environnement et commune hors ZUS</span>
-                     <table class="table table-sm table-bordered table-striped fbm-table">
+                     <table class="table table-sm table-bordered table-striped fbm-table" id="table_6a">
                         <thead>
                                 <tr>
-                                  <th colspan="1" class="fbm-table-right"></th>
+                                  <th colspan="5" class="fbm-table-right"></th>
                                 </tr>
                                 <tr class=" text-center " >
-                                  <th></th>
+                                  <th></th><th colspan="2"></th><th colspan="2"></th>
                                 </tr>
                                 <tr  class="table-active">
-                                  <th class="text-center"></th>
+                                  <th class="text-center"></th><th colspan="2"></th><th colspan="2"></th>
                                 </tr>
                               </thead>
                                 <tbody class="">
-                                  <tr><td scope="row">Revenu médian</td></tr>
-                                  <tr><td scope="row">1<sup>er</sup> décile revenus par ucm</td></tr>
-                                  <tr><td scope="row">Dernier décile revenus par ucm</td></tr>
+                                  <tr><td scope="row">Revenu médian</td><td></td><td></td><td></td><td></td></tr>
+                                  <tr><td scope="row">1<sup>er</sup> décile revenus par ucm</td><td></td><td></td><td></td><td></td></tr>
+                                  <tr><td scope="row">Dernier décile revenus par ucm</td><td></td><td></td><td></td><td></td></tr>
                                 </tbody>
                             </table>
                   </div>
                   <div class="col-md-3">
-                              <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" >
+                              <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" id="table_6b">
                               <thead>
                                 <tr>
                                   <th colspan="2" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
@@ -582,7 +581,7 @@
                             </table>
                   </div>
                   <div class="col-md-3">
-                              <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right">
+                              <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" id="table_6c">
                               <thead>
                                 <tr>
                                   <th colspan="2" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
@@ -608,7 +607,7 @@
                   <div class="row">
                       <div class="col-md-6">
                                  <span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Mobilités</span>
-                                 <table class="table table-sm table-bordered table-striped fbm-table">
+                                 <table class="table table-sm table-bordered table-striped fbm-table" id="table_7a">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
@@ -637,7 +636,7 @@
                      </div>
                      <div class="col-md-3">
                            <br>
-                              <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right">
+                              <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" id="table_7b">
                               <thead>
                                 <tr>
                                   <th colspan="4" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
@@ -664,7 +663,7 @@
                   </div>
                   <div class="col-md-3">
                                <br>
-                              <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right">
+                              <table class="table table-sm table-bordered table-striped fbm-table fbm-table-right" id="table_7c">
                               <thead>
                                 <tr>
                                   <th colspan="4" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>

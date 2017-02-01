@@ -35851,7 +35851,7 @@ var getGeoJsonData = function(){
 
 }])
 
-app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q', function($scope, $window,  GeoJsonData, PGData, $q){
+app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVService', '$q', function($scope, $window,  GeoJsonData, PGData, CSVService, $q){
 
 	$scope.offreCtrlMsg = "Message Offre Controller";
 
@@ -36029,27 +36029,88 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
 
 	 //############## END MAP ####################
 
-    $scope.tableToJson = function(idTable){
+    $scope.tableToJson = function(idTable, filename){
+        var tableRef = [];
+        var now = new Date();
+        filename = filename+'_'+now.getDay()+''+(now.getMonth()+1)+''+now.getFullYear()+'_'+now.getHours()+''+now.getMinutes()+''+now.getSeconds();
+        if(idTable==1){
+        tableRef = [
+            {
+                name: 'Total logements et Vacance',
+                ref : [
+                    {tag: '#table_1a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_1b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_1c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                type: 'table'
+            },
+            {
+                name: 'Statut d\'occupation',
+                ref : [
+                    {tag: '#table_2a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_2b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_2c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                type: 'table'
+            },
+            {
+                name: 'Typologie',
+                ref : [
+                    {tag: '#table_3a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_3b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_3c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                type: 'table'
+            },
+            {
+                name: 'Age personne de référence du ménage',
+                ref : [
+                    {tag: '#table_4a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_4b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_4c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                type: 'table'
+            }
+        ];
+        }else{
+            tableRef = [
+                {
+                    name: 'Revenus des ménages',
+                    ref : [
+                        {tag: '#table_5a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_5b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_5c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                    type: 'table',
+                },
+                {
+                    name: 'Rapport quartier / environnement et commune hors ZUS',
+                    ref : [
+                        {tag: '#table_6a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_6b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_6c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                    type: 'table',
 
-       var tablSrcTitle  = $('#table_1a #title');
-        console.log(tablSrcTitle);
-        var tableDate =  $('#table_1a #date');
-        console.log(tableDate);
-        //$('#table_1a tr:first').remove();
-        //$('#table_1a tr:first').remove();
+                },
+                {
+                    name: 'Mobilités',
+                    ref : [
+                        {tag: '#table_7a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_7b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_7c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                    type: 'table',
 
-        var tblObj1 =  $('#table_1a').tableToJSON({
-            headings: ['value', '2003_nb', '2003_%', '2013_nb', '2013_%']
-        });
+                }
+            ];
 
-         console.log(tblObj1);
-    }
-	
+        }
+
+        var csvString = 'Quartier PRU : '+ $scope.ter1Label + '(' + $scope.codeRef + ')\r\n';
+        csvString += 'Commune : ' + $scope.nomcom + '(' + $scope.dt1[0].code_com + ')\r\n\r\n\r\n';
+        csvString += 'OFFRE DE LOGEMENT et PROFIL DÉMOGRAPHIQUE\r\n';
+
+        CSVService.buildCSV(tableRef, filename, csvString);
+    };
 
 }]);
 
 
-app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q', function($scope, $window,  GeoJsonData, PGData, $q){
+app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVService', '$q', function($scope, $window,  GeoJsonData, PGData, CSVService, $q){
 
 
 	$scope.codeRef = $window._convent;
@@ -36261,6 +36322,89 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
  
 
 	 //############## END MAP ####################
+    $scope.tableToJson = function(idTable, filename){
+        var tableRef = [];
+        var now = new Date();
+        filename = filename+'_'+now.getDay()+''+(now.getMonth()+1)+''+now.getFullYear()+'_'+now.getHours()+''+now.getMinutes()+''+now.getSeconds();
+        if(idTable==1){
+            tableRef = [
+                {
+                    name: 'PROGRAMMATION ET AVANCEMENT DU PRU',
+                    ref : [
+                        {tag: '#table_1a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: '',
+                    ref : [
+                        {tag: '#table_1b', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
+                    ],
+                    type: 'table'
+                },
+
+
+            ];
+        }else if(idTable==2){
+            tableRef = [
+                {
+                    name: '',
+                    ref : [
+                        {tag: '#table_2a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
+                    ],
+                    type: 'table'
+                },
+            ];
+
+        }else if(idTable==3){
+            tableRef = [
+                {
+                    name: 'Ressources des ménages (/plafond HLM)',
+                    ref : [
+                        {tag: '#table_3a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2', 'val5','val6','val7','val8','val9','val10','val11','val12','val13','val14','val15']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: 'Référence ménages < PLAI',
+                    ref : [
+                        {tag: '#table_3b', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2','val5','val6','val7','val8','val9','val10','val11','val12','val13','val14','val15']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: '',
+                    ref : [
+                        {tag: '#table_3c', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: 'Évolution du parc (total)',
+                    ref : [
+                        {tag: '#table_3d', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: 'Évolution du parc Existant',
+                    ref : [
+                        {tag: '#table_3e', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2']}
+                    ],
+                    type: 'table'
+                }
+
+
+            ];
+
+        }
+
+        var csvString = 'Quartier PRU : '+ $scope.ter1Label + '(' + $scope.codeRef + ')\r\n';
+        csvString += 'Commune : ' + $scope.nomcom + '(' + $scope.dt1[0].code_com + ')\r\n\r\n\r\n';
+        csvString += 'DYNAMIQUES DE CONSTRUCTION ET MOBILITÉS\r\n';
+
+        CSVService.buildCSV(tableRef, filename, csvString);
+    };
 	
 
 }]);
@@ -36475,5 +36619,75 @@ app.service('PGData',['$http', function($http){
     }
 
     }]);
+
+/**
+ * Created by fbmfbm on 01/02/2017.
+ */
+app.service('CSVService',['$http', function($http){
+
+    var saveStringToCSV = function(csvData, filename){
+        // ----- tip for save string to csv -----//
+        var downloadLink = document.createElement("a");
+        var blob = new Blob(["\ufeff", csvData]);
+        var url = URL.createObjectURL(blob);
+        downloadLink.href = url;
+        downloadLink.download = filename+".csv";
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    };
+
+    return {
+        buildCSV : function(tableRef, filename, csvString){
+
+            var csvDelimiter = ';';
+            var csvData = csvString;
+
+            for(var i = 0; i<tableRef.length; i++){
+                csvData += '\r\n';
+                csvData += tableRef[i].name + ';;;\r\n';
+
+                if(tableRef[i].ref.length > 1){
+                    // SI tables avec reference 3 zonages
+                    var tblObj0 = $(tableRef[i].ref[0].tag).tableToJSON({
+                        headings: $(tableRef[i].ref[0].headings),
+                    });
+                    var tblObj1 = $(tableRef[i].ref[1].tag).tableToJSON({
+                        headings: $(tableRef[i].ref[1].headings),
+                    });
+                    var tblObj2 = $(tableRef[i].ref[2].tag).tableToJSON({
+                        headings: $(tableRef[i].ref[2].headings),
+                    });
+
+                    csvData += tblObj0[0].value + ';;;;;;' + tblObj1[0].nban1 + ';;;;;' + tblObj2[0].nban1 + ';;;;\r\n';
+                    csvData += tblObj0[1].value + ';' + tblObj0[1].nban1 + ';' + tblObj0[1].pcan1 + ';' + tblObj0[1].nban2 + ';' + tblObj0[1].pcan2 + ';;' + tblObj1[1].nban1 + ';' + tblObj1[1].pcan1 + ';' + tblObj1[1].nban2 + ';' + tblObj1[1].pcan2 + ';;' + tblObj2[1].nban1 + ';' + tblObj2[1].pcan1 + ';' + tblObj2[1].nban2 + ';' + tblObj2[1].pcan2 + '\r\n';
+                    csvData += tblObj0[2].value + ';' + tblObj0[2].nban1 + ';' + tblObj0[2].pcan1 + ';' + tblObj0[2].nban2 + ';' + tblObj0[2].pcan2 + ';;' + tblObj1[2].nban1 + ';' + tblObj1[2].pcan1 + ';' + tblObj1[2].nban2 + ';' + tblObj1[2].pcan2 + ';;' + tblObj2[2].nban1 + ';' + tblObj2[2].pcan1 + ';' + tblObj2[2].nban2 + ';' + tblObj2[2].pcan2 + '\r\n';
+                    for(var j = 3; j<tblObj0.length; j++){
+                        csvData += tblObj0[j].value + ';' + tblObj0[j].nban1 + ';' + tblObj0[j].pcan1 + ';' + tblObj0[j].nban2 + ';' + tblObj0[j].pcan2 + ';;' + tblObj1[j].nban1 + ';' + tblObj1[j].pcan1 + ';' + tblObj1[j].nban2 + ';' + tblObj1[j].pcan2 + ';;' + tblObj2[j].nban1 + ';' + tblObj2[j].pcan1 + ';' + tblObj2[j].nban2 + ';' + tblObj2[j].pcan2 + '\r\n';
+                    }
+                }else{
+                    // sinon simple tableau
+                    var tblObj0 = $(tableRef[i].ref[0].tag).tableToJSON({
+                        headings: $(tableRef[i].ref[0].headings),
+                    });
+                    csvData += tblObj0[0].value + ';;;;;;'+'\r\n';
+                    //csvData += tblObj0[1].value + ';' + tblObj0[1].nban1 + ';' + tblObj0[1].pcan1 + ';' + tblObj0[1].nban2 + ';' + tblObj0[1].pcan2 + '\r\n';
+                    //csvData += tblObj0[2].value + ';' + tblObj0[2].nban1 + ';' + tblObj0[2].pcan1 + ';' + tblObj0[2].nban2 + ';' + tblObj0[2].pcan2 + '\r\n';
+                    for(var j = 1; j<tblObj0.length; j++){
+                        for(var a = 0; a<tableRef[i].ref[0].headings.length;a++){
+                            csvData += tblObj0[j][tableRef[i].ref[0].headings[a]] + ';';
+                        }
+                        csvData +='\r\n';
+                    }
+                }
+                console.log(csvData)
+            }
+
+            saveStringToCSV(csvData, filename);
+            return(filename);
+        },
+     }
+}]);
 
 //# sourceMappingURL=all.js.map

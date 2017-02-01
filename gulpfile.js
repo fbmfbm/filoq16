@@ -33,7 +33,8 @@ elixir(function(mix) {
         'controllers/offre_ctrl.js',
         'controllers/construct_ctrl.js',
         'services/geojson_data_service.js',
-    	'services/pg_data_service.js'
+    	'services/pg_data_service.js',
+		'services/csv_service.js',
     	])
 	.scripts([
 		'/../../../node_modules/jquery/dist/jquery.js',

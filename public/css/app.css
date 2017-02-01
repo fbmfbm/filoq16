@@ -5111,6 +5111,9 @@ a.text-danger:focus, a.text-danger:hover {
 .fbm-title {
   color: #C136B4; }
 
+.btn-export {
+  float: right; }
+
 .fbm-picto-block {
   font-size: 2.8em;
   display: block;
