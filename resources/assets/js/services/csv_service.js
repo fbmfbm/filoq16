@@ -59,9 +59,10 @@ app.service('CSVService',['$http', function($http){
                         csvData +='\r\n';
                     }
                 }
-                console.log(csvData)
-            }
 
+            }
+            csvData = csvData.replace(/undefined/g, "");
+            console.log(csvData)
             saveStringToCSV(csvData, filename);
             return(filename);
         },

@@ -101,7 +101,7 @@
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td scope="row">Nombre total de lgts</td><td><span class="secret-value" ng-if="dt1[0].a0=='s'">S</span>@{{dt1[0].a0 | number:0}}</td><td></td><td>@{{dt1[1].a0 | number:0}}</td><td class="fbm-evol"><i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a0*1)-(dt1[0].a0*1))/(dt1[1].a0*1)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Nombre total de lgts</td><td><span class="secret-value" ng-if="dt1[0].a0=='s'">S</span>@{{dt1[0].a0 | number:0}}</td><td></td><td><span class="secret-value" ng-if="dt1[1].a0=='s'">S</span>@{{dt1[1].a0 | number:0}}</td><td class="fbm-evol"><i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a0*1)-(dt1[0].a0*1))/(dt1[1].a0*1)*100 | number:1}}%</td></tr>
                                 <tr><td scope="row">Dt lgts vacants</td><td><span class="secret-value" ng-if="dt1[0].a62=='s'|| dt1[0].a63=='s'">S</span>@{{(dt1[0].a62*1) + (dt1[0].a63*1)| number:0 }}</td><td>@{{(((dt1[0].a62*1) + (dt1[0].a63*1))/dt1[0].a0*1)*100| number:1 }}%</td><td><span class="secret-value" ng-if="dt1[1].a62=='s'||t1[1].a63=='s'">S</span>@{{(dt1[1].a62*1) + (dt1[1].a63*1)| number:0 }}</td><td>@{{(((dt1[1].a62*1) + (dt1[1].a63*1))/dt1[1].a0*1)*100| number:1 }}%</td></tr>
                                 <tr><td scope="row">dt privé (% / parc priv.)</td><td><span class="secret-value" ng-if="dt1[0].a62=='s'">S</span>@{{dt1[0].a62  | number:0}}</td><td>@{{((dt1[0].a62*1)/((dt1[0].a62*1)+(dt1[0].a2*1)+(dt1[0].a3*1)))*100 | number:1 }}%</td><td>@{{dt1[1].a62  | number:0}}</td><td><span class="secret-value" ng-if="dt1[1].a62=='s'">S</span>@{{((dt1[1].a62*1)/((dt1[1].a62*1)+(dt1[1].a2*1)+(dt1[1].a3*1)))*100 | number:1 }}%</td></tr>
                                 <tr><td scope="row">dt public (% / parc HLM)</td><td><span class="secret-value" ng-if="dt1[0].a63=='s'">S</span>@{{dt1[0].a63 | number:0}}</td><td>@{{(dt1[0].a63*1) /((dt1[0].a4*1)+(dt1[0].a63*1))*100| number:1 }}%</td><td><span class="secret-value" ng-if="dt1[1].a63=='s'">S</span>@{{dt1[1].a63 | number:0}}</td><td>@{{(dt1[1].a63*1) /((dt1[1].a4*1)+(dt1[1].a63*1))*100| number:1 }}%</td></tr>
@@ -127,10 +127,10 @@
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td>@{{dt2[0].a0 | number:0}}</td><td></td><td>@{{dt2[1].a0 | number:0}}</td><td class="fbm-evol"><i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a0*1)-(dt2[0].a0*1))/(dt2[1].a0*1)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{(dt2[0].a62*1) + (dt2[0].a63*1)| number:0 }}</td><td>@{{(((dt2[0].a62*1) + (dt2[0].a63*1))/dt2[0].a0*1)*100| number:1 }}%</td><td>@{{(dt2[1].a62*1) + (dt2[1].a63*1)| number:0 }}</td><td>@{{(((dt2[1].a62*1) + (dt2[1].a63*1))/dt2[1].a0*1)*100| number:1 }}%</td></tr>
-                                <tr><td>@{{dt2[0].a62  | number:0}}</td><td>@{{((dt2[0].a62*1)/((dt2[0].a62*1)+(dt2[0].a2*1)+(dt2[0].a3*1)))*100 | number:1 }}%</td><td>@{{dt2[1].a62  | number:0}}</td><td>@{{((dt2[1].a62*1)/((dt2[1].a62*1)+(dt2[1].a2*1)+(dt2[1].a3*1)))*100 | number:1 }}%</td></tr>
-                                <tr><td>@{{dt2[0].a63 | number:0}}</td><td>@{{(dt2[0].a63*1) /((dt2[0].a4*1)+(dt2[0].a63*1))*100| number:1 }}%</td><td>@{{dt2[1].a63 | number:0}}</td><td>@{{(dt2[1].a63*1) /((dt2[1].a4*1)+(dt2[1].a63*1))*100| number:1 }}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a0=='s'">S</span>@{{dt2[0].a0 | number:0}}</td><td></td><td><span class="secret-value" ng-if="dt2[0].a0=='s'">S</span>@{{dt2[1].a0 | number:0}}</td><td class="fbm-evol"><i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a0*1)-(dt2[0].a0*1))/(dt2[1].a0*1)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a62=='s'||dt2[0].a63=='s'">S</span>@{{(dt2[0].a62*1) + (dt2[0].a63*1)| number:0 }}</td><td>@{{(((dt2[0].a62*1) + (dt2[0].a63*1))/dt2[0].a0*1)*100| number:1 }}%</td><td><span class="secret-value" ng-if="dt2[0].a0=='s'">S</span>@{{(dt2[1].a62*1) + (dt2[1].a63*1)| number:0 }}</td><td>@{{(((dt2[1].a62*1) + (dt2[1].a63*1))/dt2[1].a0*1)*100| number:1 }}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a62=='s'">S</span>@{{dt2[0].a62  | number:0}}</td><td>@{{((dt2[0].a62*1)/((dt2[0].a62*1)+(dt2[0].a2*1)+(dt2[0].a3*1)))*100 | number:1 }}%</td><td><span class="secret-value" ng-if="dt2[0].a0=='s'">S</span>@{{dt2[1].a62  | number:0}}</td><td>@{{((dt2[1].a62*1)/((dt2[1].a62*1)+(dt2[1].a2*1)+(dt2[1].a3*1)))*100 | number:1 }}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a63=='s'">S</span>@{{dt2[0].a63 | number:0}}</td><td>@{{(dt2[0].a63*1) /((dt2[0].a4*1)+(dt2[0].a63*1))*100| number:1 }}%</td><td><span class="secret-value" ng-if="dt2[0].a0=='s'">S</span>@{{dt2[1].a63 | number:0}}</td><td>@{{(dt2[1].a63*1) /((dt2[1].a4*1)+(dt2[1].a63*1))*100| number:1 }}%</td></tr>
                                </tbody>
                        </table>
                     </div>
@@ -340,7 +340,7 @@
                                 <tr><td>@{{dt3[0].a68 | number:0}}</td><td>@{{dt3[0].a68/dt3[0].ta66_a68*100 | number:1}}%</td><td>@{{dt3[1].a68 | number:0}}</td><td>@{{dt3[1].a68/dt3[1].ta66_a68*100 | number:1}}%</td></tr>
                                 <tr><td scope="row" colspan="5"><br></tr>
                                 <tr><td>@{{dt3[0].b61 | number:0}}</td><td></td><td>@{{dt3[1].b61 | number:0}}</td><td class="fbm-evol"><i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].b61*1)-(dt3[0].b61*1))/(dt3[0].b61*1)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt3[0].b60 | number:2}}</td><td></td><td>@{{dt3[1].b60 | number:2}}</td><td></td></tr
+                                <tr><td>@{{dt3[0].b60 | number:2}}</td><td></td><td>@{{dt3[1].b60 | number:2}}</td><td></td></tr>
                                </tbody>
                </table>
              </div>
@@ -470,15 +470,15 @@
                                 <tr  class="table-active">
                                   <th></th>
                                   <th class="text-center">Nbr.</th>
-                                  <th class="text-center">%</th>
+                                  <th class="text-center"></th>
                                   <th class="text-center">Nbr.</th>
                                   <th class="text-center">%</th>
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td scope="row">Revenu médian par ucm</td><td>@{{dt1[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a15 - dt1[0].a15)/dt1[0].a15)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">1<sup>er</sup> décile revenus par ucm</td><td>@{{dt1[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a16 - dt1[0].a16)/dt1[0].a16)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">Dernier décile revenus par ucm</td><td>@{{dt1[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a17 - dt1[0].a17)/dt1[0].a17)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Revenu médian par ucm</td><td>@{{dt1[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a15 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a15 - dt1[0].a15)/dt1[0].a15)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">1<sup>er</sup> décile revenus par ucm</td><td>@{{dt1[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a16 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a16 - dt1[0].a16)/dt1[0].a16)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Dernier décile revenus par ucm</td><td>@{{dt1[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt1[1].a17 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt1[1].a17 - dt1[0].a17)/dt1[0].a17)*100 | number:1}}%</td></tr>
                                 <tr><td scope="row">Rapport interdécile</td><td>@{{dt1[0].a17 / dt1[0].a16 | number:2}}</td><td></td><td>@{{dt1[1].a17 / dt1[1].a16 | number:2}}</td><td class="fbm-evol"></td></tr>
                                </tbody>
               </table>
@@ -495,15 +495,15 @@
                                 </tr>
                                 <tr  class="table-active">
                                   <th class="text-center">Nbr.</th>
-                                  <th class="text-center">%</th>
+                                  <th class="text-center"></th>
                                   <th class="text-center">Nbr.</th>
                                   <th class="text-center">%</th>
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td>@{{dt2[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a15 - dt2[0].a15)/dt2[0].a15)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt2[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a16 - dt2[0].a16)/dt2[0].a16)*100 | number:1}}%</td></tr>
-                                <tr><<td>@{{dt2[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a17 - dt2[0].a17)/dt2[0].a17)*100 | number:1}}%</td></tr>
+                                <tr><td>@{{dt2[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a15 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a15 - dt2[0].a15)/dt2[0].a15)*100 | number:1}}%</td></tr>
+                                <tr><td>@{{dt2[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a16 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a16 - dt2[0].a16)/dt2[0].a16)*100 | number:1}}%</td></tr>
+                                <tr><<td>@{{dt2[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt2[1].a17 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt2[1].a17 - dt2[0].a17)/dt2[0].a17)*100 | number:1}}%</td></tr>
                                 <tr><td>@{{dt2[0].a17 / dt2[0].a16 | number:2}}</td><td></td><td>@{{dt2[1].a17 / dt2[1].a16 | number:2}}</td><td class="fbm-evol"> </td></tr>
                                </tbody>
                             </table>
@@ -521,15 +521,15 @@
                                 </tr>
                                 <tr  class="table-active">
                                   <th class="text-center">Nbr.</th>
-                                  <th class="text-center">%</th>
+                                  <th class="text-center"></th>
                                   <th class="text-center">Nbr.</th>
                                   <th class="text-center">%</th>
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td>@{{dt3[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a15 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a15 - dt3[0].a15)/dt3[0].a15)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt3[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a16 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a16 - dt3[0].a16)/dt3[0].a16)*100 | number:1}}%</td></tr>
-                                <tr><<td>@{{dt3[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a17 | number:0}}</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a17 - dt3[0].a17)/dt3[0].a17)*100 | number:1}}%</td></tr>
+                                <tr><td>@{{dt3[0].a15 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a15 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a15 - dt3[0].a15)/dt3[0].a15)*100 | number:1}}%</td></tr>
+                                <tr><td>@{{dt3[0].a16 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a16 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a16 - dt3[0].a16)/dt3[0].a16)*100 | number:1}}%</td></tr>
+                                <tr><<td>@{{dt3[0].a17 | number:0}} &#8364</td><td></td><td>@{{dt3[1].a17 | number:0}} &#8364</td><td class="fbm-evol"> <i class="fa fa-line-chart text-info" aria-hidden="true"></i> @{{((dt3[1].a17 - dt3[0].a17)/dt3[0].a17)*100 | number:1}}%</td></tr>
                                 <tr><td>@{{dt3[0].a17 / dt3[0].a16 | number:2}}</td><td></td><td>@{{dt3[1].a17 / dt3[1].a16 | number:2}}</td><td class="fbm-evol"></td></tr>
                                </tbody>
                             </table>
@@ -626,11 +626,11 @@
                                 </tr>
                               </thead>
                               <tbody class="">
-                                <tr><td scope="row">Nombre d'emménagés récents</td><td>@{{dt1[0].a27 | number:0}}</td><td>@{{(dt1[0].a27 / dt1[0].a1)*100 | number:1}}%</td><td>@{{dt1[1].a27 | number:0}}</td><td>@{{(dt1[1].a27 / dt1[1].a1)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">Propriétaires occ. (% / tot. PO)</td><td>@{{dt1[0].a28 | number:0}}</td><td>@{{(dt1[0].a28 / dt1[0].a2)*100 | number:1}}%</td><td>@{{dt1[1].a28 | number:0}}</td><td>@{{(dt1[1].a28 / dt1[1].a2)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">Locataires parc privé (% / tot. LP)</td><td>@{{dt1[0].a29 | number:0}}</td><td>@{{(dt1[0].a29 / dt1[0].a3)*100 | number:1}}%</td><td>@{{dt1[1].a29 | number:0}}</td><td>@{{(dt1[1].a29 / dt1[1].a3)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">Locataires du HLM (% / tot. HLM)</td><td>@{{dt1[0].a30 | number:0}}</td><td>@{{(dt1[0].a30 / dt1[0].a4)*100 | number:1}}%</td><td>@{{dt1[1].a30 | number:0}}</td><td>@{{(dt1[1].a30 / dt1[1].a4)*100 | number:1}}%</td></tr>
-                                <tr><td scope="row">Autres (% / tot. autres)</td><td>@{{dt1[0].a31  | number:0}}</td><td>@{{(dt1[0].a31 / dt1[0].a5)*100 | number:1}}%</td><td>@{{dt1[1].a31  | number:0}}</td><td>@{{(dt1[1].a31 / dt1[1].a5)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Nombre d'emménagés récents</td><td><span class="secret-value" ng-if="dt1[0].a27=='s'">S</span>@{{dt1[0].a27 | number:0}}</td><td>@{{(dt1[0].a27 / dt1[0].a1)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt1[1].a27=='s'">S</span>@{{dt1[1].a27 | number:0}}</td><td>@{{(dt1[1].a27 / dt1[1].a1)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Propriétaires occ. (% / tot. PO)</td><td><span class="secret-value" ng-if="dt1[0].a28=='s'">S</span>@{{dt1[0].a28 | number:0}}</td><td>@{{(dt1[0].a28 / dt1[0].a2)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt1[1].a28=='s'">S</span>@{{dt1[1].a28 | number:0}}</td><td>@{{(dt1[1].a28 / dt1[1].a2)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Locataires parc privé (% / tot. LP)</td><td><span class="secret-value" ng-if="dt1[0].a29=='s'">S</span>@{{dt1[0].a29 | number:0}}</td><td>@{{(dt1[0].a29 / dt1[0].a3)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt1[1].a29=='s'">S</span>@{{dt1[1].a29 | number:0}}</td><td>@{{(dt1[1].a29 / dt1[1].a3)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Locataires du HLM (% / tot. HLM)</td><td><span class="secret-value" ng-if="dt1[0].a30=='s'">S</span>@{{dt1[0].a30 | number:0}}</td><td>@{{(dt1[0].a30 / dt1[0].a4)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt1[1].a30=='s'">S</span>@{{dt1[1].a30 | number:0}}</td><td>@{{(dt1[1].a30 / dt1[1].a4)*100 | number:1}}%</td></tr>
+                                <tr><td scope="row">Autres (% / tot. autres)</td><td><span class="secret-value" ng-if="dt1[0].a31=='s'">S</span>@{{dt1[0].a31  | number:0}}</td><td>@{{(dt1[0].a31 / dt1[0].a5)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt1[1].a31=='s'">S</span>@{{dt1[1].a31  | number:0}}</td><td>@{{(dt1[1].a31 / dt1[1].a5)*100 | number:1}}%</td></tr>
                                </tbody>
                          </table>
                      </div>
@@ -653,11 +653,11 @@
                                 </tr>
                               </thead>
                                 <tbody class="">
-                                <tr><td>@{{dt2[0].a27 | number:0}}</td><td>@{{(dt2[0].a27 / dt2[0].a1)*100 | number:1}}%</td><td>@{{dt2[1].a27 | number:0}}</td><td>@{{(dt2[1].a27 / dt2[1].a1)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt2[0].a28 | number:0}}</td><td>@{{(dt2[0].a28 / dt2[0].a2)*100 | number:1}}%</td><td>@{{dt2[1].a28 | number:0}}</td><td>@{{(dt2[1].a28 / dt2[1].a2)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt2[0].a29 | number:0}}</td><td>@{{(dt2[0].a29 / dt2[0].a3)*100 | number:1}}%</td><td>@{{dt2[1].a29 | number:0}}</td><td>@{{(dt2[1].a29 / dt2[1].a3)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt2[0].a30 | number:0}}</td><td>@{{(dt2[0].a30 / dt2[0].a4)*100 | number:1}}%</td><td>@{{dt2[1].a30 | number:0}}</td><td>@{{(dt2[1].a30 / dt2[1].a4)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt2[0].a31  | number:0}}</td><td>@{{(dt2[0].a31 / dt2[0].a5)*100 | number:1}}%</td><td>@{{dt2[1].a31  | number:0}}</td><td>@{{(dt2[1].a31 / dt2[1].a5)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a27=='s'">S</span>@{{dt2[0].a27 | number:0}}</td><td>@{{(dt2[0].a27 / dt2[0].a1)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt2[1].a27=='s'">S</span>@{{dt2[1].a27 | number:0}}</td><td>@{{(dt2[1].a27 / dt2[1].a1)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a28=='s'">S</span>@{{dt2[0].a28 | number:0}}</td><td>@{{(dt2[0].a28 / dt2[0].a2)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt2[1].a28=='s'">S</span>@{{dt2[1].a28 | number:0}}</td><td>@{{(dt2[1].a28 / dt2[1].a2)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a29=='s'">S</span>@{{dt2[0].a29 | number:0}}</td><td>@{{(dt2[0].a29 / dt2[0].a3)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt2[1].a29=='s'">S</span>@{{dt2[1].a29 | number:0}}</td><td>@{{(dt2[1].a29 / dt2[1].a3)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a30=='s'">S</span>@{{dt2[0].a30 | number:0}}</td><td>@{{(dt2[0].a30 / dt2[0].a4)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt2[1].a30=='s'">S</span>@{{dt2[1].a30 | number:0}}</td><td>@{{(dt2[1].a30 / dt2[1].a4)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt2[0].a31=='s'">S</span>@{{dt2[0].a31  | number:0}}</td><td>@{{(dt2[0].a31 / dt2[0].a5)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt2[1].a31=='s'">S</span>@{{dt2[1].a31  | number:0}}</td><td>@{{(dt2[1].a31 / dt2[1].a5)*100 | number:1}}%</td></tr>
                                </tbody>
                               </table>
                   </div>
@@ -680,11 +680,11 @@
                                 </tr>
                               </thead>
                                 <tbody class="">
-                                <tr><td>@{{dt3[0].a27 | number:0}}</td><td>@{{(dt3[0].a27 / dt3[0].a1)*100 | number:1}}%</td><td>@{{dt3[1].a27 | number:0}}</td><td>@{{(dt3[1].a27 / dt3[1].a1)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt3[0].a28 | number:0}}</td><td>@{{(dt3[0].a28 / dt3[0].a2)*100 | number:1}}%</td><td>@{{dt3[1].a28 | number:0}}</td><td>@{{(dt3[1].a28 / dt3[1].a2)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt3[0].a29 | number:0}}</td><td>@{{(dt3[0].a29 / dt3[0].a3)*100 | number:1}}%</td><td>@{{dt3[1].a29 | number:0}}</td><td>@{{(dt3[1].a29 / dt3[1].a3)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt3[0].a30 | number:0}}</td><td>@{{(dt3[0].a30 / dt3[0].a4)*100 | number:1}}%</td><td>@{{dt3[1].a30 | number:0}}</td><td>@{{(dt3[1].a30 / dt3[1].a4)*100 | number:1}}%</td></tr>
-                                <tr><td>@{{dt3[0].a31  | number:0}}</td><td>@{{(dt3[0].a31 / dt3[0].a5)*100 | number:1}}%</td><td>@{{dt3[1].a31  | number:0}}</td><td>@{{(dt3[1].a31 / dt3[1].a5)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt3[0].a27=='s'">S</span>@{{dt3[0].a27 | number:0}}</td><td>@{{(dt3[0].a27 / dt3[0].a1)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt3[1].a27=='s'">S</span>@{{dt3[1].a27 | number:0}}</td><td>@{{(dt3[1].a27 / dt3[1].a1)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt3[0].a28=='s'">S</span>@{{dt3[0].a28 | number:0}}</td><td>@{{(dt3[0].a28 / dt3[0].a2)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt3[1].a28=='s'">S</span>@{{dt3[1].a28 | number:0}}</td><td>@{{(dt3[1].a28 / dt3[1].a2)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt3[0].a29=='s'">S</span>@{{dt3[0].a29 | number:0}}</td><td>@{{(dt3[0].a29 / dt3[0].a3)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt3[1].a29=='s'">S</span>@{{dt3[1].a29 | number:0}}</td><td>@{{(dt3[1].a29 / dt3[1].a3)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt3[0].a30=='s'">S</span>@{{dt3[0].a30 | number:0}}</td><td>@{{(dt3[0].a30 / dt3[0].a4)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt3[1].a30=='s'">S</span>@{{dt3[1].a30 | number:0}}</td><td>@{{(dt3[1].a30 / dt3[1].a4)*100 | number:1}}%</td></tr>
+                                <tr><td><span class="secret-value" ng-if="dt3[0].a31=='s'">S</span>@{{dt3[0].a31  | number:0}}</td><td>@{{(dt3[0].a31 / dt3[0].a5)*100 | number:1}}%</td><td><span class="secret-value" ng-if="dt3[1].a31=='s'">S</span>@{{dt3[1].a31  | number:0}}</td><td>@{{(dt3[1].a31 / dt3[1].a5)*100 | number:1}}%</td></tr>
                                </tbody>
                               </table>
                      </div>
