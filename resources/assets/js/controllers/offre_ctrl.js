@@ -1,5 +1,5 @@
 
-app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q', function($scope, $window,  GeoJsonData, PGData, $q){
+app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVService', '$q', function($scope, $window,  GeoJsonData, PGData, CSVService, $q){
 
 	$scope.offreCtrlMsg = "Message Offre Controller";
 
@@ -176,6 +176,83 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q',
  
 
 	 //############## END MAP ####################
-	
+
+    $scope.tableToJson = function(idTable, filename){
+        var tableRef = [];
+        var now = new Date();
+        filename = filename+'_'+now.getDay()+''+(now.getMonth()+1)+''+now.getFullYear()+'_'+now.getHours()+''+now.getMinutes()+''+now.getSeconds();
+        if(idTable==1){
+        tableRef = [
+            {
+                name: 'Total logements et Vacance',
+                ref : [
+                    {tag: '#table_1a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_1b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_1c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                type: 'table'
+            },
+            {
+                name: 'Statut d\'occupation',
+                ref : [
+                    {tag: '#table_2a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_2b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_2c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                type: 'table'
+            },
+            {
+                name: 'Typologie',
+                ref : [
+                    {tag: '#table_3a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_3b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_3c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                type: 'table'
+            },
+            {
+                name: 'Age personne de référence du ménage',
+                ref : [
+                    {tag: '#table_4a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_4b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                    {tag: '#table_4c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                type: 'table'
+            }
+        ];
+        }else{
+            tableRef = [
+                {
+                    name: 'Revenus des ménages',
+                    ref : [
+                        {tag: '#table_5a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_5b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_5c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                    type: 'table',
+                },
+                {
+                    name: 'Rapport quartier / environnement et commune hors ZUS',
+                    ref : [
+                        {tag: '#table_6a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_6b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_6c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                    type: 'table',
+
+                },
+                {
+                    name: 'Mobilités',
+                    ref : [
+                        {tag: '#table_7a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_7b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
+                        {tag: '#table_7c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
+                    type: 'table',
+
+                }
+            ];
+
+        }
+
+        var csvString = 'Quartier PRU : '+ $scope.ter1Label + '(' + $scope.codeRef + ')\r\n';
+        csvString += 'Commune : ' + $scope.nomcom + '(' + $scope.dt1[0].code_com + ')\r\n\r\n\r\n';
+        csvString += 'OFFRE DE LOGEMENT et PROFIL DÉMOGRAPHIQUE\r\n';
+
+        CSVService.buildCSV(tableRef, filename, csvString);
+    };
 
 }]);

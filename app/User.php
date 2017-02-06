@@ -41,6 +41,19 @@ class User extends Authenticatable
     }
     */
 
+    public function giveRole($role)
+    {
+        if(is_string($role)){
+            $role = Role::where('name','=',$role)->first();
+        }
+
+
+        $this->role_id = $role->id;
+        $this->save();
+
+        return true;
+    }
+
 
     public function hasRole($role)
     {

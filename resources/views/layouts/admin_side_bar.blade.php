@@ -3,7 +3,7 @@
         <a class="nav-link {{ Request::is('admin') ? 'active' : '' }}" href="{{ url('/admin') }}">
             <i class="fa fa-home"></i> Accueil</a>
     </li>
-    @can('users_add')
+    @can('display_user')
         <li>
             <a class="nav-link {{ Request::is('admin/user') ? 'active' : '' }}" href="{{ url('/admin/user') }}">
                 <i class="fa fa-users" aria-hidden="true"></i> Utilisateurs</a>
@@ -15,11 +15,13 @@
                 <i class="fa fa-cube"></i> Roles</a>
         </li>
     @endcan
-    <li class="nav-item">
-        <a class="nav-link {{ Request::is('admin/permission') ? 'active' : '' }}" href="{{ url('/admin/permission') }}">
-            <i class="fa fa-clone" aria-hidden="true"></i> Permissions</a>
-    </li>
-
+    @can('display_perm')
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('admin/permission') ? 'active' : '' }}"
+               href="{{ url('/admin/permission') }}">
+                <i class="fa fa-clone" aria-hidden="true"></i> Permissions</a>
+        </li>
+    @endcan
     <li role="separator" class="divider">
         <hr>
     </li>
