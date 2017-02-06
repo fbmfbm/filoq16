@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -13,19 +14,22 @@ class PermissionsTableSeeder extends Seeder
     {
         DB::table('permissions')->delete();
 
-        $backend_perm = DB::table('permissions')->insert(['name' => 'backend_display','display_name'=>'Afficher le backend', 'description'=>'Affichage de la section administration du site' ]);
-        $users_gestion_perm = DB::table('permissions')->insert(['name' => 'users_add','display_name'=>'Ajouter utilisateur', 'description'=>'Ajouter un nouvel utilsateur' ]);
-    	
-    	factory(App\Permission::class, 15)->create();
+        DB::table('permissions')->insert(['name' => 'display_backend','display_name'=>'Afficher le backend', 'description'=>'Affichage de la section administration du site', 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'display_user','display_name'=>'Afficher les utilisateurs', 'description'=>'Afficher les utilsateurs du site', 'created_at'=> Carbon::now()  ]);
+        DB::table('permissions')->insert(['name' => 'add_user','display_name'=>'Ajouter un utilisateur', 'description'=>'Ajouter un nouvel utilsateur' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'del_user','display_name'=>'Supprimer un utilisateur', 'description'=>'Supprimer un utilsateur' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'display_role','display_name'=>'Afficher les Roles', 'description'=>'Affichage des Roles du site' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'add_role','display_name'=>'Ajouter un Roles', 'description'=>'Ajouter un Roles au site' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'del_role','display_name'=>'Supprimer un Roles', 'description'=>'Suprimer un Roles du site' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'display_perm','display_name'=>'Afficher les Permissions', 'description'=>'Affichage des Permissions du site', 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'add_perm','display_name'=>'Ajouter une Permission', 'description'=>'Ajouter une Permission au site' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'del_perm','display_name'=>'Supprimer une Permission', 'description'=>'Suprimer une Permission du site' , 'created_at'=> Carbon::now() ]);
 
-        $adminRole = DB::table('roles')->where('name','=','admin')->first();
+    	//factory(App\Permission::class, 15)->create();
 
-        DB::table('users')->where('email','=','fabien@fmaison.com')->update(['role_id'=> $adminRole->id]); 
 
-        $adminRole = App\Role::where('name','=','admin')->first();
 
-        $adminRole->givePermissionTo('backend_display');
-        $adminRole->givePermissionTo('users_add');
-        
+
+
     }
 }

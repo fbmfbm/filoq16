@@ -4,6 +4,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use App\User;
+use Carbon\Carbon;
+
 class HomeControllerTest extends TestCase
 {
 
@@ -19,7 +22,7 @@ class HomeControllerTest extends TestCase
              ->see('Connectez-vous');
     }
 
-    public function testThatUserFbmIsInDatabase()
+    public function XtestThatUserFbmIsInDatabase()
     {
 
         $this->seeInDatabase('users', ['email' => 'fabien@fmaison.com']);
@@ -31,7 +34,23 @@ class HomeControllerTest extends TestCase
             ->seePageIs('/login');
     }
 
-    public function testLogin()
+    public function testFbmUserCanGoToAdminDashBoard()
+    {
+        $user = new User(array(
+            'id' => 1000,
+            'name' => 'fbmfbm',
+            'email' => 'fabien@fmaison.com',
+            'password' => '123456',
+            'role_id' => 1,
+            'is_active' => 1,
+            'created_at' => Carbon::now()
+            ));
+        $this->be($user); //You are now authenticated
+        $this->visit('/admin')
+            ->seePageIs('/admin');
+    }
+
+    public function XtestLogin()
     {
         $this->visit('/')
             ->click('Connectez-vous')

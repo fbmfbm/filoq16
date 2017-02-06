@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $user = \Auth::user();
 
 
-        if($user->cannot("backend_display",$user))
+        if($user->cannot("display_backend",$user))
         {
             //abort(403);
             return view ('no_access');
