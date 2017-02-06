@@ -22,6 +22,12 @@
                 <i class="fa fa-clone" aria-hidden="true"></i> Permissions</a>
         </li>
     @endcan
+    @can('displayfile')
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('admin/file') ? 'active' : '' }}" href="{{ url('/admin/file') }}">
+                <i class="fa fa-files-o" aria-hidden="true"></i> Fichiers</a>
+        </li>
+    @endcan
     <li role="separator" class="divider">
         <hr>
     </li>

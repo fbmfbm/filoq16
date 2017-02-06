@@ -15,6 +15,9 @@ $(document).ready(function(){
 
 });
 
+var app = angular.module('app', ['file-model']);
+
+
 var togglePermission = function(rolId, permName, siteUrl){
 
     window.location.href = 'role/'+rolId+'/togglperm/'+permName;

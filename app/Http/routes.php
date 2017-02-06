@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth']], function () {
 	Route::resource('user', 'Admin\\UserController');
     Route::get('user/{id}/active', 'Admin\\UserController@activeUser');
 	Route::resource('logstat', 'Admin\\LogStatController');
+    Route::resource('file', 'Admin\\FileController');
 });
 
 Route::get('/home', 'HomeController@index');
