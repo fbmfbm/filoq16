@@ -27,12 +27,15 @@ Route::group(['prefix' => 'admin','middleware'=>['auth']], function () {
     Route::get('user/{id}/active', 'Admin\\UserController@activeUser');
 	Route::resource('logstat', 'Admin\\LogStatController');
     Route::resource('file', 'Admin\\FileController');
+    Route::get('file/visible/{id}', 'Admin\\FileController@toggl_visible');
 });
 
 Route::get('/home', 'HomeController@index');
 Route::get('/zonage', 'ZonageController@index');
 Route::get('/thema/offre/{convent}', 'ThemaController@offre_logmt');
 Route::get('/thema/construct/{convent}', 'ThemaController@construct_logmt');
+Route::get('/ressources', 'RessourcesController@index');
+Route::get('fileentry/get/{name}', ['as' => 'getfileentry', 'uses' => 'Admin\\FileController@get']);
 
 Route::post('/jx/geojson', 'AjaxController@getGeojson');
 Route::post('/jx/pgdata', 'AjaxController@getPGData');

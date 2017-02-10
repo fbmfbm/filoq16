@@ -17,11 +17,11 @@ class CreateFilesTable extends Migration
             $table->timestamps();
             $table->string('name')->nullable();
             $table->string('short_title',100)->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('rubrique_id');
             $table->string('path')->nullable();
             $table->string('mime');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->integer('size');
             $table->boolean('active')->default(true);
             $table->integer('level')->default(1);

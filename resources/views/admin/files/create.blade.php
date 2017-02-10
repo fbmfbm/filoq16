@@ -6,14 +6,15 @@
     <div class="container-fluid" ng-controller="FileCtrl">
         <div class="row text-center">
             <div class="col-md-12">
-                <h3 class=""><i class="fa  fa-files-o text-primary"></i> CRÉATION D'UN DOCUMENTS TÉLÉCHARGABLES</h3>
+                <h3 class=""><i class="fa  fa-files-o text-primary"></i> CRÉATION D'UN DOCUMENT TÉLÉCHARGABLE</h3>
                 <hr>
             </div>
         </div>
         <div class="col-sm-12 col-md-6  offset-md-3">
+            <a href="{{ url('/admin/file/') }}"><i class="fa fa-undo" aria-hidden="true"></i> Retour à la liste des fichiers</a>
             <div class="card">
                 <div class="card-header">
-                    <h4>Selection</h4>
+                    <h4>Sélection d'un ichier</h4>
                 </div>
                 <div class="card-block">
                     @if (session('status'))
@@ -39,17 +40,18 @@
                         <ul>
                             <li>PDF</li>
                             <li>CSV</li>
-                            <li>TXT</li>
-                            <li>DOC/DOCS</li>
+                            <li>ODS</li>
+                            <li>PPT</li>
+                            <li>DOC</li>
                             <li>XLS/XLSX</li>
-                            <li>IMAGES (JPG/GIF)</li>
+                            <li>IMAGES (JPG/JPEG/GIF/PNG)</li>
                         </ul>
                         </p>
                         <br>
 
-                        <input type=file name="filefield" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" file-model="file">
+                        <input type=file name="filefield" accept=".xlsx,.xls,image/*,.doc, .docx.,.ppt, .pptx,.txt,.pdf" file-model="file">
 
-                        <div ng-if="file">
+                        <div >
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class=" control-label">Nom</label>
@@ -71,7 +73,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class=" control-label">Description</label>
-                            <input type="text" class="form-control" name="description" >
+                            <textarea rows="4" cols="50"class="form-control" name="description"></textarea>
                             @if ($errors->has('description'))
                                 <span class="help-block text-info">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -80,7 +82,9 @@
                         </div>
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class=" control-label">Type</label>
-                            <input type="text" class="form-control" name="type" ng-model="file.type" readonly>
+
+                            <input ng-if="file.type==''" type="text" class="form-control" name="type"  value="" readonly>
+                            <input ng-if="file.type!=''" type="text" class="form-control" name="type" ng-model="file.type" readonly>
                             @if ($errors->has('type'))
                                 <span class="help-block text-info">
                                         <strong>{{ $errors->first('type') }}</strong>

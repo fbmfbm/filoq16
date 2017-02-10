@@ -13,9 +13,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <a class="btn btn-outline-primary" href="/admin/permission/create" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle permission">
-
-                            <i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+                        @can('add_perm')
+                        <a class="btn btn-outline-primary" href="/admin/permission/create" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle permission"> <i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+                        @else
+                            <button class="btn btn-outline-primary" href="#" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle permission" disabled> <i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+                        @endcan
                     </div>
                     <div class="card-block">
                         @if (session('status'))
@@ -51,10 +53,16 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="hidden" name="id" id="id" value="{{ $permission->id }}">
                                 </form>
+                                @can('del_perm')
                                 <button onclick="confirmeDelet('roleDeletForm_',{{$permission->id}});"
                                         class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
+                                    @else
+                                    <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer" disabled>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                @endcan
                             </td>
                     @endforeach
                 </table>

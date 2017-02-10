@@ -16,6 +16,11 @@ class EventServiceProvider extends ServiceProvider
          'Illuminate\Auth\Events\Login' => [
             'App\Listeners\LogSuccessfulLogin',
             ],
+        'App\Events\FileEntry' => [
+            'App\Listeners\FileEntrySuccessfullAdded',
+            'App\Listeners\FileEntrySuccessfullLoaded',
+            'App\Listeners\FileEntrySuccessfulldeleted',
+        ],
     ];
 
     /**
@@ -28,6 +33,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        //
+        $events->listen('event.*', function (array $data) {
+            //
+        });
     }
 }

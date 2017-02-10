@@ -22,7 +22,7 @@
                 <i class="fa fa-clone" aria-hidden="true"></i> Permissions</a>
         </li>
     @endcan
-    @can('displayfile')
+    @can('display_file')
         <li class="nav-item">
             <a class="nav-link {{ Request::is('admin/file') ? 'active' : '' }}" href="{{ url('/admin/file') }}">
                 <i class="fa fa-files-o" aria-hidden="true"></i> Fichiers</a>
@@ -31,10 +31,12 @@
     <li role="separator" class="divider">
         <hr>
     </li>
+    @can('add_admin')
     <li class="nav-item">
         <a class="nav-link {{ Request::is('admin/report') ? 'active' : '' }}" href="#">
             <i class="fa fa-dashboard"></i> Rapports</a>
     </li>
+    @endcan
     <li class="nav-item">
         <a class="nav-link {{ Request::is('admin/logstat') ? 'active' : '' }}" href="{{ url('/admin/logstat') }}">
             <i class="fa fa-line-chart" aria-hidden="true"></i> Logs</a>

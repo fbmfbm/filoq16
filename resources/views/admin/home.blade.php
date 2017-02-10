@@ -15,18 +15,16 @@
                 <div class="card">
                     <div class="card-img-top" style="background-color:#009dad; width:100%; min-height:100px;" src="...">
                         <div class="cn">
-                            <div class="inner"><i class="fa fa-cubes" aria-hidden="true"></i></div>
+                            <div class="inner"><i class="fa fa-users" aria-hidden="true"></i></div>
                         </div>
                     </div>
                     <div class="card-block">
-                        <h4 class="card-title">Thématiques</h4>
-                        <h7 class="card-subtitle text-muted">Sections de l'application</h7>
+                        <h4 class="card-title">Utilisateurs</h4>
+                        <h7 class="card-subtitle text-muted">Utilisateurs enregistrés</h7>
                         <br/>
-                        <p class="card-text">Thématiques présentes sur le site.</p>
+                        <p class="card-text">Gestion des utilisateurs du site.</p>
                         <br>
-                        <a href="{{ url('/admin/logstat') }}" class="btn btn-primary">Gerer</a>
-                        <a href="{{ url('/admin/logstat') }}" class="card-link">Visualiser</a>
-                        <a href="{{ url('/admin/logstat') }}" class="card-link">info</a>
+                        <a href="{{ url('/admin/user') }}" class="btn btn-primary">Gérer</a>
                     </div>
                 </div>
             </div>
@@ -34,18 +32,16 @@
                 <div class="card">
                     <div class="card-img-top" style="background-color:#ad9800; width:100%; min-height:100px;" src="...">
                         <div class="cn">
-                            <div class="inner"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
+                            <div class="inner"><i class="fa fa-files-o" aria-hidden="true"></i></div>
                         </div>
                     </div>
                     <div class="card-block">
-                        <h4 class="card-title">Statistiques</h4>
-                        <h7 class="card-subtitle text-muted">Information</h7>
+                        <h4 class="card-title">Documents</h4>
+                        <h7 class="card-subtitle text-muted">Fichiers téléchargeables</h7>
                         <br/>
-                        <p class="card-text">Ensemble des rapports disponible pour le site.</p>
+                        <p class="card-text">Gestion des fichiers téléchargeables à partir du site.</p>
                         <br/>
-                        <a href="{{ url('/admin/logstat') }}" class="btn btn-primary">Gerer</a>
-                        <a href="{{ url('/admin/logstat') }}" class="card-link">Visualiser</a>
-                        <a href="{{ url('/admin/logstat') }}" class="card-link">info</a>
+                        <a href="{{ url('/admin/file') }}" class="btn btn-primary">Gérer</a>
                     </div>
                 </div>
             </div>
@@ -57,14 +53,12 @@
                         </div>
                     </div>
                     <div class="card-block">
-                        <h4 class="card-title">Données</h4>
-                        <h7 class="card-subtitle text-muted">Bases de données</h7>
+                        <h4 class="card-title">Permissions et Rôles</h4>
+                        <h7 class="card-subtitle text-muted">Accès et droits de visualisation</h7>
                         <br/>
-                        <p class="card-text">Gestionnaire des éléments et des données disponibles</p>
+                        <p class="card-text">Gestions des droits d'accès aux sections du site</p>
                         <br/>
-                        <a href="{{ url('/admin/user') }}" class="btn btn-primary">Gerer</a>
-                        <a href="{{ url('/admin/user') }}" class="card-link">Visualiser</a>
-                        <a href="{{ url('/admin/user') }}" class="card-link">info</a>
+                        <a href="{{ url('/admin/permission') }}" class="btn btn-primary">Gérer</a>
                     </div>
                 </div>
             </div>

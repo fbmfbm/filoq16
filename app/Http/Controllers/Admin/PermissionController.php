@@ -33,7 +33,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'bail|required|alpha|max:255',
+            'name' => 'bail|required|alpha_dash|max:255',
             'display_name' => 'required'
         ]);
 
@@ -62,7 +62,7 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'bail|required|alpha|max:255',
+            'name' => 'bail|required|alpha_dash|max:255',
             'display_name' => 'required',
         ]);
 
