@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<div id="wrapper">
+<div id="wrapper"  ng-app="app">
 
     @include('layouts.admin_topnav')
 
@@ -30,6 +30,7 @@
 </div>
 <!-- Latest compiled and minified JavaScript -->
 <!-- JavaScripts -->
+
 
 <script src="/js/admin-main.js"></script>
 </body>

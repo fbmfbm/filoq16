@@ -83,10 +83,13 @@
 
                             </div>
                             <div class="form-group">
-
+                                @can('edite_role')
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>
                                     Enregistrer
                                 </button>
+                                @else
+                                    <div class="alert alert-danger" role="alert">Vous ne possédez pas les droits suffisants pour éditer cet objet</div>
+                                @endcan
                                 <a href="{{ url('/admin/role') }}" class="btn btn-outline-secondary"><i
                                             class="fa fa-undo" aria-hidden="true"></i> Annuler</a>
                             </div>
