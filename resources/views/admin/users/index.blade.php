@@ -49,9 +49,26 @@
                             </tr>
                             @foreach( $users as $user)
                                 <tr>
-                                    <td><input type="checkbox" name="opp" value="0"></td>
+                                    @if($user->role->name == 'admin')
+                                        @can('edit_admin')
+                                            <td><input type="checkbox" name="opp" value="0"></td>
+                                        @else
+                                            <td></td>
+                                        @endcan
+                                        @else
+                                        <td><input type="checkbox" name="opp" value="0"></td>
+                                        @endif
+
                                     <td><span class="tag tag-pill tag-default">{{$user->id}}</span></td>
-                                    <td><a href="{{ url('admin/user/'.$user->id) }}">{{$user->name}}</a></td>
+                                    @if($user->role->name == 'admin')
+                                        @can('edit_admin')
+                                            <td><a href="{{ url('admin/user/'.$user->id) }}">{{$user->name}}</a></td>
+                                        @else
+                                            <td>{{$user->name}}</td>
+                                        @endcan
+                                        @else
+                                        <td><a href="{{ url('admin/user/'.$user->id) }}">{{$user->name}}</a></td>
+                                    @endif
                                     <td>
                                         <span class="tag tag-default">{{$user->role->display_name or 'Utilisateur' }}</span>
                                     </td>
@@ -65,19 +82,42 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="id" id="id" value="{{ $user->id }}">
                                         </form>
+                                        @if($user->role->name == 'admin')
+                                            @can('edit_admin')
                                         <button onclick="confirmeDelet('userDeletForm_',{{$user->id}});"
                                                 class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer"><i class="fa fa-trash"
                                                                                  aria-hidden="true"></i></button>
+                                            @else
+                                                <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer" disabled><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            @endcan
+                                            @else
+                                            <button onclick="confirmeDelet('userDeletForm_',{{$user->id}});"
+                                                    class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer"><i class="fa fa-trash"
+                                                                                                                                                  aria-hidden="true"></i></button>
+                                            @endif
                                     </td>
                                     <td>
+
                                         @if (! $user->is_active)
                                             <a href="{{ url('admin/user/'.$user->id.'/active') }}"
                                                class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Activer l'utilisateur"><i class="fa fa-toggle-off"
                                                                                    aria-hidden="true"></i></a>
                                         @else
+                                            @if($user->role->name == 'admin')
+                                                @can('edit_admin')
                                             <a href="{{ url('admin/user/'.$user->id.'/active') }}"
                                                class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Désactiver l'utiisateur"><i class="fa fa-toggle-on"
                                                                                  aria-hidden="true"></i></a>
+                                                @else
+                                                    <a href="#"
+                                                       class="btn btn-sm btn-primary disabled"  data-placement="top" title="Désactiver l'utiisateur"><i class="fa fa-toggle-on"aria-hidden="true"></i></a>
+                                                @endcan
+                                                @else
+                                                <a href="{{ url('admin/user/'.$user->id.'/active') }}"
+                                                   class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Désactiver l'utiisateur"><i class="fa fa-toggle-on"
+                                                                                                                                                                aria-hidden="true"></i></a>
+                                                @endif
+
                                         @endif
                                     </td>
 

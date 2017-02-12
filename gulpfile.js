@@ -24,6 +24,7 @@ elixir(function(mix) {
         '/../../../node_modules/angular-openlayers-directive/dist/angular-openlayers-directive.js',
         //'/../../../node_modules/canvas-to-blob/index.js',
     	'/../../../node_modules/file-saver/FileSaver.js',
+        '/../../../node_modules/table-to-json/lib/jquery.tabletojson.min.js',
 
         'lib/layerswitcher.js',
     	'app.js',
@@ -32,14 +33,18 @@ elixir(function(mix) {
         'controllers/offre_ctrl.js',
         'controllers/construct_ctrl.js',
         'services/geojson_data_service.js',
-    	'services/pg_data_service.js'
+    	'services/pg_data_service.js',
+		'services/csv_service.js',
     	])
 	.scripts([
-		'/../../../node_modules/jquery/dist/jquery.js',
+		'/../../../node_modules/jquery/jquery.js',
+		'/../../../node_modules/angular/angular.js',
 		'/../../../node_modules/tether/dist/js/tether.js',
 		'/../../../node_modules/bootstrap/dist/js/bootstrap.js',
         '/../../../node_modules/bootbox/bootbox.js',
-		'admin/admin-main.js'
+		'admin/admin-main.js',
+		'admin/controllers/file_controller.js',
+		'admin/directives/fileModel.js'
 	], 'public/js/admin-main.js')
     .version(['/css/app.css','/css/admin.css', '/js/all.js' ]);
 });

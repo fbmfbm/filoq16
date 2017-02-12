@@ -20,7 +20,7 @@
                  <ul class="nav navbar-nav">
                     <li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}">Accueil</a></li>
                     <li class="nav-item active"><a class="nav-link" href="{{ url('/zonage') }}">Zonage</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Ressources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/ressources') }}">Ressources</a></li>
                 </ul>
                 <!-- Left Side Of Navbar -->
                 <!-- Right Side Of Navbar -->
@@ -36,7 +36,11 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Déconnexion</a>
+                                <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> Déconnexion</a>
+                                @can('display_file')
+                                    <a class="dropdown-item" href="{{ url('/admin') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Administration</a>
+                                @endcan
+
                             </div>
                             </div>
                     
@@ -50,6 +54,7 @@
 
     <!-- JavaScripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="//lightswitch05.github.io/table-to-json/javascripts/jquery.tabletojson.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"  crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js"  crossorigin="anonymous"></script>
     <script src="{{ elixir('js/all.js') }}"></script> 

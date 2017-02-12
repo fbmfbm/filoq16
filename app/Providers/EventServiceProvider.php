@@ -16,6 +16,24 @@ class EventServiceProvider extends ServiceProvider
          'Illuminate\Auth\Events\Login' => [
             'App\Listeners\LogSuccessfulLogin',
             ],
+        'App\Events\UserAdded' => [
+            'App\Listeners\LogUserAdded',
+        ],
+        'App\Events\UserDeleted' => [
+            'App\Listeners\LogUserDeleted',
+        ],
+        'App\Events\FileEntryAdded' => [
+            'App\Listeners\LogFileEntryAdded',
+        ],
+        'App\Events\FileEntryLoaded' => [
+            'App\Listeners\LogFileEntryDownloadByUser',
+        ],
+        'App\Events\FileEntryDeleted' => [
+            'App\Listeners\LogFileEntryDeleted',
+        ],
+        'App\Events\QueryAjaxOnTerritory' => [
+            'App\Listeners\LogQueryAjaxForTerritory',
+        ],
     ];
 
     /**
@@ -28,6 +46,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        //
+        $events->listen('event.*', function (array $data) {
+            //
+        });
     }
 }

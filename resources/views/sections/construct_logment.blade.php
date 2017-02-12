@@ -32,6 +32,7 @@
                              <span class="fbm-chiffre-cle"><i class="fa fa-home" aria-hidden="true"></i> Logement :  <span class="fbm-badge">  @{{(dt1[1].a0 / dt3[0].a0_com)*100 | number:1}} % </span> </span><br>
                              <span class="fbm-chiffre-cle"><i class="fa fa-building" aria-hidden="true"></i> HLM : <span class="fbm-badge">   @{{(dt1[1].a4 / dt3[0].a4_com)*100 | number:1}} % </span></span><br>
                              <span class="fbm-chiffre-cle"><i class="fa fa-male" aria-hidden="true"></i> Population : <span class="fbm-badge">    @{{(dt1[1].b61 / dt3[0].b61_com)*100 | number:1}} % </span> </span>
+                             <p><span class="font-italic fbm-sm">( soit Population totale pour la commune  @{{nomcom}} : @{{ dt3[0].b61_com | number:0}} et population du territoire @{{ter1Label}} : @{{dt1[1].b61 | number:0}} )</span></p>
                           </h1>
                           <br>
                        </div>
@@ -74,13 +75,13 @@
             <div class="row">
               <div class="col-md-12">
                   <br>
-                 <h3 class="fbm-tab-sec-title">PROGRAMMATION ET AVANCEMENT DU PRU</h3>
+                  <a href="#"  class="btn btn-info btn-sm btn-export" ng-click="tableToJson(1, 'progamm')"><i class="fa fa-floppy-o" aria-hidden="true"></i> csv</a><h3 class="fbm-tab-sec-title">PROGRAMMATION ET AVANCEMENT DU PRU</h3>
                 
               </div>
             </div><!-- end row -->
             <div class="row">
                 <div class="col-md-12">
-                  <table class="table table-sm table-bordered fbm-table" >
+                  <table class="table table-sm table-bordered fbm-table" id="table_1a">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
@@ -101,7 +102,7 @@
                          </table> 
                          <br>
                          <div class="col-md-5">
-                          <table class="table fbm-table-enphase table-sm table-bordered fbm-table">
+                          <table class="table fbm-table-enphase table-sm table-bordered fbm-table" id="table_1b">
                                 <tbody>
                                   <tr><td scope="row">Taux de réalisation (démol. + construct.)</td><td>@{{dt6[0].a38 | number:1}}%</td></tr>
                                   <tr><td scope="row">Taux de renouvellement au terme du PRU</td><td>@{{dt6[0].a23 | number:1}}%</td></tr>
@@ -122,13 +123,13 @@
                     <br>
                     <div class="col-md-12">
                         <br>
-                         <h3 class="fbm-tab-sec-title">DYNAMIQUE DE CONSTRUCTION</h3>
+                        <a href="#"  class="btn btn-info btn-sm btn-export" ng-click="tableToJson(2, 'dynamique_construct')"><i class="fa fa-floppy-o" aria-hidden="true"></i> csv</a><h3 class="fbm-tab-sec-title">DYNAMIQUE DE CONSTRUCTION</h3>
                         
                      </div>
                   </div><!-- end row -->
                     <div class="row">
                         <div class="col-md-6">
-                          <table class="table table-sm table-bordered fbm-table" >
+                          <table class="table table-sm table-bordered fbm-table" id="table_2a">
                               <thead>
                                 <tr>
                                   <th colspan="5" class="fbm-table-right"><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
@@ -149,8 +150,8 @@
                               <tbody>
                                 <tr><td scope="row">Total</td><td>@{{dt10[1].c1 | number:0}}</td><td></td><td>@{{dt10[1].b1 | number:0}}</td><td></td></tr>
                                 <tr><td scope="row">Privé</td><td>@{{dt10[1].c2*1 + dt10[1].c3*1  | number:0}}</td><td>@{{((dt10[1].c2*1 + dt10[1].c3*1)  / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b2*1 + dt10[1].b3*1 | number:0}}</td><td>@{{((dt10[1].b2*1 + dt10[1].b3*1)  / dt10[1].b1)*100 | number:1}}%</td></tr>
-                                <tr style="color:#999;"><td scope="row"><small> - Dont PO.</small></td><td>@{{dt10[1].c2 | number:0}}</td><td>@{{(dt10[1].c2 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b2 | number:0}}</td><td>@{{(dt10[1].b2 / dt10[1].b1)*100 | number:1}}%</td></tr>
-                                <tr style="color:#999;"><td scope="row"><small> - Dont LP.</small></td><td>@{{dt10[1].c3 | number:0}}</td><td>@{{(dt10[1].c3 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b3 | number:0}}</td><td>@{{(dt10[1].b3 / dt10[1].b1)*100 | number:1}}%</td></tr>
+                                <tr style="color:#999;"><td scope="row"> Dont PO.</td><td>@{{dt10[1].c2 | number:0}}</td><td>@{{(dt10[1].c2 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b2 | number:0}}</td><td>@{{(dt10[1].b2 / dt10[1].b1)*100 | number:1}}%</td></tr>
+                                <tr style="color:#999;"><td scope="row"> Dont LP.</td><td>@{{dt10[1].c3 | number:0}}</td><td>@{{(dt10[1].c3 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b3 | number:0}}</td><td>@{{(dt10[1].b3 / dt10[1].b1)*100 | number:1}}%</td></tr>
                                 <tr><td scope="row">HLM</td><td>@{{dt10[1].c4  | number:0}}</td><td>@{{(dt10[1].c4 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b4  | number:0}}</td><td>@{{(dt10[1].b4 / dt10[1].b1)*100 | number:1}}%</td></tr>
                                 <tr><td scope="row">Autres</td><td>@{{dt10[1].c5  | number:0}}</td><td>@{{(dt10[1].c5 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b5  | number:0}}</td><td>@{{(dt10[1].b5 / dt10[1].b1)*100 | number:1}}%</td></tr>
                                </tbody>
@@ -162,14 +163,14 @@
             <div class="row">
                 <div class="col-md-12">
                   <br>
-                 <h3 class="fbm-tab-sec-title">REVENUS DES MÉNAGES : OCCUPANTS ET NOUVEAUX MÉNAGES</h3>
+                    <a href="#"  class="btn btn-info btn-sm btn-export" ng-click="tableToJson(3, 'revenus_men')"><i class="fa fa-floppy-o" aria-hidden="true"></i> csv</a><h3 class="fbm-tab-sec-title">REVENUS DES MÉNAGES : OCCUPANTS ET NOUVEAUX MÉNAGES</h3>
                 
                  </div>
             </div><!-- end row -->
             <div class="row">
                 <div class="col-md-12">
                    <p><span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i> Ressources des ménages (/plafond HLM) </span></p>
-                      <table class="table table-sm table-bordered fbm-table">
+                      <table class="table table-sm table-bordered fbm-table" id="table_3a">
                               <thead>
                               <tr class="info">
                                   <th colspan="16" class="info"  ><i class="fa fa-chevron-circle-down text-pru" aria-hidden="true"></i> @{{ter1Label}} (@{{codeDep}})</th>
@@ -285,7 +286,7 @@
                           <p><span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info " aria-hidden="true"></i> Référence ménages < PLAI </span></p>
 
 
-                           <table class="table table-sm table-bordered fbm-table">
+                           <table class="table table-sm table-bordered fbm-table" id="table_3b">
                               <thead>
                                <tr class="info">
                                   <th colspan="16" class="info" ><i class="fa fa-chevron-circle-down text-border" aria-hidden="true"></i> Environnement (frange 500m)</th>
@@ -337,7 +338,7 @@
                           </table>
                           <p style="page-break-before: always"></p>
 
-                           <table class="table table-sm table-bordered fbm-table">
+                           <table class="table table-sm table-bordered fbm-table" id="table_3c">
                               <thead>
                                <tr class="info">
                                   <th colspan="16" class="info"  ><i class="fa fa-chevron-circle-down text-horsq" aria-hidden="true"></i> Commune hors ZUS et QPV</th>
@@ -395,8 +396,9 @@
                 <div class="col-md-12">
                 <p><span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i>  Evolution du parc (total) </span></p>
                
-                 <table class="table table-sm table-bordered fbm-table">
+                 <table class="table table-sm table-bordered fbm-table" id="table_3d">
                               <thead>
+                              <tr><th></th><th></th><th></th><th></th></tr>
                                 <tr>
                                 <th></th>
                                   <th class="fbm-table-right">TOTAL</th>
@@ -425,8 +427,9 @@
                 <div class="col-md-12">
                 <p><span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info" aria-hidden="true"></i>  Evolution du parc Existant </span></p>
                
-                 <table class="table table-sm table-bordered fbm-table">
+                 <table class="table table-sm table-bordered fbm-table" id="table_3e">
                               <thead>
+                              <tr><th></th><th></th><th></th><th></th></tr>
                                 <tr>
                                 <th></th>
                                   <th class="fbm-table-right">TOTAL</th>

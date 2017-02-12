@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\QueryAjaxOnTerritory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -55,6 +56,10 @@ class AjaxController extends Controller
             'msg' => 'recupération des données dans la table réalisée',
             'data'   => $data
         );
+        if($refScale == 'quart')
+        {
+            event(new QueryAjaxOnTerritory($refCode, $refScale));
+        }
 
         return \Response::json( $response );
     }

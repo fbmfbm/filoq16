@@ -12,7 +12,7 @@
      <p>Les traces sont stockées en base de données.</p>
 
     @if(count($stats) > 0)
-
+                    {!! $stats->render(new \Illuminate\Pagination\BootstrapFourPresenter($stats)) !!}
                 <table class="table table-bordered table-striped table-sm">
                         <thead class="">
                             <tr>
@@ -28,10 +28,10 @@
                     @foreach($stats as $logstat)
                         <tr>
                             <td>{{ $logstat->type }}</td>
-                            <td>{{ $logstat->name }}</td>
+                            <td>{{ $logstat->description }}</td>
                             <td>({{ $logstat->user_id }}) {{ $logstat->user_name }}</td>
                             <td>{{ $logstat->user_ip }}</td>           
-                            <td>{{ date('D d M Y | H\h i-s', strtotime($logstat->created_at)) }}</td>           
+                            <td>{{ date('d/m/Y | H\h i-s', strtotime($logstat->created_at)) }}</td>
              <td>
                 <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
              </td>
@@ -39,6 +39,7 @@
         @endforeach
         </tbody>
         </table>
+       {!! $stats->render(new \Illuminate\Pagination\BootstrapFourPresenter($stats)) !!}
   @else
     <p>Pas de donnée dans votre base</p>
     @endif

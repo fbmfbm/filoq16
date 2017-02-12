@@ -1,5 +1,5 @@
 
-app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '$q', function($scope, $window,  GeoJsonData, PGData, $q){
+app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVService', '$q', function($scope, $window,  GeoJsonData, PGData, CSVService, $q){
 
 
 	$scope.codeRef = $window._convent;
@@ -211,6 +211,89 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
  
 
 	 //############## END MAP ####################
+    $scope.tableToJson = function(idTable, filename){
+        var tableRef = [];
+        var now = new Date();
+        filename = filename+'_'+now.getDay()+''+(now.getMonth()+1)+''+now.getFullYear()+'_'+now.getHours()+''+now.getMinutes()+''+now.getSeconds();
+        if(idTable==1){
+            tableRef = [
+                {
+                    name: 'PROGRAMMATION ET AVANCEMENT DU PRU',
+                    ref : [
+                        {tag: '#table_1a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: '',
+                    ref : [
+                        {tag: '#table_1b', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
+                    ],
+                    type: 'table'
+                },
+
+
+            ];
+        }else if(idTable==2){
+            tableRef = [
+                {
+                    name: '',
+                    ref : [
+                        {tag: '#table_2a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
+                    ],
+                    type: 'table'
+                },
+            ];
+
+        }else if(idTable==3){
+            tableRef = [
+                {
+                    name: 'Ressources des ménages (/plafond HLM)',
+                    ref : [
+                        {tag: '#table_3a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2', 'val5','val6','val7','val8','val9','val10','val11','val12','val13','val14','val15']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: 'Référence ménages < PLAI',
+                    ref : [
+                        {tag: '#table_3b', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2','val5','val6','val7','val8','val9','val10','val11','val12','val13','val14','val15']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: '',
+                    ref : [
+                        {tag: '#table_3c', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: 'Évolution du parc (total)',
+                    ref : [
+                        {tag: '#table_3d', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2']}
+                    ],
+                    type: 'table'
+                },
+                {
+                    name: 'Évolution du parc Existant',
+                    ref : [
+                        {tag: '#table_3e', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2']}
+                    ],
+                    type: 'table'
+                }
+
+
+            ];
+
+        }
+
+        var csvString = 'Quartier PRU : '+ $scope.ter1Label + '(' + $scope.codeRef + ')\r\n';
+        csvString += 'Commune : ' + $scope.nomcom + '(' + $scope.dt1[0].code_com + ')\r\n\r\n\r\n';
+        csvString += 'DYNAMIQUES DE CONSTRUCTION ET MOBILITÉS\r\n';
+
+        CSVService.buildCSV(tableRef, filename, csvString);
+    };
 	
 
 }]);
