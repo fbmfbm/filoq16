@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserAdded;
+use App\Events\UserDeleted;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -50,6 +52,8 @@ class UserController extends Controller
             'role_id' => $basic_user_role->id,
             'password' => bcrypt($request->password),
         ]);
+
+        event(new UserAdded($request->name));
 
 
         return redirect()->route('admin.user.index');
@@ -110,7 +114,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-
+        event(new UserDeleted($user));
         session()->flash('status', 'Votre enregistrement à bien été supprimé !');
         return back();
     }

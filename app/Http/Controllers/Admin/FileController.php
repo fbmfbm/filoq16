@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Events\FileEntryAdded;
+use App\Events\FileEntryDeleted;
+use App\Events\FileEntryLoaded;
 use Event;
 use App\Events\FileEntryUpdated;
 use Illuminate\Http\Request;
@@ -114,7 +117,7 @@ class FileController extends Controller
 
         $entry->save();
 
-        Event::fire(new FileEntryUpdated($entry));
+        event(new FileEntryAdded($entry));
 
         return redirect('admin/file');
     }
@@ -126,6 +129,7 @@ class FileController extends Controller
 
         Storage::delete('public/annexes/'.$file->name);
 
+        event(new FileEntryDeleted($file));
         $file->delete();
 
         session()->flash('status', 'Votre enregistrement à bien été supprimé !');
@@ -148,6 +152,7 @@ class FileController extends Controller
 
         if ( file_exists( $file_path ) ) {
             // Send Download
+            event(new FileEntryLoaded($filename));
             return response()->download($file_path);
         } else {
             // Error

@@ -7,20 +7,19 @@ use App\FileEntry;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class FileEntryUpdated extends Event
+class FileEntryAdded extends Event
 {
     use SerializesModels;
-
-    public $file;
+    public $fileEntry;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(FileEntry $file)
+    public function __construct(FileEntry $fileEntry)
     {
-        $this->file = $file;
+        $this->fileEntry = $fileEntry;
     }
 
     /**

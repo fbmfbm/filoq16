@@ -26,6 +26,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth']], function () {
 	Route::resource('user', 'Admin\\UserController');
     Route::get('user/{id}/active', 'Admin\\UserController@activeUser');
 	Route::resource('logstat', 'Admin\\LogStatController');
+    Route::get('file/test', function (){
+        event(new \App\Events\FileEntryUpdated(new \App\FileEntry()));
+    });
     Route::resource('file', 'Admin\\FileController');
     Route::get('file/visible/{id}', 'Admin\\FileController@toggl_visible');
 });
