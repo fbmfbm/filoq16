@@ -17,5 +17,8 @@
     "openlayers": "^3.16.0",
     "tether": "^1.2.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^1.12.4",
+    "table-to-json": "^0.11.1"
+  }
 }
