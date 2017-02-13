@@ -16,7 +16,7 @@
                 <div class="lead">
                 </div>
                 <br>
-                <p><a class="btn btn-outline-primary" href  ng-click="toggleLogin()" > <i class="fa fa-sign-in" aria-hidden="true"></i> Connectez-vous</a>  pour accèder aux fonctionnalités complètes du site</p>
+                <p><a class="btn btn-outline-secondary" href  ng-click="toggleLogin()" > <i class="fa fa-sign-in" aria-hidden="true"></i> Connectez-vous</a>  pour accèder aux fonctionnalités complètes du site</p>
                  <div class="card" id="login-form" ng-hide="showLogin">
              <div class="card-header text-info">Connexion</div>
              <div class="card-block">
