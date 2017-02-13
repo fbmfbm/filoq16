@@ -13,10 +13,14 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
+                        @can('add_role')
                         <a class="btn btn-outline-primary" href="/admin/role/create" data-toggle="tooltip"
                            data-placement="top" title="Ajouter un nouveau role">
 
                             <i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+                            @else
+                            <button class="btn btn-outline-primary" href="#" data-toggle="tooltip" data-placement="top" title="Ajouter un nouveau role" disabled> <i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+                            @endcan
                     </div>
                     <div class="card-block">
                         @if (session('status'))
@@ -46,8 +50,9 @@
                             @foreach( $roles as $role)
                                 <tr>
                                     <td>{{$role->id}}</td>
+
                                     <td><a href="/admin/role/{{$role->id}}">{{$role->name}}</a></td>
-                                    <td><a href="/admin/role/{{$role->id}}">{{$role->display_name}}</a></td>
+                                    <td>{{$role->display_name}}</td>
                                     <td>{{date('d F Y', strtotime($role->created_at))}}</td>
                                     <td>
 
@@ -59,11 +64,17 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="id" id="id" value="{{ $role->id }}">
                                         </form>
-                                        <button onclick="confirmeDelet('roleDeletForm_',{{$role->id}});"
+                                        @can('del_role')
+                                        <button onclick="confirmeDelet('roleDeletForm_',{{ $role->id }} );"
                                                 class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top"
                                                 title="Supprimer">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
+                                            @else
+                                            <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer" disabled>
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        @endcan
                                     </td>
                             @endforeach
                         </table>
@@ -105,18 +116,28 @@
                                                 @endforeach
                                             @else
                                             @endif
+                                            @can('edit_perm')
                                             <input type="checkbox" id="" class=""
                                                    name="{{'check_perm'.$perm->id."_as_".$role->id}}"
                                                    {{($test==true)?'checked':''}} value="" onchange="togglePermission({{$role->id.','.$perm->id, url('admin/role')}})">
+                                                @else
+                                                <input type="checkbox" id="" class=""
+                                                       name="{{'check_perm'.$perm->id."_as_".$role->id}}"
+                                                       {{($test==true)?'checked':''}} disabled>
+                                            @endcan
                                         </td>
                                 @endforeach
                                 <!-- end Checkbox -->
 
 
                                     <td>
+                                        @can('edit_perm')
                                         <a href="#" class="btn btn-secondary btn-sm" data-toggle="tooltip"
                                            data-placement="top" title="Effacer la permission pour tous les roles"><i class="fa fa-eraser"
                                                                                               aria-hidden="true"></i></a>
+                                            @else
+                                            <a href="#" class="btn btn-secondary btn-sm disabled"  data-placement="top" title="Effacer la permission pour tous les roles"><i class="fa fa-eraser"aria-hidden="true"></i></a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

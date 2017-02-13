@@ -77,7 +77,13 @@
                                 <label for="role_id" class="col-sm-12 col-form-label">Role</label>
                                 <select class="form-control" name="role_id" id="role_id">
                                     @foreach( $roles as $role)
+                                        @can('add_admin')
                                         <option value="{{ $role->id }}" {{ ($role->id == $user->role_id) ? ' selected="selected"' : '' }}>{{$role->display_name}}</option>
+                                        @else
+                                            @if($role->name <> 'admin')
+                                                <option value="{{ $role->id }}" {{ ($role->id == $user->role_id) ? ' selected="selected"' : '' }}>{{$role->display_name}}</option>
+                                            @endif
+                                        @endcan
                                     @endforeach
                                 </select>
                             </div>

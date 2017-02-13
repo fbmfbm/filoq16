@@ -8,7 +8,6 @@
         <ul class="nav navbar-nav">
             <li class="nav-item active"><a class="nav-link" href="{{ url('/admin') }}">Accueil</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Visualiser le site</a> </li>
-            <li class="nav-item"><a class="nav-link" href="#">Ressources</a></li>
         </ul>
         <!-- Left Side Of Navbar -->
         <!-- Right Side Of Navbar -->

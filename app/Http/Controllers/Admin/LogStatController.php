@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Gate;
+use DB;
 
 use App\LogStat;
 
@@ -21,8 +22,8 @@ class LogStatController extends Controller
 
         setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 
-        $stats = LogStat::all()->sortByDesc('created_at');
-
+        $stats = LogStat::orderBy('created_at', 'DESC')->paginate(25);
+        //$stats = DB::table('log_stats')->paginate(25);
         return view('admin.logstats.index')->with('stats',$stats);
     }
 
