@@ -26,7 +26,6 @@ class CreateFilesTable extends Migration
             $table->boolean('active')->default(true);
             $table->integer('level')->default(1);
             $table->integer('owner');
-
             $table->index('type', 'file_type_index');
         });
     }

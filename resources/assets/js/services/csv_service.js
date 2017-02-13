@@ -62,7 +62,7 @@ app.service('CSVService',['$http', function($http){
 
             }
             csvData = csvData.replace(/undefined/g, "");
-            console.log(csvData)
+            //console.log(csvData)
             saveStringToCSV(csvData, filename);
             return(filename);
         },

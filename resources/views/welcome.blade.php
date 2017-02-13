@@ -75,12 +75,12 @@
                 @else
                 <h2 clas="display-3">Bienvenue  <span class="text-info">{{ Auth::user()->name }}</span></h2>
                         <div class="row">
-                            <div class="fbm-card-negative center-block" ng-click="goToURL('zonnage/')">
+                            <a class="fbm-card-negative center-block" ng-click="goToURL('zonnage/')" href="{{url('zonage/')}}">
                                 <i class="fa fa-btn fa-pie-chart text-info fbm-picto-block" aria-hidden="true"></i><p>Zonage aux quartiers</p>
-                            </div>
-                             <div class="fbm-card-negative center-block">
-                                <i class="fa fa-btn fa-file-text text-info fbm-picto-block" aria-hidden="true"></i><p>Lexique des indicateurs</p>
-                            </div>
+                            </a>
+                             <a class="fbm-card-negative center-block"  href="{{url('ressources/')}}">
+                                <i class="fa fa-btn fa-file-text text-info fbm-picto-block" aria-hidden="true"></i><p>Ressources</p>
+                            </a>
                         </div>
                 @endif
             </div>

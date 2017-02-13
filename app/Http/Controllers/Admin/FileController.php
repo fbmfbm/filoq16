@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\FileEntryAdded;
 use App\Events\FileEntryDeleted;
 use App\Events\FileEntryLoaded;
+use App\FileSection;
 use Event;
 use App\Events\FileEntryUpdated;
 use Illuminate\Http\Request;
@@ -46,8 +47,9 @@ class FileController extends Controller
 
     public function create()
     {
+        $sections = FileSection::where('active', true)->orderBy('id', 'asc')->get();
 
-        return view('admin.files.create');
+        return view('admin.files.create', ['sections'=>$sections]);
     }
 
     public function edit($id)
@@ -68,7 +70,7 @@ class FileController extends Controller
 
         $file->short_title = $request->title;
         $file->description = $request->description;
-
+        $file->rubrique_id = $request->section;
         $file->save();
 
         // redirect
@@ -87,8 +89,6 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
-
-
         //$request->filefield =  $request->filefield->getClientOriginalExtension();
         $this->validate($request, [
             'name' => 'required|unique:files,name|max:255',
@@ -106,7 +106,7 @@ class FileController extends Controller
         $entry->name = $request->name;
         $entry->short_title = $request->title;
         $entry->description = $request->description;
-        $entry->rubrique_id = 0;
+        $entry->rubrique_id = $request->section;
         $entry->path = 'public/annexes/';
         $entry->mime = $file->getClientOriginalExtension();
         $entry->type = $file->getClientOriginalExtension();

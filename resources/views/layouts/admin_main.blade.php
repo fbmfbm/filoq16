@@ -30,9 +30,8 @@
 </div>
 <!-- Latest compiled and minified JavaScript -->
 <!-- JavaScripts -->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" crossorigin="anonymous"></script>
-
-<script src="/js/admin-main.js"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" crossorigin="anonymous"></script>--}}
+{{--<script src="/js/admin-main.js"></script>--}}
+<script src="{{ elixir('js/admin-main.js') }}"></script>
 </body>
 </html>

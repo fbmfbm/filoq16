@@ -31,7 +31,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 		});
 
 		return defered.promise;
-	}
+	};
 
     getPGData( $scope.codeRef, 'quart').then(function(result10){
 
@@ -73,7 +73,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 				$scope.nomcom   = result3[0].nom_com;
 
           $scope.dt3 = result3;
-          console.log($scope.dt3)
+          //console.log($scope.dt3)
 
           getPGData( $scope.codeRef, 'evol_tot').then(function(result4){
 
@@ -86,7 +86,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
                   getPGData( $scope.codeRef, 'programm_pru').then(function(result6){
 
                         $scope.dt6 = result6;                 
-                        getGeoJsonQuartier()//----------- build map !!
+                        getGeoJsonQuartier();//----------- build map !!
                   });
              });
           });
@@ -100,7 +100,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 	  
 	 var getGeoJsonQuartier = function(refCode){
 
-        (!refCode)?refCode='':refCode=refCode;
+        (!refCode)?refCode='':refCode;
 
          GeoJsonData.getGeoData($scope.codecom , 'comselect',refCode).then(function(result){
 
@@ -130,7 +130,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 
 	 	var layersStack = buildLayers();
 
-	 	console.log(layersStack.length);
+	 	//console.log(layersStack.length);
 
 		map = new ol.Map({
             logo: false,
@@ -146,12 +146,12 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 		var zoomCenter = layersStack[1].getSource().getExtent();
 		map.getView().fit(zoomCenter	, map.getSize());
         		
-		layersStack[1].getSource().on("change", function(evt){
+		layersStack[1].getSource().on("change", function(){
 			var extent = layersStack[1].getSource().getExtent();	
-    		console.log(extent);
+    		//console.log(extent);
     		map.getView().fit(extent, map.getSize());
     	});
-     }
+     };
 
      var buildLayers = function(){
 
@@ -204,11 +204,8 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
               blocpicto: "fa-square",
               visible: false
       });
-
-	   	var layersStack = [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
-	   	return layersStack;
-     }
- 
+	   	return [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
+     };
 
 	 //############## END MAP ####################
     $scope.tableToJson = function(idTable, filename){
@@ -230,7 +227,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
                         {tag: '#table_1b', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
                     ],
                     type: 'table'
-                },
+                }
 
 
             ];
@@ -242,7 +239,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
                         {tag: '#table_2a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']}
                     ],
                     type: 'table'
-                },
+                }
             ];
 
         }else if(idTable==3){

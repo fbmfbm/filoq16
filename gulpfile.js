@@ -18,6 +18,9 @@ elixir(function(mix) {
     .sass([
         'admin.scss',], 'public/css/admin.css')
     .scripts([
+		'/../../../node_modules/jquery/dist/jquery.js',
+		'/../../../node_modules/tether/dist/js/tether.js',
+		'/../../../node_modules/bootstrap/dist/js/bootstrap.js',
     	'/../../../node_modules/openlayers/dist/ol.js',
     	'/../../../node_modules/angular/angular.js',
     	'/../../../node_modules/angular-sanitize/angular-sanitize.min.js',
@@ -46,5 +49,5 @@ elixir(function(mix) {
 		'admin/controllers/file_controller.js',
 		'admin/directives/fileModel.js'
 	], 'public/js/admin-main.js')
-    .version(['/css/app.css','/css/admin.css', '/js/all.js' ]);
+    .version(['/css/app.css','/css/admin.css', '/js/all.js', 'js/admin-main.js']);
 });

@@ -21,6 +21,13 @@ class FileEntry extends Model
         'name', 'short_title', 'description','rubrique_id',  'path','mime', 'type','size', 'active', 'level', 'owner',
     ];
 
+    public function fileSection(){
+
+        return $this->belongsTo(FileSection::class);
+    }
+
+
+
 
 
 
