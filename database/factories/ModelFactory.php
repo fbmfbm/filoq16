@@ -20,7 +20,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(App\Role::class, function (Faker\Generator $faker) {
 
     return [
@@ -38,5 +37,3 @@ $factory->define(App\Permission::class, function (Faker\Generator $faker) {
         'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
     ];
 });
-
-

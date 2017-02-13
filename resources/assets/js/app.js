@@ -1,4 +1,4 @@
-var msg = "Test d'une nouvelle app actualisée !";
+var msg = "App Filoq2016";
 
 
 console.log(msg);

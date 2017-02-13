@@ -32,7 +32,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 		});
 
 		return defered.promise;
-	}
+	};
 
 
 	getPGData( $scope.codeRef, 'quart').then(function(result1){
@@ -43,7 +43,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
 	 		$scope.dt1 = result1;
 
-      console.log(result1);
+      //console.log(result1);
 
 		getPGData($scope.codecom+'_R500', 'border').then(function(result2){
 
@@ -54,7 +54,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 				$scope.nomcom   = result3[0].nom_com;
         
         $scope.dt3 = result3;
-				getGeoJsonQuartier()//----------- build map !!
+				getGeoJsonQuartier();//----------- build map !!
 			});
 		});
 	});
@@ -95,7 +95,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
 	 	var layersStack = buildLayers();
 
-	 	console.log(layersStack.length);
+	 	//console.log(layersStack.length);
 
 		map = new ol.Map({
             logo: false,
@@ -111,12 +111,12 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 		var zoomCenter = layersStack[1].getSource().getExtent();
 		map.getView().fit(zoomCenter	, map.getSize());
         		
-		layersStack[1].getSource().on("change", function(evt){
+		layersStack[1].getSource().on("change", function(){
 			var extent = layersStack[1].getSource().getExtent();	
-    		console.log(extent);
+    		//console.log(extent);
     		map.getView().fit(extent, map.getSize());
     	});
-     }
+     };
 
      var buildLayers = function(){
 
@@ -170,9 +170,9 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
               visible: false
       });
 
-	   	var layersStack = [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
-	   	return layersStack;
-     }
+	   	return [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
+
+     };
  
 
 	 //############## END MAP ####################
@@ -224,7 +224,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
                         {tag: '#table_5a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
                         {tag: '#table_5b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
                         {tag: '#table_5c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
-                    type: 'table',
+                    type: 'table'
                 },
                 {
                     name: 'Rapport quartier / environnement et commune hors ZUS',
@@ -232,7 +232,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
                         {tag: '#table_6a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
                         {tag: '#table_6b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
                         {tag: '#table_6c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
-                    type: 'table',
+                    type: 'table'
 
                 },
                 {
@@ -241,7 +241,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
                         {tag: '#table_7a', nbcol: 5, headings: ['value', 'nban1', 'pcan1', 'nban2', 'pcan2']},
                         {tag: '#table_7b', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']},
                         {tag: '#table_7c', nbcol: 4, headings: ['nban1', 'pcan1', 'nban2', 'pcan2']}],
-                    type: 'table',
+                    type: 'table'
 
                 }
             ];

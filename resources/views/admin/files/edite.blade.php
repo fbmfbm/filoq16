@@ -65,6 +65,19 @@
                                     </span>
                                 @endif
                             </div>
+                        <div class="form-group{{ $errors->has('section') ? ' has-error' : '' }}">
+                            <label for="section" class=" control-label">Rubrique</label>
+                            <select class="form-control" name="section" id="section" >
+                                <option value="1" {{ ($file->rubrique_id == 1) ? "selected":"" }}>Méthodologie </option>
+                                <option value="2" {{ ($file->rubrique_id == 2) ? "selected":"" }}>Études et rapport  </option>
+                                <option value="3" {{ ($file->rubrique_id == 3) ? "selected":"" }}>Textes réglementaires </option>
+                            </select>
+                            @if ($errors->has('section'))
+                                <span class="help-block text-info">
+                                        <strong>{{ $errors->first('section') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
                             <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                                 <label for="type" class=" control-label">Type</label>
                                 <input type="text" class="form-control" name="type"   value="{{$file->type}}" readonly>

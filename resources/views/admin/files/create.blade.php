@@ -80,9 +80,21 @@
                                     </span>
                             @endif
                         </div>
+                            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                <label for="section" class=" control-label">Rubrique</label>
+                                <select class="form-control" name="section" id="section">
+                                    @foreach($sections as $section)
+                                    <option value="{{$section->id}}">{{$section->description}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('section'))
+                                    <span class="help-block text-info">
+                                        <strong>{{ $errors->first('section') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class=" control-label">Type</label>
-
                             <input ng-if="file.type==''" type="text" class="form-control" name="type"  value="" readonly>
                             <input ng-if="file.type!=''" type="text" class="form-control" name="type" ng-model="file.type" readonly>
                             @if ($errors->has('type'))

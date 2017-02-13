@@ -1,6 +1,6 @@
 app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope, GeoJsonData, PGData){
 
-	$scope.zonageCtrlMsg = "Message du Zonage Controller";
+	$scope.zonageCtrlMsg = "Zonage Controller";
 
 
 	var inited = false;
@@ -13,7 +13,7 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope
 
   var quartierLayer;
 
-	var featureOverlay;
+	//var featureOverlay;
 	var layerVector;
   $scope.refPru  = [];
 
@@ -35,7 +35,6 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope
 var getGeoJsonData = function(){
 
         GeoJsonData.getGeoData($scope.refCode, $scope.refScale, $scope.refDep).then(function(result){
-
            	vectorSource.addFeatures(result);
         });
     };
@@ -122,11 +121,10 @@ var getGeoJsonData = function(){
 
 	   	layerVector.setVisible(true);
 
-	   	var layersStack = [baseLayer, layerVector, borderLayer, zusLayer, quartierLayer];
+	   	return  [baseLayer, layerVector, borderLayer, zusLayer, quartierLayer];
 
-	   	return layersStack;
 
-   }
+   };
 
    var initMap = function(){
 
@@ -134,7 +132,7 @@ var getGeoJsonData = function(){
             layer : layerVector,
             style : new ol.style.Style({
                 stroke: new ol.style.Stroke({color: "rgba(211,246,0,0.51)", lineDash:null, width: 4}),
-                fill: new ol.style.Fill({color: "rgba(50,239,217,0.21)"}),
+                fill: new ol.style.Fill({color: "rgba(50,239,217,0.21)"})
             }),
             wrapX: false
         });
@@ -143,10 +141,10 @@ var getGeoJsonData = function(){
 	   		condition: ol.events.condition.pointerMove,
 	   		layer : layerVector,
 	   		style : new ol.style.Style({
-                stroke: new ol.style.Stroke({color: "rgba(211,246,0,0.51)", lineDash:null, width: 4}),
+                stroke: new ol.style.Stroke({color: "rgba(211,246,0,0.51)", lineDash:null, width: 4})
                 //fill: new ol.style.Fill({color: "rgba(50,255,98,0.0)"}),
-            }),
-	   	})
+            })
+	   	});
 
    			var layersStack = buildLayers();
    			map = new ol.Map({
@@ -174,9 +172,9 @@ var getGeoJsonData = function(){
 
             map.getView().fit(extent, map.getSize());
 
-            layersStack[1].getSource().on("change", function(evt){
+            layersStack[1].getSource().on("change", function(){
             	extent = layersStack[1].getSource().getExtent();
-            	console.log(extent);
+            	//console.log(extent);
             	map.getView().fit(extent, map.getSize());
 			});
 
@@ -233,7 +231,7 @@ var getGeoJsonData = function(){
 
             $scope.refCode = feature.get('code');
 
-            console.log( $scope.refCode,  $scope.refScale, $scope.refDep);
+            //console.log( $scope.refCode,  $scope.refScale, $scope.refDep);
               //if(feature.get('scale')!='pars') { searchData() };
         });
 
@@ -242,17 +240,17 @@ var getGeoJsonData = function(){
 
      inited = true;
 
-   }
+   };
 
    // Function to rdisplay data from direct link on button searche
    $scope.displayDataDirectLink = function(code){
 
-       console.log(code);
+       //console.log(code);
        if(code && code != '' && code !=' '){
            window.location = "/thema/offre/"+code;
        }
 
-   }
+   };
 
    var displayFeatureInfo = function(pixel) {
 
@@ -268,7 +266,7 @@ var getGeoJsonData = function(){
                 top: (pixel[1]+110) + 'px'
             });
 
-            var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+            var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
                 return feature;
             });
 
@@ -297,8 +295,8 @@ var getGeoJsonData = function(){
                 var featureExtent = ol.extent.createEmpty(); 
                 ol.extent.extend(featureExtent, features[i].getGeometry().getExtent()); 
                 map.getView().fit(featureExtent, map.getSize());
-            };
-        };
+            }
+        }
      }//--if feature
  
   };
@@ -309,11 +307,11 @@ var getGeoJsonData = function(){
    	
 	        
 
-   }
+   };
 
    var clearVectorLayer = function(){
 
-        console.log(map.getLayers());
+        //console.log(map.getLayers());
         var vectorLayer = map.getLayers().a[1].getSource().clear();
     };
 
@@ -327,7 +325,7 @@ var getGeoJsonData = function(){
         
         }//--end if
 
-   }
+   };
 
 
    var searchData = function(){
@@ -337,8 +335,8 @@ var getGeoJsonData = function(){
       }else{
         clearVectorLayer();
         getGeoJsonData();
-      };
-   }
+      }
+   };
 
      $scope.exportPNG = function () {
 
@@ -358,4 +356,4 @@ var getGeoJsonData = function(){
 
 
 
-}])
+}]);

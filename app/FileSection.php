@@ -4,33 +4,27 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FileEntry extends Model
+class FileSection extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'files';
+    protected $table = 'file_sections';
+
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'short_title', 'description','rubrique_id',  'path','mime', 'type','size', 'active', 'level', 'owner',
+        'name', 'description', 'active'
     ];
 
-    public function fileSection(){
-
-        return $this->belongsTo(FileSection::class);
+    public function fileEntrys(){
+        return $this->hasMany(FileEntry::class);
     }
-
-
-
-
-
-
+//
 }
-
-
