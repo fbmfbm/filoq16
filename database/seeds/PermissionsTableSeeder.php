@@ -24,6 +24,12 @@ class PermissionsTableSeeder extends Seeder
         DB::table('permissions')->insert(['name' => 'display_perm','display_name'=>'Afficher les Permissions', 'description'=>'Affichage des Permissions du site', 'created_at'=> Carbon::now() ]);
         DB::table('permissions')->insert(['name' => 'add_perm','display_name'=>'Ajouter une Permission', 'description'=>'Ajouter une Permission au site' , 'created_at'=> Carbon::now() ]);
         DB::table('permissions')->insert(['name' => 'del_perm','display_name'=>'Supprimer une Permission', 'description'=>'Suprimer une Permission du site' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'add_admin','display_name'=>'Ajouter un admin', 'description'=>'Ajouter un Admin' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'del_admin','display_name'=>'Supprimer un admin', 'description'=>'Supprimer un Admin' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'edit_admin','display_name'=>'Actualiser un admin', 'description'=>'Actualiser un Admin' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'add_file','display_name'=>'Ajouter un fichier', 'description'=>'Ajouter un fichier' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'del_file','display_name'=>'Supprimer un fichier', 'description'=>'Supprimer un fichier' , 'created_at'=> Carbon::now() ]);
+        DB::table('permissions')->insert(['name' => 'display_file','display_name'=>'Afficher un fichier', 'description'=>'Afficher un fichier' , 'created_at'=> Carbon::now() ]);
 
     	//factory(App\Permission::class, 15)->create();
 
