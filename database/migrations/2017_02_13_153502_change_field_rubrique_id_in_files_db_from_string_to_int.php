@@ -12,7 +12,8 @@ class ChangeFieldRubriqueIdInFilesDbFromStringToInt extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE files ALTER COLUMN rubrique_id TYPE integer USING (rubrique_id::integer);');
+        //DB::statement("UPDATE file SET col_name = replace(rubrique_id, '0', '');");
+        //DB::statement("ALTER TABLE files ALTER COLUMN rubrique_id TYPE integer USING (rubrique_id::integer);");
         Schema::table('files', function ($table) {
             //$table->integer('rubrique_id')->unsigned()->change();
             $table->foreign('rubrique_id')->references('id')->on('file_sections')->onDelete('cascade');
