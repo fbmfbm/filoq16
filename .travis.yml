@@ -9,8 +9,7 @@ before_script:
   - cp .env.travis .env
   - composer self-update
   - composer install --no-interaction
-  - npm install --global gulp-cli
-  - npm install
+  - npm -g install npm@next
   - gulp --production
   - php artisan key:generate
   - php artisan migrate --seed
