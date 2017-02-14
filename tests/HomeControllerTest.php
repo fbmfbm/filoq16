@@ -32,6 +32,17 @@ class HomeControllerTest extends TestCase
         $this->visit('/admin')
             ->seePageIs('/login');
     }
+    public function testLogin()
+    {
+        $this->visit('/')
+            ->click('Connectez-vous')
+            ->see('Connexion')
+            ->see('E-mail')
+            ->type('fabien@fmaison.com', 'email')
+            ->type('12345678', 'password')
+            ->press('Connexion')
+            ->seePageIs(route('home'));
+    }
 
     public function testFbmUserCanGoToAdminDashBoard()
     {
@@ -49,16 +60,5 @@ class HomeControllerTest extends TestCase
             ->seePageIs('/admin');
     }
 
-    public function XtestLogin()
-    {
-        $this->visit('/')
-            ->click('Connectez-vous')
-            ->see('Connexion')
-            ->see('E-mail')
-            ->type('fabien@fmaison.com', 'email')
-            ->type('fbmfbm68', 'password')
-            ->press('Connexion')
-            ->seePageIs(route('home'));
-    }
 
 }
