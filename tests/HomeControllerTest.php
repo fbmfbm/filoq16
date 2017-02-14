@@ -40,7 +40,7 @@ class HomeControllerTest extends TestCase
             'id' => 1000,
             'name' => 'fbmfbm',
             'email' => 'fabien@fmaison.com',
-            'password' => '123456',
+            'password' => '12345678',
             'role_id' => 1,
             'is_active' => 1,
             'created_at' => Carbon::now()

@@ -7,7 +7,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://localhost';
+    //protected $baseUrl = 'http://localhost';
 
     /**
      * Creates the application.
@@ -16,7 +16,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        putenv('DB_CONNECTION = sqlite_testing');
+        //putenv('DB_CONNECTION = sqlite_testing');
 
         $app = require __DIR__.'/../bootstrap/app.php';
 
@@ -29,7 +29,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         parent::setUp();
 
-        ################ ATTENTION INDISPENSABLE config:CREAL pour ne pas detruire la base
+        ################ ATTENTION INDISPENSABLE config:CLEAR pour ne pas detruire la base
         Artisan::call('config:clear');
         Artisan::call('migrate:reset');
         Artisan::call('migrate');
