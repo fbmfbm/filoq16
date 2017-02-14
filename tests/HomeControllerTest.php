@@ -11,7 +11,7 @@ class HomeControllerTest extends TestCase
 {
 
 
-    public function XtestThatUserFbmIsInDatabase()
+    public function testThatUserFbmIsInDatabase()
     {
 
         $this->seeInDatabase('users', ['email' => 'fabien@fmaison.com']);
@@ -41,10 +41,10 @@ class HomeControllerTest extends TestCase
             ->type('fabien@fmaison.com', 'email')
             ->type('12345678', 'password')
             ->press('Connexion')
-            ->seePageIs(route('home'));
+            ->seePageIs('/admin');
     }
 
-    public function testFbmUserCanGoToAdminDashBoard()
+    public function XtestFbmUserCanGoToAdminDashBoard()
     {
         $user = new User(array(
             'id' => 1000,
