@@ -34,14 +34,14 @@
         <env name="DB_CONNECTION" value="pgsql"/>
         <env name="DB_HOST" value="localhost"/>
         <env name="DB_PORT" value="5432"/>
-        <env name="DB_DATABASE" value="filoq_gestion"/>
-        <env name="DB_USERNAME" value="fbmfbm"/>
+        <env name="DB_DATABASE" value="filoq_gestion_test"/>
+        <env name="DB_USERNAME" value="postgres"/>
         <env name="DB_PASSWORD" value="fbmfbm68"/>
         <env name="DB_BIS_CONNECTION" value="pgsql2"/>
         <env name="DB_BIS_HOST" value="localhost"/>
         <env name="DB_BIS_PORT" value="5432"/>
-        <env name="DB_BIS_DATABASE" value="filoq16"/>
-        <env name="DB_BIS_USERNAME" value="fbmfbm"/>
+        <env name="DB_BIS_DATABASE" value="filoq16_test"/>
+        <env name="DB_BIS_USERNAME" value="postgres"/>
         <env name="DB_BIS_PASSWORD" value="fbmfbm68"/>
 
     </php>

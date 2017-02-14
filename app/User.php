@@ -93,7 +93,7 @@ class User extends Authenticatable
         }*/
 
         $role = $this->role;
-        if ($role->hasPermissionTo($permission->name)) {
+        if ($role and $role->hasPermissionTo($permission->name)) {
             return true;
         }
         return false;
