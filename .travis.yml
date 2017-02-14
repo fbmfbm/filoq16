@@ -12,6 +12,7 @@ before_script:
   - npm -g install npm@next
   - npm install gulp
   - npm install --global gulp-cli
+  - npm install
   - gulp --production
   - php artisan key:generate
   - php artisan migrate --seed
