@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="bootstrap/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Application Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./app</directory>
+            <exclude>
+                <file>./app/Http/routes.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    <php>
+
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+
+        <env name="APP_ENV" value="test"/>
+        <env name="APP_DEBUG" value="true"/>
+        <env name="APP_KEY" value="base64:WSemq2FlZyuWmuaXcTm0kjQaP2dLNf3VNS5g/DjY2b4="/>
+        <env name="APP_URL" value="http://www.laravel16.com"/>
+        <env name="DB_CONNECTION" value="pgsql"/>
+        <env name="DB_HOST" value="localhost"/>
+        <env name="DB_PORT" value="5432"/>
+        <env name="DB_DATABASE" value="filoq_gestion"/>
+        <env name="DB_USERNAME" value="fbmfbm"/>
+        <env name="DB_PASSWORD" value="fbmfbm68"/>
+        <env name="DB_BIS_CONNECTION" value="pgsql2"/>
+        <env name="DB_BIS_HOST" value="localhost"/>
+        <env name="DB_BIS_PORT" value="5432"/>
+        <env name="DB_BIS_DATABASE" value="filoq16"/>
+        <env name="DB_BIS_USERNAME" value="fbmfbm"/>
+        <env name="DB_BIS_PASSWORD" value="fbmfbm68"/>
+
+    </php>
+</phpunit>

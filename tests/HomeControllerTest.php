@@ -41,10 +41,10 @@ class HomeControllerTest extends TestCase
             ->type('fabien@fmaison.com', 'email')
             ->type('12345678', 'password')
             ->press('Connexion')
-            ->seePageIs('/admin');
+            ->seePageIs('/');
     }
 
-    public function XtestFbmUserCanGoToAdminDashBoard()
+    public function testFbmUserCanGoToAdminDashBoard()
     {
         $user = new User(array(
             'id' => 1000,
@@ -59,6 +59,4 @@ class HomeControllerTest extends TestCase
         $this->visit('/admin')
             ->seePageIs('/admin');
     }
-
-
 }
