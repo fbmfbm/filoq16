@@ -6,15 +6,23 @@ php:
 addons:
   postgresql: "9.4"
 before_script:
+  - cp .env.travis .env
+  - composer self-update
+  - composer install --no-interaction
+  - npm install --global gulp-cli
+  - npm install
+  - gulp --production
+  - php artisan key:generate
+  - php artisan migrate --seed
+
+before_install:
   - psql -c 'create database filoq_gestion_test;' -U postgres
   - psql -c 'create database filoq16_test;' -U postgres
   - psql -U postgres -c "create extension postgis"
   - export PGPASSWORD="12345678"
-  - cp .env.travis .env
-  - composer self-update
-  - composer install --no-interaction
-  - php artisan migrate --seed
 
+services:
+  - postgresql
 cache:
   directories:
     - node_modules

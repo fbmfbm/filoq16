@@ -11,6 +11,11 @@ class HomeControllerTest extends TestCase
 {
 
 
+    public function XtestThatUserFbmIsInDatabase()
+    {
+
+        $this->seeInDatabase('users', ['email' => 'fabien@fmaison.com']);
+    }
     /**
      * A basic test example.
      *
@@ -20,12 +25,6 @@ class HomeControllerTest extends TestCase
     {
         $this->visit('/')
              ->see('Connectez-vous');
-    }
-
-    public function XtestThatUserFbmIsInDatabase()
-    {
-
-        $this->seeInDatabase('users', ['email' => 'fabien@fmaison.com']);
     }
 
     public function testToBeRedirectToLoginIfNavigateToAdmin()
