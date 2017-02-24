@@ -25,7 +25,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
 		PGData.getPGData(code, scale).then(function(result){
 
-			//console.log(result);
+			console.log(result);
 			
 			 defered.resolve(result.data);
 
@@ -43,7 +43,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
 	 		$scope.dt1 = result1;
 
-      //console.log(result1);
+      console.log(result1);
 
 		getPGData($scope.codecom+'_R500', 'border').then(function(result2){
 

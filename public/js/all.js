@@ -52245,7 +52245,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
 		PGData.getPGData(code, scale).then(function(result){
 
-			//console.log(result);
+			console.log(result);
 			
 			 defered.resolve(result.data);
 
@@ -52263,7 +52263,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
 	 		$scope.dt1 = result1;
 
-      //console.log(result1);
+      console.log(result1);
 
 		getPGData($scope.codecom+'_R500', 'border').then(function(result2){
 
@@ -52491,7 +52491,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 	$scope.dt3 = {};
   $scope.dt4 = {};
 
-	var comSource = new ol.source.Vector();
+  var comSource = new ol.source.Vector();
   var quartierSource = new ol.source.Vector();
   var bordureSource = new ol.source.Vector();
   var zusSource = new ol.source.Vector();
@@ -52503,7 +52503,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 
 		PGData.getPGData(code, scale).then(function(result){
 
-			//console.log(result);
+			console.log(result);
 
 			 defered.resolve(result.data);
 
@@ -52842,8 +52842,8 @@ app.service('GeoJsonData',['$http', function($http){
 
 app.service('PGData',['$http', function($http){
 
-    var tbleFiloq = " filoq ";
-    var tbleFiloqSecret = " filoq_secret ";
+    var tbleFiloq = " filoq_test ";
+    var tbleFiloqSecret = " filoq_test ";
     var tblFiloqEnquete = " filoq_enquete ";
 
     var queryDynamique = "";
@@ -52875,20 +52875,16 @@ app.service('PGData',['$http', function($http){
     queryDynamique += " (sum(c10::DEC) + sum(c11::DEC) + sum(c12::DEC) + sum(c13::DEC)) AS lp_occ_parc_sup06 ";
 
 
-
-
-
     return {
         getRefCode : function(typeRef){
 
            prop_query = " SELECT distinct code_conv as code, nom_terr_np as nom_conv,code_dep_cn AS code_dep, code_comm_pru_zus_np as code_com, territoire_np as type_ter, q_hors_q ";
-           from_query = " FROM filoq ";
+           from_query = " FROM "+tbleFiloq;
            filter_query = " WHERE territoire_np = '"+typeRef+"'  ORDER BY nom_conv ";
            filter_query =   prop_query +  from_query +  filter_query;
 
            var promise = $http.post('/jx/pgdata', {refScale: '', refCode: '',  filterQuery : filter_query}).then(function(response){
 
-               //console.log("promise1", response);
                 return response.data;
             });
 
@@ -52912,7 +52908,8 @@ app.service('PGData',['$http', function($http){
                 prop_query = " SELECT milesim,code_conv, nom_terr_np as nom_terr,code_dep_cn AS code_dep, code_comm_pru_zus_np as code_com, territoire_np as type_ter, q_hors_q, COALESCE(nullif(a1,'s'),'0')::dec+COALESCE(nullif(a75,'s'),'0')::dec AS a0, a1 a1, a2 a2, a3 a3, a4 a4, a5 a5, a15 a15, a16 a16, a17 a17, a18 a18, a19 a19, a20 a20, a21 a21, a22 a22, a26 a26, a27 a27, a28 a28, a29 a29, a30 a30, a31 a31, a60 a60, a61 a61, a62 a62, a63 a63, a66 a66, a67 a67, a68 a68, b1 b1, b2 b2, b3 b3, b4 b4, b5 b5, b6 b6, b7 b7, b9 b8, b9 b9, b10 b10, b11 b11, b12 b12, b13 b13, b14 b14, b15 b15, b16 b16, b17 b17, b18 b18, b19 b19, b20 b20, b22 b21, b23 b23, b60 b60, b61 b61, COALESCE(nullif(a18,'s'),'0')::dec+COALESCE(nullif(a19,'s'),'0')::dec+COALESCE(nullif(a20,'s'),'0')::dec+COALESCE(nullif(a21,'s'),'0')::dec+COALESCE(nullif(a22,'s'),'0')::dec AS ta18_a22, COALESCE(nullif(a66,'s'),'0')::dec+COALESCE(nullif(a67,'s'),'0')::dec+COALESCE(nullif(a68,'s'),'0')::dec AS ta66_a68, c1 c1, c2 c2, c3 c3, c4 c4, c5 c5, c6 c6, c7 c7, c8 c8, c9 c9, c10 c10, c11 c11, c12 c12, c13 c13, c14 c14, c15 c15, c16 c16, c17 c17, c18 c18, c19 c19, c20 c20, c21 c21, c22 c22, c23 c23, c24 c24, c25 c25, c26 c26, c27 c27, c28 c28, c29 c29, c40 c40, c41 c41, c42 c42, c43 c43, c44 c44, c45 c45, c46 c46, c47 c47, c48 c48, c49 c49, c50 c50, c51 c51, c52 c52, c53 c53, c54 c54, c55 c55, c56 c56, c57 c57, c58 c58  ";
                 from_query = " FROM "+tbleFiloqSecret;
                 //filter_query = " WHERE code_conv ='"+refCode+"' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim, code_conv, nom_terr_np, code_dep_cn, code_comm_pru_zus_np, territoire_np, q_hors_q ORDER BY milesim  ";
-                filter_query = " WHERE code_conv ='"+refCode+"' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"')  ORDER BY milesim  ";
+                filter_query = " WHERE code_conv ='"+refCode+"' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"')  ORDER BY milesim ASC  ";
+                console.log("ref_code quartier :", refCode);
                 break;
             case 'border':
                 //prop_query = " SELECT milesim, code_conv, nom_terr_np as nom_terr,code_dep_cn AS code_dep, sum(a1::DEC)+sum(a75::DEC) AS a0, sum(a1::DEC) a1, sum(a2::DEC) a2, sum(a3::DEC) a3, sum(a4::DEC) a4, sum(a5::DEC) a5, sum(a15::DEC) a15, sum(a16::DEC) a16, sum(a17::DEC) a17, sum(a18::DEC) a18, sum(a19::DEC) a19, sum(a20::DEC) a20, sum(a21::DEC) a21, sum(a22::DEC) a22, sum(a26::DEC) a26, sum(a27::DEC) a27, sum(a28::DEC) a28, sum(a29::DEC) a29, sum(a30::DEC) a30, sum(a31::DEC) a31, sum(a60::DEC) a60, sum(a61::DEC) a61, sum(a62::DEC) a62, sum(a63::DEC) a63, sum(a66::DEC) a66, sum(a67::DEC) a67, sum(a68::DEC) a68, sum(b60::DEC) b60, sum(b61::DEC) b61, (sum(a18::DEC)+sum(a19::DEC)+sum(a20::DEC)+sum(a21::DEC)+sum(a22::DEC)) AS ta18_a22, (sum(a66::DEC)+sum(a67::DEC)+sum(a68 ::DEC))AS ta66_a68 ";
@@ -52921,6 +52918,7 @@ app.service('PGData',['$http', function($http){
                 from_query = " FROM "+tbleFiloqSecret;
                 //filter_query = " WHERE  geo_filoc ='"+refCode+"' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim, code_conv, nom_terr_np, code_dep_cn ORDER BY milesim ";
                 filter_query = " WHERE  geo_filoc ='"+refCode+"' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') ORDER BY milesim ";
+                console.log("ref_code bordures pour test :", refCode);
                 break;
             case 'horq':
                 //prop_query = " SELECT tb2.*, tb1.* FROM (SELECT milesim, sum(a1::DEC)+sum(a75::DEC) AS a0, sum(a1::DEC) a1, sum(a2::DEC) a2, sum(a3::DEC) a3, sum(a4::DEC) a4, sum(a5::DEC) a5, sum(a15::DEC) a15, sum(a16::DEC) a16, sum(a17::DEC) a17, sum(a18::DEC) a18, sum(a19::DEC) a19, sum(a20::DEC) a20, sum(a21::DEC) a21, sum(a22::DEC) a22, sum(a26::DEC) a26, sum(a27::DEC) a27, sum(a28::DEC) a28, sum(a29::DEC) a29, sum(a30::DEC) a30, sum(a31::DEC) a31, sum(a60::DEC) a60, sum(a61::DEC) a61, sum(a62::DEC) a62, sum(a63::DEC) a63, sum(a66::DEC) a66, sum(a67::DEC) a67, sum(a68::DEC) a68, sum(b61::DEC)/sum(c1::DEC) b60, sum(b61::DEC) b61, (sum(a18::DEC)+sum(a19::DEC)+sum(a20::DEC)+sum(a21::DEC)+sum(a22::DEC)) AS ta18_a22, (sum(a66::DEC)+sum(a67::DEC)+sum(a68 ::DEC))AS ta66_a68 ";
@@ -52928,7 +52926,8 @@ app.service('PGData',['$http', function($http){
                 prop_query = " SELECT tb2.*, tb1.* FROM (SELECT milesim, COALESCE(nullif(a1,'s'),'0')::dec+COALESCE(nullif(a75,'s'),'0')::dec AS a0, a1 a1, a2 a2, a3 a3, a4 a4, a5 a5, a15 a15, a16 a16, a17 a17, a18 a18, a19 a19, a20 a20, a21 a21, a22 a22, a26 a26, a27 a27, a28 a28, a29 a29, a30 a30, a31 a31, a60 a60, a61 a61, a62 a62, a63 a63, a66 a66, a67 a67, a68 a68, b1 b1, b2 b2, b3 b3, b4 b4, b5 b5, b6 b6, b7 b7, b9 b8, b9 b9, b10 b10, b11 b11, b12 b12, b13 b13, b14 b14, b15 b15, b16 b16, b17 b17, b18 b18, b19 b19, b20 b20, b22 b21, b23 b23, b60 b60, b61 b61, COALESCE(nullif(a18,'s'),'0')::dec+COALESCE(nullif(a19,'s'),'0')::dec+COALESCE(nullif(a20,'s'),'0')::dec+COALESCE(nullif(a21,'s'),'0')::dec+COALESCE(nullif(a22,'s'),'0')::dec AS ta18_a22, COALESCE(nullif(a66,'s'),'0')::dec+COALESCE(nullif(a67,'s'),'0')::dec+COALESCE(nullif(a68,'s'),'0')::dec AS ta66_a68, c1 c1, c2 c2, c3 c3, c4 c4, c5 c5, c6 c6, c7 c7, c8 c8, c9 c9, c10 c10, c11 c11, c12 c12, c13 c13, c14 c14, c15 c15, c16 c16, c17 c17, c18 c18, c19 c19, c20 c20, c21 c21, c22 c22, c23 c23, c24 c24, c25 c25, c26 c26, c27 c27, c28 c28, c29 c29, c40 c40, c41 c41, c42 c42, c43 c43, c44 c44, c45 c45, c46 c46, c47 c47, c48 c48, c49 c49, c50 c50, c51 c51, c52 c52, c53 c53, c54 c54, c55 c55, c56 c56, c57 c57, c58 c58 ";
                 from_query = " FROM "+tbleFiloqSecret;
                 //filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM filoq WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
-                filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"')  ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM filoq WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
+                filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"')  ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM "+tbleFiloqSecret+" WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
+                console.log("ref_code horq :", refCode);
                 break;
 
                 //////////////////////////////
@@ -52952,6 +52951,7 @@ app.service('PGData',['$http', function($http){
                 prop_query += queryDynamique;
                 from_query = " FROM "+tbleFiloq;
                 filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM filoq WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
+
                 break;
              case 'evol_tot':
                prop_query = " SELECT CASE WHEN t13.v0 / t03.v1 > 1.05 then 'Fragilistation' WHEN t13.v0 / t03.v1 < 0.95 then 'Diversification' else 'sans effet' END as tot_status,  CASE  WHEN t13.v2 / t03.v3 > 1.05 then 'Fragilistation'  WHEN t13.v2 / t03.v3 < 0.95 then 'Diversification' else 'sans effet' END as pp_status ,  CASE  WHEN t13.v4 / t03.v5 > 1.05 then 'Fragilistation'  WHEN t13.v4 / t03.v5 < 0.95 then 'Diversification' else 'sans effet' END as ps_status ";
@@ -52979,7 +52979,7 @@ app.service('PGData',['$http', function($http){
 
             filter_query =   prop_query +  from_query +  filter_query;
 
-            //console.log(filter_query);
+            console.log(filter_query);
 
             var promise = $http.post('/jx/pgdata', {refScale: refScale, refCode: refCode,  filterQuery : filter_query}).then(function(response){
 

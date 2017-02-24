@@ -12,7 +12,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 	$scope.dt3 = {};
   $scope.dt4 = {};
 
-	var comSource = new ol.source.Vector();
+  var comSource = new ol.source.Vector();
   var quartierSource = new ol.source.Vector();
   var bordureSource = new ol.source.Vector();
   var zusSource = new ol.source.Vector();
@@ -24,7 +24,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 
 		PGData.getPGData(code, scale).then(function(result){
 
-			//console.log(result);
+			console.log(result);
 
 			 defered.resolve(result.data);
 
