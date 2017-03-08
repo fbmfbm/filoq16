@@ -5100,13 +5100,23 @@ a.text-danger:focus, a.text-danger:hover {
   /* border-radius:0.2em; */ }
 
 .LayerSwitcher .checkbox.checked {
-  background: #BBBBBB; }
+  background: #FFFFFF; }
+
+.LayerSwitcher .checkbox.checked:after {
+  font: normal normal normal 14px/1 FontAwesome;
+  color: #c31c95;
+  content: "\f14a"; }
 
 .LayerSwitcher .radiobutton {
   border-radius: 1em; }
 
 .LayerSwitcher .radiobutton.checked {
-  background: #BBBBBB; }
+  background: #ffffff; }
+
+.LayerSwitcher .radiobutton.checked:after {
+  font: normal normal normal 14px/1 FontAwesome;
+  color: #c31c95;
+  content: "\f192"; }
 
 .fbm-title {
   color: #C136B4; }

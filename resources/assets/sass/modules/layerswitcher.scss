@@ -1,3 +1,4 @@
+
 .LayerSwitcher {
   border:1px solid #C3D0CE;
   width:20em;
@@ -12,7 +13,7 @@
   cursor:pointer;
 }
 .LayerClickDiv {
-    margin: 0.1em;
+  margin: 0.1em;
 }
 .LayerSwitcher .Separator {
   border-bottom:1px solid #C3D0CE;
@@ -30,13 +31,30 @@
   /* border-radius:0.2em; */
 }
 .LayerSwitcher .checkbox.checked {
-  background:#BBBBBB;
+  background:#FFFFFF;
+
 }
+.LayerSwitcher .checkbox.checked:after {
+  font: normal normal normal 14px/1 FontAwesome;
+  color: #c31c95;
+  content: "\f14a";
+}
+
 .LayerSwitcher .radiobutton {
   border-radius:1em;
 }
 .LayerSwitcher .radiobutton.checked {
-  background:#BBBBBB;
+  background:#ffffff;
 }
+
+.LayerSwitcher .radiobutton.checked:after {
+  font: normal normal normal 14px/1 FontAwesome;
+  color: #c31c95;
+  content: "\f192";
+}
+
+
+//////
+
 
 
