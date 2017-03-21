@@ -42,7 +42,7 @@ class LogSuccessfulLogin
         $logUser->description = "Connection de l'utilisateur ".$this->user->name;
         $logUser->user_name = $this->user->name;
         $logUser->user_id = $this->user->id;
-        $logUser->user_ip = $_SERVER['REMOTE_ADDR'];
+        isset($_SERVER['REMOTE_ADDR'])? $logUser->user_ip = $_SERVER['REMOTE_ADDR']: $logUser->user_ip = '0.0.0.0';;
 
         $logUser->save();
 

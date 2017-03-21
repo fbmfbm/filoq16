@@ -45,14 +45,18 @@ app.service('GeoJsonData',['$http', function($http){
                 filter_query = " FROM qru16 As lg WHERE geom IS NOT NULL ORDER BY id_convent";
             }
 
-
+            console.log(refScale, refCode );
             var promise = $http.post('/jx/geojson', {refScale: refScale, refCode: refCode, geomQuery : geom_query, propQuery : prop_query, filterQuery : filter_query}).then(function(response){    
 
                 var featureCollection = JSON.parse(response.data.data[0].row_to_json);
                 var geojsonFormat = new ol.format.GeoJSON();
-                var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
+                if(featureCollection){
 
-                return allFeatures;
+                    var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
+                    return allFeatures;
+
+                }
+
             });
 
 

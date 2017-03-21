@@ -18,7 +18,7 @@ class CreateFilesTable extends Migration
             $table->string('name')->nullable();
             $table->string('short_title',100)->nullable();
             $table->text('description')->nullable();
-            $table->string('rubrique_id');
+            $table->integer('rubrique_id')->unsigned();
             $table->string('path')->nullable();
             $table->string('mime');
             $table->string('type')->nullable();

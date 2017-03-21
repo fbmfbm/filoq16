@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         $fbm = factory(App\User::class)->create([
             'email' => 'fabien@fmaison.com',
             'name' => 'fbmfbm',
-            'password' => bcrypt('fbmfbm68'),
+            'password' => bcrypt('12345678'),
         ]);
 
         $lambda = factory(App\User::class)->create([

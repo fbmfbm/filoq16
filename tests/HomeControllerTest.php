@@ -11,6 +11,11 @@ class HomeControllerTest extends TestCase
 {
 
 
+    public function testThatUserFbmIsInDatabase()
+    {
+
+        $this->seeInDatabase('users', ['email' => 'fabien@fmaison.com']);
+    }
     /**
      * A basic test example.
      *
@@ -22,16 +27,21 @@ class HomeControllerTest extends TestCase
              ->see('Connectez-vous');
     }
 
-    public function XtestThatUserFbmIsInDatabase()
-    {
-
-        $this->seeInDatabase('users', ['email' => 'fabien@fmaison.com']);
-    }
-
     public function testToBeRedirectToLoginIfNavigateToAdmin()
     {
         $this->visit('/admin')
             ->seePageIs('/login');
+    }
+    public function testLogin()
+    {
+        $this->visit('/')
+            ->click('Connectez-vous')
+            ->see('Connexion')
+            ->see('E-mail')
+            ->type('fabien@fmaison.com', 'email')
+            ->type('12345678', 'password')
+            ->press('Connexion')
+            ->seePageIs('/');
     }
 
     public function testFbmUserCanGoToAdminDashBoard()
@@ -40,7 +50,7 @@ class HomeControllerTest extends TestCase
             'id' => 1000,
             'name' => 'fbmfbm',
             'email' => 'fabien@fmaison.com',
-            'password' => '123456',
+            'password' => '12345678',
             'role_id' => 1,
             'is_active' => 1,
             'created_at' => Carbon::now()
@@ -49,17 +59,4 @@ class HomeControllerTest extends TestCase
         $this->visit('/admin')
             ->seePageIs('/admin');
     }
-
-    public function XtestLogin()
-    {
-        $this->visit('/')
-            ->click('Connectez-vous')
-            ->see('Connexion')
-            ->see('E-mail')
-            ->type('fabien@fmaison.com', 'email')
-            ->type('fbmfbm68', 'password')
-            ->press('Connexion')
-            ->seePageIs(route('home'));
-    }
-
 }
