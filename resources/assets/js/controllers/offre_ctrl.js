@@ -7,16 +7,16 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 	$scope.codeRef = $window._convent;
 
 	$scope.refScale = 'quart';
-  $scope.setTab = 1;
+    $scope.setTab = 1;
 
 	$scope.dt1 = {};
 	$scope.dt2 = {};
 	$scope.dt3 = {};
 
 	var comSource = new ol.source.Vector();
-  var quartierSource = new ol.source.Vector();
-  var bordureSource = new ol.source.Vector();
-  var zusSource = new ol.source.Vector();
+    var quartierSource = new ol.source.Vector();
+    var bordureSource = new ol.source.Vector();
+    var zusSource = new ol.source.Vector();
 
 	//############# GET STAT DATA ##########################
 	var getPGData = function(code, scale ){
@@ -52,8 +52,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 			getPGData( $scope.codecom , 'horq').then(function(result3){
 
 				$scope.nomcom   = result3[0].nom_com;
-        
-        $scope.dt3 = result3;
+                $scope.dt3 = result3;
 				getGeoJsonQuartier();//----------- build map !!
 			});
 		});
@@ -67,7 +66,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
         (!refCode)?refCode='':refCode=refCode;
 
-         GeoJsonData.getGeoData($scope.codecom , 'comselect',refCode).then(function(result){
+         GeoJsonData.getGeoData($scope.codecom.slice(0,5), 'comselect',refCode).then(function(result){
 
             comSource.addFeatures(result);
 
@@ -79,12 +78,12 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
 	                quartierSource.addFeatures(result);
 
-	              	GeoJsonData.getGeoData($scope.refCode, "zus", refCode).then(function(result){
+	              	//GeoJsonData.getGeoData($scope.refCode, "zus", refCode).then(function(result){
 
-	                    zusSource.addFeatures(result);
-	                    initMap();
+	                    //zusSource.addFeatures(result);
+                        initMap();
 
-               	});//---end zus
+               	//});//---end zus
             });//--end pru
         });//----end border       
      });//----end com 
@@ -109,7 +108,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
         });
 
 		var zoomCenter = layersStack[1].getSource().getExtent();
-		map.getView().fit(zoomCenter	, map.getSize());
+		map.getView().fit(zoomCenter, map.getSize());
         		
 		layersStack[1].getSource().on("change", function(){
 			var extent = layersStack[1].getSource().getExtent();	
@@ -170,7 +169,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
               visible: false
       });
 
-	   	return [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
+	   	return [baseLayer,comLayer, borderLayer, quartierLayer];
 
      };
  

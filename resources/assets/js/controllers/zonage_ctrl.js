@@ -270,10 +270,14 @@ var getGeoJsonData = function(){
                 return feature;
             });
 
-            if (feature) {
+            if (feature && (feature.get('label').indexOf('bordure') >=  0)){
 
                 info.tooltip('hide')
-                    .attr('data-original-title', (feature.get('label')+" ("+feature.get('code')+")") )
+                    .attr('data-original-title', (feature.get('label')))
+                    .tooltip('show');
+            }else if(feature){
+                info.tooltip('hide')
+                    .attr('data-original-title', (feature.get('label') + " (" + feature.get('code') + ")"))
                     .tooltip('show');
             }else{
 

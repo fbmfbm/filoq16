@@ -1,8 +1,8 @@
 
 app.service('PGData',['$http', function($http){
 
-    var tbleFiloq = " filoq_test ";
-    var tbleFiloqSecret = " filoq_test ";
+    var tbleFiloq = " filoq_v3 ";
+    var tbleFiloqSecret = " filoq_secret_v3 ";
     var tblFiloqEnquete = " filoq_enquete ";
 
     var queryDynamique = "";
@@ -109,7 +109,7 @@ app.service('PGData',['$http', function($http){
                 prop_query = "  SELECT tb2.*, tb1.* FROM (SELECT milesim,  ";
                 prop_query += queryDynamique;
                 from_query = " FROM "+tbleFiloq;
-                filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM filoq WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
+                filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM "+tbleFiloq+" WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
 
                 break;
              case 'evol_tot':
@@ -138,7 +138,7 @@ app.service('PGData',['$http', function($http){
 
             filter_query =   prop_query +  from_query +  filter_query;
 
-            console.log(filter_query);
+            //console.log(filter_query);
 
             var promise = $http.post('/jx/pgdata', {refScale: refScale, refCode: refCode,  filterQuery : filter_query}).then(function(response){
 

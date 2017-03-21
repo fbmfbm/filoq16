@@ -27,9 +27,9 @@
                              <span class="text-muted">Quartier PRU :</span>
                              <p><strong class="text-info">@{{ter1Label}}</strong> <span class='text-muted'>(@{{codeRef}})</span><br>
                              Commune : <br>
-                             <strong>@{{nomcom}}</strong> <span class='text-muted'>(@{{dt1[0].code_com}})</span></p>
+                             <strong>@{{nomcom}}</strong> <span class='text-muted'>(@{{codecom}})</span></p>
                             <p class="text-info">Poids du quartier dans la commune :</p>
-                             <span class="fbm-chiffre-cle"><i class="fa fa-home" aria-hidden="true"></i> Logement :  <span class="fbm-badge">  @{{(dt1[1].a0 / dt3[0].a0_com)*100 | number:1}} % </span> </span><br>
+                             <span class="fbm-chiffre-cle"><i class="fa fa-home" aria-hidden="true"></i> Logement :  <span class="fbm-badge">  @{{(dt10[0].a0 / dt3[0].a0_com)*100 | number:1}} % </span> </span><br>
                              <span class="fbm-chiffre-cle"><i class="fa fa-building" aria-hidden="true"></i> HLM : <span class="fbm-badge">   @{{(dt1[1].a4 / dt3[0].a4_com)*100 | number:1}} % </span></span><br>
                              <span class="fbm-chiffre-cle"><i class="fa fa-male" aria-hidden="true"></i> Population : <span class="fbm-badge">    @{{(dt1[1].b61 / dt3[0].b61_com)*100 | number:1}} % </span> </span>
                              <p><span class="font-italic fbm-sm">( soit Population totale pour la commune  @{{nomcom}} : @{{ dt3[0].b61_com | number:0}} et population du territoire @{{ter1Label}} : @{{dt1[1].b61 | number:0}} )</span></p>

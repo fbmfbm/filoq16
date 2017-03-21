@@ -52131,10 +52131,14 @@ var getGeoJsonData = function(){
                 return feature;
             });
 
-            if (feature) {
+            if (feature && (feature.get('label').indexOf('bordure') >=  0)){
 
                 info.tooltip('hide')
-                    .attr('data-original-title', (feature.get('label')+" ("+feature.get('code')+")") )
+                    .attr('data-original-title', (feature.get('label')))
+                    .tooltip('show');
+            }else if(feature){
+                info.tooltip('hide')
+                    .attr('data-original-title', (feature.get('label') + " (" + feature.get('code') + ")"))
                     .tooltip('show');
             }else{
 
@@ -52227,16 +52231,16 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 	$scope.codeRef = $window._convent;
 
 	$scope.refScale = 'quart';
-  $scope.setTab = 1;
+    $scope.setTab = 1;
 
 	$scope.dt1 = {};
 	$scope.dt2 = {};
 	$scope.dt3 = {};
 
 	var comSource = new ol.source.Vector();
-  var quartierSource = new ol.source.Vector();
-  var bordureSource = new ol.source.Vector();
-  var zusSource = new ol.source.Vector();
+    var quartierSource = new ol.source.Vector();
+    var bordureSource = new ol.source.Vector();
+    var zusSource = new ol.source.Vector();
 
 	//############# GET STAT DATA ##########################
 	var getPGData = function(code, scale ){
@@ -52272,8 +52276,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 			getPGData( $scope.codecom , 'horq').then(function(result3){
 
 				$scope.nomcom   = result3[0].nom_com;
-        
-        $scope.dt3 = result3;
+                $scope.dt3 = result3;
 				getGeoJsonQuartier();//----------- build map !!
 			});
 		});
@@ -52287,7 +52290,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
         (!refCode)?refCode='':refCode=refCode;
 
-         GeoJsonData.getGeoData($scope.codecom , 'comselect',refCode).then(function(result){
+         GeoJsonData.getGeoData($scope.codecom.slice(0,5), 'comselect',refCode).then(function(result){
 
             comSource.addFeatures(result);
 
@@ -52299,12 +52302,12 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 
 	                quartierSource.addFeatures(result);
 
-	              	GeoJsonData.getGeoData($scope.refCode, "zus", refCode).then(function(result){
+	              	//GeoJsonData.getGeoData($scope.refCode, "zus", refCode).then(function(result){
 
-	                    zusSource.addFeatures(result);
-	                    initMap();
+	                    //zusSource.addFeatures(result);
+                        initMap();
 
-               	});//---end zus
+               	//});//---end zus
             });//--end pru
         });//----end border       
      });//----end com 
@@ -52329,7 +52332,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
         });
 
 		var zoomCenter = layersStack[1].getSource().getExtent();
-		map.getView().fit(zoomCenter	, map.getSize());
+		map.getView().fit(zoomCenter, map.getSize());
         		
 		layersStack[1].getSource().on("change", function(){
 			var extent = layersStack[1].getSource().getExtent();	
@@ -52390,7 +52393,7 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
               visible: false
       });
 
-	   	return [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
+	   	return [baseLayer,comLayer, borderLayer, quartierLayer];
 
      };
  
@@ -52481,15 +52484,15 @@ app.controller('OffreCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVS
 app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', 'CSVService', '$q', function($scope, $window,  GeoJsonData, PGData, CSVService, $q){
 
 
-	$scope.codeRef = $window._convent;
+    $scope.codeRef = $window._convent;
 
-	$scope.refScale = 'quart';
+    $scope.refScale = 'quart';
     $scope.setTab = 1;
 
-	$scope.dt1 = {};
-	$scope.dt2 = {};
-	$scope.dt3 = {};
-  $scope.dt4 = {};
+    $scope.dt1 = {};
+    $scope.dt2 = {};
+    $scope.dt3 = {};
+    $scope.dt4 = {};
 
   var comSource = new ol.source.Vector();
   var quartierSource = new ol.source.Vector();
@@ -52502,11 +52505,8 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 		var defered = $q.defer();
 
 		PGData.getPGData(code, scale).then(function(result){
-
-			console.log(result);
-
+			//console.log(result);
 			 defered.resolve(result.data);
-
 		});
 
 		return defered.promise;
@@ -52517,29 +52517,32 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 	 		$scope.ter1Label = result10[0].nom_terr;
 			$scope.codeDep   = result10[0].code_dep;
 			$scope.codecom   = result10[0].code_com;
-
 	 		$scope.dt10 = result10;
+            $scope.nomcom   = result10[0].nom_com;
+
+           // console.log("recupération du nom de com : etape 1", $scope.codecom);
     });
 
 
 	getPGData( $scope.codeRef, 'quart_dyna1').then(function(result1){
 
-	 		$scope.ter1Label = result1[0].nom_terr;
-			$scope.codeDep   = result1[0].code_dep;
-			$scope.codecom   = result1[0].code_com;
+	 		//$scope.ter1Label = result1[0].nom_terr;
+			//$scope.codeDep   = result1[0].code_dep;
+			//$scope.codecom   = result1[0].code_com;
+        //console.log("recupération du nom de com : etape 2");
 
-	 		$scope.dt1 = result1;
+         $scope.dt1 = result1;
 
-      for( x in result1[0]){  
-        if(result1[0][x]){
-          result1[0][x] = Number(result1[0][x]); 
-        }
-      }
-      for( x in result1[1]){  
-        if(result1[1][x]){
-          result1[1][x] = Number(result1[1][x]); 
-        }
-      }
+          for( x in result1[0]){
+            if(result1[0][x]){
+              result1[0][x] = Number(result1[0][x]);
+            }
+          }
+          for( x in result1[1]){
+            if(result1[1][x]){
+              result1[1][x] = Number(result1[1][x]);
+            }
+          }
 
       //console.log(result1);
 
@@ -52547,9 +52550,11 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 
 			$scope.dt2 = result2;
 
+
 			getPGData( $scope.codecom , 'horq_dyna1').then(function(result3){
 
 				$scope.nomcom   = result3[0].nom_com;
+                //console.log("Recupération des données hors q donc com");
 
           $scope.dt3 = result3;
           //console.log($scope.dt3)
@@ -52562,10 +52567,12 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 
                   $scope.dt5 = result5;
 
+                    getGeoJsonQuartier($scope.codeRef);//----------- build map !!
+
                   getPGData( $scope.codeRef, 'programm_pru').then(function(result6){
 
                         $scope.dt6 = result6;                 
-                        getGeoJsonQuartier();//----------- build map !!
+
                   });
              });
           });
@@ -52580,20 +52587,22 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 	 var getGeoJsonQuartier = function(refCode){
 
         (!refCode)?refCode='':refCode;
+        //console.log("La ref du quartier :", $scope.codecom);
 
-         GeoJsonData.getGeoData($scope.codecom , 'comselect',refCode).then(function(result){
+         GeoJsonData.getGeoData($scope.codecom.slice(0,5) , 'comselect',refCode).then(function(result){
 
             comSource.addFeatures(result);
 
-	        GeoJsonData.getGeoData($scope.refCode, "border",refCode).then(function(result){
+	        GeoJsonData.getGeoData($scope.codeRef, "border",refCode).then(function(result){
 
-	            bordureSource.addFeatures(result);
+                (result > 0) ? bordureSource.addFeatures(result):null;
+                console.log(refCode);
 
-	            GeoJsonData.getGeoData($scope.refCode, "quartier", refCode).then(function(result){
+	            GeoJsonData.getGeoData($scope.codeRef, "quartier", refCode).then(function(result){
 
 	                quartierSource.addFeatures(result);
 
-	              	GeoJsonData.getGeoData($scope.refCode, "zus", refCode).then(function(result){
+	              	GeoJsonData.getGeoData($scope.codeRef, "zus", refCode).then(function(result){
 
 	                    zusSource.addFeatures(result);
 	                    initMap();
@@ -52601,15 +52610,19 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
                	});//---end zus
             });//--end pru
         });//----end border       
-     });//----end com 
+     });//----end com
 
     };
 
 	var initMap = function(){
 
-	 	var layersStack = buildLayers();
+        var layersStack = buildLayers();
 
-	 	//console.log(layersStack.length);
+        //console.log(layersStack.length);
+        buildMap(layersStack);
+    }
+
+    var buildMap = function(layersStack){
 
 		map = new ol.Map({
             logo: false,
@@ -52683,7 +52696,9 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
               blocpicto: "fa-square",
               visible: false
       });
-	   	return [baseLayer,comLayer, borderLayer, zusLayer, quartierLayer];
+
+	   	return [baseLayer, comLayer, borderLayer, zusLayer, quartierLayer];
+
      };
 
 	 //############## END MAP ####################
@@ -52821,14 +52836,18 @@ app.service('GeoJsonData',['$http', function($http){
                 filter_query = " FROM qru16 As lg WHERE geom IS NOT NULL ORDER BY id_convent";
             }
 
-
+            console.log(refScale, refCode );
             var promise = $http.post('/jx/geojson', {refScale: refScale, refCode: refCode, geomQuery : geom_query, propQuery : prop_query, filterQuery : filter_query}).then(function(response){    
 
                 var featureCollection = JSON.parse(response.data.data[0].row_to_json);
                 var geojsonFormat = new ol.format.GeoJSON();
-                var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
+                if(featureCollection){
 
-                return allFeatures;
+                    var allFeatures = geojsonFormat.readFeatures(featureCollection, {featureProjection: 'EPSG:3857'});
+                    return allFeatures;
+
+                }
+
             });
 
 
@@ -52842,8 +52861,8 @@ app.service('GeoJsonData',['$http', function($http){
 
 app.service('PGData',['$http', function($http){
 
-    var tbleFiloq = " filoq_test ";
-    var tbleFiloqSecret = " filoq_test ";
+    var tbleFiloq = " filoq_v3 ";
+    var tbleFiloqSecret = " filoq_secret_v3 ";
     var tblFiloqEnquete = " filoq_enquete ";
 
     var queryDynamique = "";
@@ -52950,7 +52969,7 @@ app.service('PGData',['$http', function($http){
                 prop_query = "  SELECT tb2.*, tb1.* FROM (SELECT milesim,  ";
                 prop_query += queryDynamique;
                 from_query = " FROM "+tbleFiloq;
-                filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM filoq WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
+                filter_query = " WHERE  nom_terr_np IN('"+refCode+"') AND q_hors_q = 'hors q' AND (milesim LIKE '__"+milesim1+"' OR milesim LIKE '__"+milesim2+"') GROUP BY milesim ORDER BY milesim ) AS tb1, (SELECT geo_filoc as code_com, nom_terr_np as nom_com,  sum(a1::DEC)+sum(a75::DEC) AS a0_com, sum(a4::DEC) AS a4_com, sum(b61::DEC) AS b61_com FROM "+tbleFiloq+" WHERE  geo_filoc IN('"+refCode+"') AND q_hors_q = 'total' AND territoire_np = 'commune' AND (milesim LIKE '__"+milesim2+"') group by geo_filoc, nom_terr_np) tb2";
 
                 break;
              case 'evol_tot':
@@ -52979,7 +52998,7 @@ app.service('PGData',['$http', function($http){
 
             filter_query =   prop_query +  from_query +  filter_query;
 
-            console.log(filter_query);
+            //console.log(filter_query);
 
             var promise = $http.post('/jx/pgdata', {refScale: refScale, refCode: refCode,  filterQuery : filter_query}).then(function(response){
 
