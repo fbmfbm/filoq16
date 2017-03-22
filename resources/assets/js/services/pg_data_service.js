@@ -138,7 +138,7 @@ app.service('PGData',['$http', function($http){
 
             filter_query =   prop_query +  from_query +  filter_query;
 
-            //console.log(filter_query);
+            //if(refScale=='border_dyna1'){ console.log(refScale,refCode, filter_query)};
 
             var promise = $http.post('/jx/pgdata', {refScale: refScale, refCode: refCode,  filterQuery : filter_query}).then(function(response){
 

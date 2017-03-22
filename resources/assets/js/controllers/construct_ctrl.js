@@ -39,64 +39,69 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
             $scope.nomcom   = result10[0].nom_com;
 
            // console.log("recupération du nom de com : etape 1", $scope.codecom);
+            getAllScallData()
     });
 
+    var getAllScallData = function()
+    {
+        getPGData($scope.codeRef, 'quart_dyna1').then(function(result1){
 
-	getPGData( $scope.codeRef, 'quart_dyna1').then(function(result1){
+            //$scope.ter1Label = result1[0].nom_terr;
+            //$scope.codeDep   = result1[0].code_dep;
+            //$scope.codecom   = result1[0].code_com;
+            //console.log("recupération du nom de com : etape 2");
 
-	 		//$scope.ter1Label = result1[0].nom_terr;
-			//$scope.codeDep   = result1[0].code_dep;
-			//$scope.codecom   = result1[0].code_com;
-        //console.log("recupération du nom de com : etape 2");
+            $scope.dt1 = result1;
 
-         $scope.dt1 = result1;
-
-          for( x in result1[0]){
-            if(result1[0][x]){
-              result1[0][x] = Number(result1[0][x]);
+            for(x in result1[0]){
+                if(result1[0][x]){
+                    result1[0][x] = Number(result1[0][x]);
+                }
             }
-          }
-          for( x in result1[1]){
-            if(result1[1][x]){
-              result1[1][x] = Number(result1[1][x]);
+            for(x in result1[1]){
+                if(result1[1][x]){
+                    result1[1][x] = Number(result1[1][x]);
+                }
             }
-          }
 
-      //console.log(result1);
+            //console.log(result1);
 
-		getPGData($scope.codecom+'_R500', 'border_dyna1').then(function(result2){
+            getPGData($scope.codecom + '_R500', 'border_dyna1').then(function(result2){
 
-			$scope.dt2 = result2;
+                //console.log($scope.codecom + '_R500');
 
+                $scope.dt2 = result2;
+                //console.log($scope.dt2);
 
-			getPGData( $scope.codecom , 'horq_dyna1').then(function(result3){
+                getPGData($scope.codecom, 'horq_dyna1').then(function(result3){
 
-				$scope.nomcom   = result3[0].nom_com;
-                //console.log("Recupération des données hors q donc com");
+                    $scope.nomcom = result3[0].nom_com;
+                    //console.log("Recupération des données hors q donc com");
 
-          $scope.dt3 = result3;
-          //console.log($scope.dt3)
+                    $scope.dt3 = result3;
+                    //console.log($scope.dt3)
 
-          getPGData( $scope.codeRef, 'evol_tot').then(function(result4){
+                    getPGData($scope.codeRef, 'evol_tot').then(function(result4){
 
-            $scope.dt4 = result4;
+                        $scope.dt4 = result4;
 
-            getPGData( $scope.codeRef, 'evol_exist').then(function(result5){
+                        getPGData($scope.codeRef, 'evol_exist').then(function(result5){
 
-                  $scope.dt5 = result5;
+                            $scope.dt5 = result5;
 
-                    getGeoJsonQuartier($scope.codeRef);//----------- build map !!
+                            getGeoJsonQuartier($scope.codeRef);//----------- build map !!
 
-                  getPGData( $scope.codeRef, 'programm_pru').then(function(result6){
+                            getPGData($scope.codeRef, 'programm_pru').then(function(result6){
 
-                        $scope.dt6 = result6;                 
+                                $scope.dt6 = result6;
 
-                  });
-             });
-          });
-			});
-		});
-	});
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    };//------fin function get all scall data
 
 	//############### END GET STAT DATA ###########
 
