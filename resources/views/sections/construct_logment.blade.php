@@ -44,7 +44,7 @@
                                   <p><strong>PRU :</strong> Le périmètre comprend l’ensemble du PRU. En cas de PRU intercommunal les logements situés sur la ou les commune(s) limitrophe(s) sont inclus.</p>
                                   <p><strong>Bordures 500m :</strong> Le périmètre comprend la somme des bordures de l’ensemble des PRU et des ZUS présents sur la commune. Attention les données diffusées ne concernent que les éléments compris sur la commune (filtre infra communal).</p>
                                   <p><strong>Commune hors QPV :</strong> Les données diffusées concernent l’ensemble de la commune hors PRU et hors ZUS.</p>
-                                  <p><i>Attention en cas de PRU intercommunal les données de référence (bordure et commune) ne concernent que la commune principale (commune sur laquelle le PRU est implanté le plus largement).</i></p>
+                                  {{--<p><i>Attention en cas de PRU intercommunal les données de référence (bordure et commune) ne concernent que la commune principale (commune sur laquelle le PRU est implanté le plus largement).</i></p>--}}
                               </div>
                               <div id="map2" class=""> </div>
                           </div>
