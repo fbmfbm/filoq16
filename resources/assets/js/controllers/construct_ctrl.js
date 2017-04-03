@@ -63,9 +63,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
                     result1[1][x] = Number(result1[1][x]);
                 }
             }
-
             //console.log(result1);
-
             getPGData($scope.codecom + '_R500', 'border_dyna1').then(function(result2){
 
                 //console.log($scope.codecom + '_R500');
