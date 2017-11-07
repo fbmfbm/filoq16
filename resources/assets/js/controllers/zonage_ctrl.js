@@ -101,7 +101,9 @@ var getGeoJsonData = function(){
     }
 
    var buildLayers = function(){
-    
+
+
+       var ignKey = 'ar5b9suuwo6hkdonwp48kpjy' ;
       /*
        var baseLayer = new ol.layer.Group({
           'title': 'Fond de plan',layers: [
@@ -112,10 +114,30 @@ var getGeoJsonData = function(){
         */
 
       var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [
-          new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })})
+         //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })}),
           //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'AerialWithLabels' })})
+          new ol.layer.Tile({source: new ol.source.XYZ({ url:'http://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',crossOrigin: 'anonymous', attributions: ["OpenLayer","IGN - 2017"] })}),
+          new ol.layer.Tile({
+              source: new ol.source.WMTS({
+                  url: 'https://wxs.ign.fr/' + ignKey  + '/wmts',
+                  layer:'ORTHOIMAGERY.ORTHOPHOTOS',
+                  crossOrigin: 'anonymous',
+                  matrixSet: 'PM',
+                  format: 'image/jpeg',
+                  projection: 'EPSG:3857',
+                  tileGrid: new ol.tilegrid.WMTS({
+                      origin: [-20037508,20037508],
+                      resolutions: buildResolution(),
+                      matrixIds:["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],
+                  }),
+                  style: 'normal',
+                  attributions: ["©OpenStreetMap - ","©GéoPortail - 2017"],
+                  printattributions: ["©OpenStreetMap - ","©GéoPortail - 2017"],
+              })
+          })
+
         ]});
-        
+
      
 
       baseLayer.set('name', 'fond de plan');
@@ -134,7 +156,8 @@ var getGeoJsonData = function(){
 	        });
 	*/
 
-        var ignKey = 'ar5b9suuwo6hkdonwp48kpjy' ;
+
+
 
        layerVector = new ol.layer.Tile({
            source: new ol.source.WMTS({
@@ -166,7 +189,7 @@ var getGeoJsonData = function(){
               title: "Bordures 500",
               name : "vector_border",
               bloccolor: "rgb(90,150,230)",
-              blocpicto: "fa-square"
+              blocpicto: "fa-square",
           });
 
 
@@ -230,7 +253,7 @@ var getGeoJsonData = function(){
 	   	});
 
        var attribution = new ol.control.Attribution({
-           collapsible: true
+           collapsible: false
 
        });
 
@@ -238,8 +261,8 @@ var getGeoJsonData = function(){
 
        map = new ol.Map({
                 logo: false,
-                controls: ol.control.defaults({ attribution: false }).extend([]),
-                interactions: ol.interaction.defaults().extend([select, over]),
+                controls: ol.control.defaults({ attribution: false}).extend([attribution]),
+                interactions: ol.interaction.defaults().extend([ select, over]),
                 target: document.getElementById('map'),
                 renderer: 'canvas',
                 layers: layersStack,
@@ -267,19 +290,23 @@ var getGeoJsonData = function(){
 
             var extent = layersStack[2].getSource().getExtent();
 
-            map.getView().fit(extent, map.getSize());
+            //map.getView().fit(extent, map.getSize());
+            map.getView().fit(extent);
 
             layersStack[1].getSource().on("change", function(){
             	extent = layersStack[1].getSource().getExtent();
             	//console.log(extent);
-            	map.getView().fit(extent, map.getSize());
+            	//map.getView().fit(extent, map.getSize());
+            	map.getView().fit(extent);
 			});
 
-			buildVectorOverlay();
+
+			//buildVectorOverlay();
 
 			map.on('pointermove', function(evt) {
 
-	            if (evt.dragging) {
+
+			    if (evt.dragging) {
 	                //info.tooltip('hide');
 	                return;
 	            }
@@ -287,6 +314,7 @@ var getGeoJsonData = function(){
            		var pixel = map.getEventPixel(evt.originalEvent);
             		
             	displayFeatureInfo(pixel);
+
         	});
 
 
@@ -449,10 +477,22 @@ var getGeoJsonData = function(){
 
      $scope.exportPNG = function () {
 
-    canvas = document.getElementsByTagName('canvas')[0];
-    canvas.toBlob(function (blob) {
-        saveAs(blob, 'map.png');
-    });
+        /*
+         canvas = document.getElementsByTagName('canvas')[0];
+        canvas.toBlob(function (blob) {
+            saveAs(blob, 'map.png');
+        });
+        */
+         map.once('postcompose', function(event) {
+             var canvas = event.context.canvas;
+             event.context.textAlign = 'right';
+             event.context.fillStyle = "#ff0000";
+             event.context.fillText('© OpenStreeMap - GéoPortail -  DRIHL 2017', canvas.width - 5, canvas.height - 10);
+             canvas.toBlob(function(blob) {
+                 saveAs(blob, 'map.png');
+             });
+         });
+         map.renderSync();
   };
 
 
