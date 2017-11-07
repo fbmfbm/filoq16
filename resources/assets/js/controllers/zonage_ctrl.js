@@ -2,11 +2,13 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope
 
 	$scope.zonageCtrlMsg = "Zonage Controller";
 
+    $('[data-toggle="popover"]').popover();
+
 
 	var inited = false;
 	$scope.refScale = 'dep';
-  var map; 
-	var vectorSource = new ol.source.Vector();
+  var map;
+  var vectorSource = new ol.source.Vector();
   var quartierSource = new ol.source.Vector();
   var bordureSource = new ol.source.Vector();
   var zusSource = new ol.source.Vector();
@@ -60,6 +62,44 @@ var getGeoJsonData = function(){
         });//----end border       
     };
 
+  var buildResolution = function(){
+        var resolutions = [
+            156543.03392804103,
+            78271.5169640205,
+            39135.75848201024,
+            19567.879241005125,
+            9783.939620502562,
+            4891.969810251281,
+            2445.9849051256406,
+            1222.9924525628203,
+            611.4962262814101,
+            305.74811314070485,
+            152.87405657035254,
+            76.43702828517625,
+            38.218514142588134,
+            19.109257071294063,
+            9.554628535647034,
+            4.777314267823517,
+            2.3886571339117584,
+            1.1943285669558792,
+            0.5971642834779396,
+            0.29858214173896974,
+            0.14929107086948493,
+            0.07464553543474241
+        ] ;
+        var projection = ol.proj.get('EPSG:3857');
+        var projectionExtent = projection.getExtent();
+        var size = ol.extent.getWidth(projectionExtent) / 256;
+        var resolutions2 = new Array(20);
+        var matrixIds = new Array(20);
+        for (let z = 0; z < 20; ++z) {
+            resolutions2[z] = size / Math.pow(2, z);
+            matrixIds[z] = z;
+        }
+
+        return resolutions2;
+    }
+
    var buildLayers = function(){
     
       //var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [new ol.layer.Tile({source: new ol.source.OSM()}),new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})]});
@@ -70,8 +110,10 @@ var getGeoJsonData = function(){
      
 
       baseLayer.set('name', 'fond de plan');
+
       baseLayer.set('baselayer', true);
 
+    /*
 	   	layerVector = new ol.layer.Vector({
 	            source: vectorSource,
 	            style: new ol.style.Style({
@@ -81,6 +123,30 @@ var getGeoJsonData = function(){
 	            title: "Limites de territoires",
 	            name : "vector"
 	        });
+	*/
+
+        var ignKey = 'ar5b9suuwo6hkdonwp48kpjy' ;
+
+       layerVector = new ol.layer.Tile({
+           source: new ol.source.WMTS({
+               url: 'https://wxs.ign.fr/' + ignKey  + '/wmts',
+               layer:'ADMINISTRATIVEUNITS.BOUNDARIES',
+               crossOrigin: 'anonymous',
+               matrixSet: 'PM',
+               format: 'image/png',
+               projection: 'EPSG:3857',
+               tileGrid: new ol.tilegrid.WMTS({
+                   origin: [-20037508,20037508],
+                   resolutions: buildResolution(),
+                   matrixIds:["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],
+               }),
+               style: 'normal'
+           }),
+           title: "Limites de territoires",
+           name : "vector"
+       })
+
+
 
       var borderLayer =  new ol.layer.Vector({
               source: bordureSource,
@@ -93,11 +159,19 @@ var getGeoJsonData = function(){
               bloccolor: "rgb(90,150,230)",
               blocpicto: "fa-square"
           });
+
+
       quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
               style: new ol.style.Style({
                   stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"})
+                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"}),
+                  text: new ol.style.Text({
+                      text: 'test',
+                      fill: new ol.style.Fill({color: "rgba(255,255,255,1.0)"}),
+
+
+                  }),
               }),
               title: "Quartiers PRU",
               name : "vector_pru",
@@ -146,8 +220,9 @@ var getGeoJsonData = function(){
             })
 	   	});
 
-   			var layersStack = buildLayers();
-   			map = new ol.Map({
+   		var layersStack = buildLayers();
+
+       map = new ol.Map({
                 logo: false,
                 controls: ol.control.defaults({ attribution: false }).extend([]),
                 interactions: ol.interaction.defaults().extend([select, over]),
@@ -155,8 +230,16 @@ var getGeoJsonData = function(){
                 renderer: 'canvas',
                 layers: layersStack,
                 view: new ol.View({
+
+                    center: [342089.8399157086, 6228476.722399187],
+                    extent:[181495.6434885533, 6209895.358554488, 344459.38779254904, 6292447.3491024785],
+                    zoom: 13,
+                    minZoom: 8,
+                    maxZoom: 14
                 })
             });
+
+
 
           //########## LAYER SWITCHER #######
           new LayerSwitcher({
@@ -168,7 +251,7 @@ var getGeoJsonData = function(){
          //######### END LAYER SWITCHER ########
 
 
-            var extent = layersStack[1].getSource().getExtent();
+            var extent = layersStack[2].getSource().getExtent();
 
             map.getView().fit(extent, map.getSize());
 
@@ -191,6 +274,7 @@ var getGeoJsonData = function(){
             		
             	displayFeatureInfo(pixel);
         	});
+
 
 
 
@@ -299,6 +383,7 @@ var getGeoJsonData = function(){
                 var featureExtent = ol.extent.createEmpty(); 
                 ol.extent.extend(featureExtent, features[i].getGeometry().getExtent()); 
                 map.getView().fit(featureExtent, map.getSize());
+
             }
         }
      }//--if feature
