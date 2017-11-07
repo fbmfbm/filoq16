@@ -54564,11 +54564,20 @@ var getGeoJsonData = function(){
 
    var buildLayers = function(){
     
-      //var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [new ol.layer.Tile({source: new ol.source.OSM()}),new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})]});
+      /*
+       var baseLayer = new ol.layer.Group({
+          'title': 'Fond de plan',layers: [
+              new ol.layer.Tile({source: new ol.source.OSM()}),
+              //new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})
+          ]});
+
+        */
+
       var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [
           new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })})
           //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'AerialWithLabels' })})
         ]});
+        
      
 
       baseLayer.set('name', 'fond de plan');
@@ -54606,7 +54615,7 @@ var getGeoJsonData = function(){
            }),
            title: "Limites de territoires",
            name : "vector"
-       })
+       });
 
 
 
@@ -54682,6 +54691,11 @@ var getGeoJsonData = function(){
             })
 	   	});
 
+       var attribution = new ol.control.Attribution({
+           collapsible: true
+
+       });
+
    		var layersStack = buildLayers();
 
        map = new ol.Map({
@@ -54750,7 +54764,9 @@ var getGeoJsonData = function(){
 
             $scope.refDep = '75';
 
-            switch(feature.get('scale')){
+            if(feature){
+
+                switch(feature.get('scale')){
                 case  'reg':
 
                     $scope.refScale = 'dep';
@@ -54759,23 +54775,27 @@ var getGeoJsonData = function(){
                     $scope.refDep = feature.get('code').substring(0, 2);
                     $scope.refScale = 'com';
                     break;
-               case  'com':
-                   $scope.refDep = feature.get('code').substring(0, 2);
-                   $scope.refScale = 'comselect';
+                case  'com':
+                    $scope.refDep = feature.get('code').substring(0, 2);
+                    $scope.refScale = 'comselect';
                     break;
-               case  'comselect':
-                   $scope.refDep = feature.get('code').substring(0, 2);
-                   $scope.refScale= 'quartier';
+                case  'comselect':
+                    $scope.refDep = feature.get('code').substring(0, 2);
+                    $scope.refScale= 'quartier';
                     break;
-              case  'quart':
-                   var code = feature.get('code');
+                case  'quart':
+                    var code = feature.get('code');
 
-                   window.location = "/thema/offre/"+code;
-                   
-                    break;
-            }
+                    window.location = "/thema/offre/"+code;
 
-            $scope.refCode = feature.get('code');
+                    break;
+                }
+
+                $scope.refCode = feature.get('code');
+
+            };
+
+
 
             //console.log( $scope.refCode,  $scope.refScale, $scope.refDep);
               //if(feature.get('scale')!='pars') { searchData() };
