@@ -137,6 +137,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
 
 	var initMap = function(){
 
+
         var layersStack = buildLayers();
 
         //console.log(layersStack.length);

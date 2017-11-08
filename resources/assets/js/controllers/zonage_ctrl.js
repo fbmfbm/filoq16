@@ -92,7 +92,7 @@ var getGeoJsonData = function(){
         var size = ol.extent.getWidth(projectionExtent) / 256;
         var resolutions2 = new Array(20);
         var matrixIds = new Array(20);
-        for (let z = 0; z < 20; ++z) {
+        for (var z = 0; z < 20; ++z) {
             resolutions2[z] = size / Math.pow(2, z);
             matrixIds[z] = z;
         }
@@ -209,7 +209,7 @@ var getGeoJsonData = function(){
               source: quartierSource,
               style: function(feature, resolution){
 
-                  if(resolution < 15){
+                  if(resolution < 20){
 
                       styleVectorQuartier.getText().setText(feature.get('label').substring(0,50));
 
@@ -286,8 +286,8 @@ var getGeoJsonData = function(){
                     center: [342089.8399157086, 6228476.722399187],
                     extent:[181495.6434885533, 6209895.358554488, 344459.38779254904, 6292447.3491024785],
                     zoom: 13,
-                    minZoom: 8,
-                    maxZoom: 14
+                    minZoom: 3,
+                    maxZoom: 13
                 })
             });
 
