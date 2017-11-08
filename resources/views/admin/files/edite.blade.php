@@ -16,7 +16,7 @@
                 <div class="card-header">
                     <h4>Fichier</h4>
                 </div>
-                <div class="card-block">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -32,7 +32,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="card-block">
+                <div class="card-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/file/'.$file->id)}}">
 
                         {{ method_field('PATCH') }}

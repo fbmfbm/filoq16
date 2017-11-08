@@ -22,7 +22,7 @@
                         <div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Vous avez atteins les limites de votre espace de stockage (80Mo) et vous ne pouvez plus ajouter de fichiers</div>
                         @endif
                 </div>
-                <div class="card-block">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -38,7 +38,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="card-block">
+                <div class="card-body">
 
                     @if(count($ref_files) > 0)
                             <table class="table table-bordered table-hover table-striped table-sm">

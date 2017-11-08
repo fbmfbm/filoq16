@@ -4,13 +4,12 @@ $(document).ready(function(){
 
     // Activation des ttoltype bootstrap
     $('[data-toggle="tooltip"]').tooltip();
-    // Definition des options de BootstrapBox par default
-    /*
-    $('#MyButton').click(function(){
-        CapacityChart();
-    });
-    */
+
 });
+
+
+
+
 
 var app = angular.module('app', ['file-model']);
 

@@ -193,17 +193,36 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
               bloccolor: "rgb(90,150,230)",
               blocpicto: "fa-square"
           });
-      	quartierLayer =  new ol.layer.Vector({
-              source: quartierSource,
-              style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"})
-              }),
-              title: "Quartiers PRU",
-              name : "vector_pru",
-              bloccolor: "rgb(255,127,0)",
-              blocpicto: "fa-square"
-      });
+
+         //////// STYLE POUR QUARTIERS
+
+         var styleVectorQuartier = new ol.style.Style({
+             stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
+             fill: new ol.style.Fill({color: "rgba(255,127,0,0.5)"}),
+             text: new ol.style.Text({
+                 fill: new ol.style.Fill({color: "rgba(255,255,255,1.0)"}),
+                 exceedLength: true,
+             })
+         });
+
+         ////// FIN DU STYLE QUARTIERS //////
+
+         quartierLayer =  new ol.layer.Vector({
+             source: quartierSource,
+             style: function(feature, resolution){
+                 if(resolution < 205){
+                     (feature.get('label')&&feature.get('label').length < 20)? styleVectorQuartier.getText().setText(feature.get('label')):styleVectorQuartier.getText().setText(feature.get('label').substr(0,20)+'...');
+
+                 }else{
+                     styleVectorQuartier.getText().setText('');
+                 }
+                 return styleVectorQuartier;
+             },
+             title: "Quartiers PRU",
+             name : "vector_pru",
+             bloccolor: "rgb(255,127,0)",
+             blocpicto: "fa-square"
+         });
 
       var zusLayer =  new ol.layer.Vector({
               source: zusSource,

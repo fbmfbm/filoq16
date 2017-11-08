@@ -116,7 +116,7 @@ var getGeoJsonData = function(){
       var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [
          //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })}),
           //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'AerialWithLabels' })})
-          new ol.layer.Tile({source: new ol.source.XYZ({ url:'http://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',crossOrigin: 'anonymous', attributions: ["OpenLayer","IGN - 2017"] })}),
+          new ol.layer.Tile({source: new ol.source.XYZ({ url:'http://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',crossOrigin: 'anonymous' })}),
           new ol.layer.Tile({
               source: new ol.source.WMTS({
                   url: 'https://wxs.ign.fr/' + ignKey  + '/wmts',
@@ -174,7 +174,7 @@ var getGeoJsonData = function(){
                }),
                style: 'normal'
            }),
-           title: "Limites de territoires",
+           title: "Limites administratives",
            name : "vector"
        });
 
@@ -192,19 +192,34 @@ var getGeoJsonData = function(){
               blocpicto: "fa-square",
           });
 
+        //////// STYLE POUR QUARTIERS
+
+      var styleVectorQuartier = new ol.style.Style({
+          stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
+          fill: new ol.style.Fill({color: "rgba(255,127,0,0.5)"}),
+          text: new ol.style.Text({
+              fill: new ol.style.Fill({color: "rgba(255,255,255,1.0)"}),
+              exceedLength: true,
+          })
+      });
+
+        ////// FIN DU STYLE QUARTIERS //////
 
       quartierLayer =  new ol.layer.Vector({
               source: quartierSource,
-              style: new ol.style.Style({
-                  stroke: new ol.style.Stroke({color: "rgba(250,127,0,0.9)", lineDash: null, width: 2}),
-                  fill: new ol.style.Fill({color: "rgba(255,127,0,0.4)"}),
-                  text: new ol.style.Text({
-                      text: 'test',
-                      fill: new ol.style.Fill({color: "rgba(255,255,255,1.0)"}),
+              style: function(feature, resolution){
+
+                  if(resolution < 15){
+
+                      styleVectorQuartier.getText().setText(feature.get('label').substring(0,50));
+
+                    }else{
+                      styleVectorQuartier.getText().setText('');
+                  }
 
 
-                  }),
-              }),
+                  return styleVectorQuartier;
+              },
               title: "Quartiers PRU",
               name : "vector_pru",
               bloccolor: "rgb(255,127,0)",
@@ -372,6 +387,7 @@ var getGeoJsonData = function(){
 
      inited = true;
 
+
    };
 
    // Function to rdisplay data from direct link on button searche
@@ -395,7 +411,7 @@ var getGeoJsonData = function(){
 
             info.css({
                 left: (pixel[0]+10) + 'px',
-                top: (pixel[1]+110) + 'px'
+                top: (pixel[1]+210) + 'px'
             });
 
             var feature = map.forEachFeatureAtPixel(pixel, function(feature) {

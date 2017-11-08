@@ -18,7 +18,7 @@
                     <div class="card-header">
                         <h4 class="card-title">Permission</h4>
                     </div>
-                    <div class="card-block">
+                    <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
@@ -35,7 +35,7 @@
                         @endif
                     </div>
 
-                    <div class="card-block">
+                    <div class="card-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/permission')}}">
                             {!! csrf_field() !!}
 

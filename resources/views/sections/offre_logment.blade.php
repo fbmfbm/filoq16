@@ -20,7 +20,7 @@
         </ul>
             <div class="card ">
              <div class="card-header">Structure de l'offre de logement et profil démographique </div>
-                <div class="card-block">
+                <div class="card-body">
                    <div class="row">
                       <div class="col-md-12">
                           <h1 class='lead'>
