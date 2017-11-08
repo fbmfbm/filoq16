@@ -18,7 +18,7 @@
                             <div class="inner"><i class="fa fa-users" aria-hidden="true"></i></div>
                         </div>
                     </div>
-                    <div class="card-block">
+                    <div class="card-body">
                         <h4 class="card-title">Utilisateurs</h4>
                         <h7 class="card-subtitle text-muted">Utilisateurs enregistrés</h7>
                         <br/>
@@ -35,7 +35,7 @@
                             <div class="inner"><i class="fa fa-files-o" aria-hidden="true"></i></div>
                         </div>
                     </div>
-                    <div class="card-block">
+                    <div class="card-body">
                         <h4 class="card-title">Documents</h4>
                         <h7 class="card-subtitle text-muted">Fichiers téléchargeables</h7>
                         <br/>
@@ -52,7 +52,7 @@
                             <div class="inner"><i class="fa fa-database" aria-hidden="true"></i></div>
                         </div>
                     </div>
-                    <div class="card-block">
+                    <div class="card-body">
                         <h4 class="card-title">Permissions et Rôles</h4>
                         <h7 class="card-subtitle text-muted">Accès et droits de visualisation</h7>
                         <br/>

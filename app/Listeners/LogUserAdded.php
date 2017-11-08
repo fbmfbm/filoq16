@@ -32,13 +32,15 @@ class LogUserAdded
         $this->user = Auth::user();
 
 
-        $logStat = new LogStat();
+        $logUser = new LogStat();
         $logUser->name = "User_Added";
         $logUser->type = "User";
         $logUser->description = "Ajout de l'utilisateur ".$event->userAddedName." par ".$this->user->name;
         $logUser->user_name = $this->user->name;
         $logUser->user_id = $this->user->id;
         $logUser->user_ip = $_SERVER['REMOTE_ADDR'];
+
+        $logUser->save();
 
     }
 }

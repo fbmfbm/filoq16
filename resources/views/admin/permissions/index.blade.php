@@ -19,7 +19,7 @@
                             <button class="btn btn-outline-primary" href="#" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle permission" disabled> <i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
                         @endcan
                     </div>
-                    <div class="card-block">
+                    <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
@@ -35,7 +35,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="card-block">
+                    <div class="card-body">
                 <table class="table table-bordered table-hover table-striped table-sm">
                     <tr><th>id</th><th>Nom</th><th>Affichage</th><th>Date</th><th></th></tr>
                     @foreach( $permissions as $permission)

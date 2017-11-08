@@ -1,4 +1,4 @@
-<ul class="nav nav nav-pills nav-stacked">
+<ul class="nav nav-pills flex-column">
     <li class="nav-item">
         <a class="nav-link {{ Request::is('admin') ? 'active' : '' }}" href="{{ url('/admin') }}">
             <i class="fa fa-home"></i> Accueil</a>
@@ -31,12 +31,6 @@
     <li role="separator" class="divider">
         <hr>
     </li>
-    @can('add_admin')
-    <li class="nav-item">
-        <a class="nav-link {{ Request::is('admin/report') ? 'active' : '' }}" href="#">
-            <i class="fa fa-dashboard"></i> Rapports</a>
-    </li>
-    @endcan
     <li class="nav-item">
         <a class="nav-link {{ Request::is('admin/logstat') ? 'active' : '' }}" href="{{ url('/admin/logstat') }}">
             <i class="fa fa-line-chart" aria-hidden="true"></i> Logs</a>

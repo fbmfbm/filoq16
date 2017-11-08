@@ -9,7 +9,7 @@
              <div class="card-header">Tableau de bord</div>
                 
             
-            <div class="card-block">
+            <div class="card-body">
                    
                     <h4 class="card-title">Gestionnaire</h4>
                     <h6 class="card-subtitle text-muted">Gestion de vos données en ligne</h6>

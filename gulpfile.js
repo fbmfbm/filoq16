@@ -18,9 +18,14 @@ elixir(function(mix) {
     .sass([
         'admin.scss',], 'public/css/admin.css')
     .scripts([
+
 		'/../../../node_modules/jquery/dist/jquery.js',
-		'/../../../node_modules/tether/dist/js/tether.js',
-		'/../../../node_modules/bootstrap/dist/js/bootstrap.js',
+
+		//'/../../../node_modules/popper.js/dist/popper-utils.min.js',
+		//'/../../../node_modules/tether/dist/js/tether.js',
+		'/../../../node_modules/bootstrap/dist/js/bootstrap.bundle.js',
+        //'/../../../node_modules/bootstrap/js/dist/tooltip.js',
+		//'/../../../node_modules/popper.js/dist/popper.js',
     	'/../../../node_modules/openlayers/dist/ol.js',
     	'/../../../node_modules/angular/angular.js',
     	'/../../../node_modules/angular-sanitize/angular-sanitize.min.js',
@@ -42,8 +47,11 @@ elixir(function(mix) {
 	.scripts([
 		'/../../../node_modules/jquery/dist/jquery.js',
 		'/../../../node_modules/angular/angular.js',
-		'/../../../node_modules/tether/dist/js/tether.js',
-		'/../../../node_modules/bootstrap/dist/js/bootstrap.js',
+		//'/../../../node_modules/tether/dist/js/tether.js',
+		//'/../../../node_modules/bootstrap/dist/js/bootstrap.js',
+        '/../../../node_modules/bootstrap/dist/js/bootstrap.bundle.js',
+        //'/../../../node_modules/bootstrap/js/dist/tooltip.js',
+        //'/../../../node_modules/popper.js/dist/popper.js',
         '/../../../node_modules/bootbox/bootbox.js',
 		'admin/admin-main.js',
 		'admin/controllers/file_controller.js',

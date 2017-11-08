@@ -5,6 +5,11 @@ $brand-info: 				#C31C95;//#00EFD9;
 $enable-flex:               true;
 $enable-rounded:            true;
 
+$theme-colors: (
+        "primary": #3866b9,
+        "info": #C31C95
+);
+
 @mixin rounded($radius: 0.5em) {
   -webkit-border-radius: $radius;
   -moz-border-radius: $radius;
@@ -14,7 +19,7 @@ $enable-rounded:            true;
 //@import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,800);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.min.css);
-@import "node_modules/bootstrap/scss/bootstrap-flex.scss";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
 @import url(http://openlayers.org/en/v3.16.0/css/ol.css);
 
 @import "modules/layerswitcher.scss";
