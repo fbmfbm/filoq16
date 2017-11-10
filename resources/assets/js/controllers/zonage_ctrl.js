@@ -113,10 +113,12 @@ var getGeoJsonData = function(){
 
         */
 
+
+
       var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [
          //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })}),
           //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'AerialWithLabels' })})
-          new ol.layer.Tile({source: new ol.source.XYZ({ url:'http://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',crossOrigin: 'anonymous' })}),
+          //new ol.layer.Tile({source: new ol.source.XYZ({ url:'http://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',crossOrigin: 'anonymous' })}),
           new ol.layer.Tile({
               source: new ol.source.WMTS({
                   url: 'https://wxs.ign.fr/' + ignKey  + '/wmts',
@@ -286,8 +288,8 @@ var getGeoJsonData = function(){
                     center: [342089.8399157086, 6228476.722399187],
                     extent:[181495.6434885533, 6209895.358554488, 344459.38779254904, 6292447.3491024785],
                     zoom: 13,
-                    minZoom: 3,
-                    maxZoom: 13
+                    minZoom: 6,
+                    maxZoom: 19
                 })
             });
 
