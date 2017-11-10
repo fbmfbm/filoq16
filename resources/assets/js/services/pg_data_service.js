@@ -131,8 +131,8 @@ app.service('PGData',['$http', function($http){
             case 'programm_pru':
                 //prop_query = " SELECT sum(a19::DEC) a19,sum(a20::DEC) a20,sum(a21::DEC) a21, sum(a22::DEC) a22,sum(a23::DEC) a23, sum(a24::DEC) a24, SUM(a25::DEC) a25,  SUM(a26::DEC) a26,  SUM(a27::DEC) a27, sum(a28::DEC) a28, sum(a29::DEC) a29, sum(a30::DEC) a30, sum(a35::DEC) a35, sum(a36::DEC) a36, sum(a37::DEC) a37, sum(a38::DEC) a38, sum(a41::DEC) a41 ";
                 prop_query = " SELECT e.a19::DEC a19, e.a20::DEC a20, e.a21::DEC a21, e.a22::DEC a22, e.a23::DEC a23, e.a24::DEC a24, e.a25::DEC a25, e.a26::DEC a26, e.a27::DEC a27, e.a28::DEC a28, e.a29::DEC a29, e.a30::DEC a30, e.a35::DEC a35, e.a36::DEC a36, e.a37::DEC a37, e.a38::DEC a38, e.a41::DEC a41, round(((NULLIF(s.a4,'so'))::dec/(nullIF(s.a1,'so'))::dec)*100,1)  as tx_lls_an1, t1.tx_lls as  tx_lls_old ";
-                from_query = " FROM "+tblFiloqEnquete+ " as e join "+tbleFiloqSecret+" as s on e.code_projet = s.code_conv,  (SELECT round(((NULLIF(s.a4,'so'))::dec/(nullIF(s.a1,'so'))::dec)*100,1)  as tx_lls from "+tbleFiloqSecret+" as s WHERE s.milesim = '2 003' AND s.code_conv = '"+refCode+"'   ) as t1";
-                filter_query = "  WHERE s.milesim = '2 013' AND e.code_projet = '"+refCode+"' ";
+                from_query = " FROM "+tblFiloqEnquete+ " as e join "+tbleFiloqSecret+" as s on e.code_projet = s.code_conv,  (SELECT round(((NULLIF(s.a4,'so'))::dec/(nullIF(s.a1,'so'))::dec)*100,1)  as tx_lls from "+tbleFiloqSecret+" as s WHERE s.milesim LIKE '__003' AND s.code_conv = '"+refCode+"'   ) as t1";
+                filter_query = "  WHERE s.milesim LIKE '__013' AND e.code_projet = '"+refCode+"' ";
                 break;
             };
 
