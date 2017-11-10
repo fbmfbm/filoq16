@@ -91,16 +91,20 @@
                                 </tr>
                                 <tr class=" text-center fbm-table-header" >
                                   <th></th>
+                                  <th >Total programmé</th>
                                   <th >Livré en 2013</th>
                                   <th >À livrer</th>
-                                  <th >Total programmé</th>
                                   <th >Tx de réalisation</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr><td scope="row">Démolition</td><td>@{{dt6[0].a25 | number:0}}</td><td>@{{dt6[0].a26 | number:0}}</td><td>@{{dt6[0].a27 | number:0}}</td><td>@{{dt6[0].a19 | number:1}}%</td></tr>
+                                {{--<tr><td scope="row">Démolition</td><td>@{{dt6[0].a25 | number:0}}</td><td>@{{dt6[0].a26}}</td><td>@{{dt6[0].a27}}</td><td>@{{dt6[0].a19 | number:1}}%</td></tr>
                                 <tr><td scope="row">Reconstitution de l'offre sur site</td><td>@{{dt6[0].a28 | number:0}}</td><td>@{{dt6[0].a29 | number:0}}</td><td>@{{dt6[0].a30 | number:0}}</td><td>@{{dt6[0].a20 | number:1}}%</td></tr>
-                                <tr><td scope="row">Diversification de l'offre</td><td>@{{dt6[0].a35 | number:0}}</td><td>@{{dt6[0].a36 | number:0}}</td><td>@{{dt6[0].a37 | number:0}}</td><td>@{{dt6[0].a21 | number:1}}%</td></tr>
+                                <tr><td scope="row">Diversification de l'offre</td><td>@{{dt6[0].a35 | number:0}}</td><td>@{{dt6[0].a36 | number:0}}</td><td>@{{dt6[0].a37 | number:0}}</td><td>@{{dt6[0].a21 | number:1}}%</td></tr>--}}
+
+                                <tr><td scope="row">Démolition</td><td>@{{dt6[0].a27}}</td><td>@{{dt6[0].a25 | number:0}}</td><td>@{{dt6[0].a26}}</td><td>@{{dt6[0].a19 | number:1}}%</td></tr>
+                                <tr><td scope="row">Reconstitution de l'offre sur site</td><td>@{{dt6[0].a30 | number:0}}</td><td>@{{dt6[0].a28 | number:0}}</td><td>@{{dt6[0].a29 | number:0}}</td><td>@{{dt6[0].a20 | number:1}}%</td></tr>
+                                <tr><td scope="row">Diversification de l'offre</td><td>@{{dt6[0].a37 | number:0}}</td><td>@{{dt6[0].a35 | number:0}}</td><td>@{{dt6[0].a36 | number:0}}</td><td>@{{dt6[0].a21 | number:1}}%</td></tr>
                                </tbody>
                          </table> 
                          <br>
@@ -114,8 +118,8 @@
                                 </tbody>
                           </table>
                           <br>
-                          <span class="fbm-table-enphase" style="font-size: 15px !important;"><i class="fa fa-arrow-circle-right " aria-hidden="true"></i> Taux de LLS en 2003 : @{{(dt1[0].a63*1) /((dt1[0].a4*1)+(dt1[0].a63*1))*100| number:1 }}% </span><br>
-                          <span class="fbm-table-enphase" style="font-size: 15px !important;"><i class="fa fa-arrow-circle-right " aria-hidden="true"></i> Taux de LLS en 2013 :  @{{(dt1[1].a63*1) /((dt1[1].a4*1)+(dt1[1].a63*1))*100| number:1 }}% </span><br>
+                          <span class="fbm-table-enphase" style="font-size: 15px !important;"><i class="fa fa-arrow-circle-right " aria-hidden="true"></i> Taux de LLS en 2003 : @{{dt6[0].tx_lls_old}}% </span><br>
+                          <span class="fbm-table-enphase" style="font-size: 15px !important;"><i class="fa fa-arrow-circle-right " aria-hidden="true"></i> Taux de LLS en 2013 :  @{{dt6[0].tx_lls_an1}}% </span><br>
                           <span class="fbm-table-enphase mt-1"><i class="fa fa-arrow-circle-right " aria-hidden="true"></i> Taux de LLS au terme du PRU :  @{{ dt6[0].a41 | number:1}}%  </span>
                           <hr>
                          </div>

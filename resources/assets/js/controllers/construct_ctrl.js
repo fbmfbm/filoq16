@@ -92,6 +92,7 @@ app.controller('ConstructCtrl', ['$scope', '$window', 'GeoJsonData', 'PGData', '
                             getPGData($scope.codeRef, 'programm_pru').then(function(result6){
 
                                 $scope.dt6 = result6;
+                                console.log( $scope.dt6);
 
                             });
                         });
