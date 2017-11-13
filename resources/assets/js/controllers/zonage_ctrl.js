@@ -36,8 +36,18 @@ app.controller('ZonageCtrl', ['$scope', 'GeoJsonData', 'PGData', function($scope
 
 var getGeoJsonData = function(){
 
+    $('#loadingModal').modal('show');
+
         GeoJsonData.getGeoData($scope.refCode, $scope.refScale, $scope.refDep).then(function(result){
+
            	vectorSource.addFeatures(result);
+
+            $('#loadingModal').modal('hide');
+        }, function(err){
+
+            alert("votre requête n'a pas pu être traitée v2. Merci de renouveler votre demande.");
+            $('#loadingModal').modal('hide');
+
         });
     };
 

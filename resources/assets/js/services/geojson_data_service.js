@@ -57,7 +57,7 @@ app.service('GeoJsonData',['$http', function($http){
 
                 }
 
-            });
+            },function(err){  console.log("Errueur lors de la requête SQL : ", err)} );
 
 
             return promise;
