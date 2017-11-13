@@ -51,6 +51,19 @@
                 </div>
             </div> 
         </div>
+
+        <div class="modal fade bd-example-modal-sm" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content text-center">
+                    <br>
+                    <p>
+                    Chargement ... <br>
+                    <i class="fa fa-spinner fa-spin fa-2x fa-fw text-primary"></i>
+                    <span class="sr-only">Chargement...</span>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
