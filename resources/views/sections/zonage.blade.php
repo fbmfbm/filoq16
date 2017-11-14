@@ -44,6 +44,7 @@
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-map-marker text-info" aria-hidden="true"></i> Cliquez sur un territoire (quartiers PRU) pour accéder aux données</h4>    
                         <br>
+                    <i class="fa fa-info-circle text-primary" aria-hidden="true"></i> <a href="{{url('/ressources')}}"><span class="small">Téléchargez la liste des quartiers cibles du Programme de Rénovation Urbaine dans la section ressources et documents <i class="fa fa-download" aria-hidden="true"></i> </span></a>
                      <div id="map">
                         <div id="info"></div>
                     </div>
