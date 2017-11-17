@@ -16,6 +16,12 @@ html {
 body {
   margin: 0; }
 
+p.fbm-sources-sm {
+  font-size: 0.6em;
+  margin-left: 2em;
+
+}
+
 article,
 aside,
 details,

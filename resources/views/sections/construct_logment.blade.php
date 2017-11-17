@@ -50,6 +50,7 @@
                             </div>
 
                             <div id="map2" class=""> </div>
+                            <p class="fbm-sources-sm text-right" style="margin-right: 2em;">sources : OpenStreetMap & GéoPortail 2017</p>
                         </div>
                     </div><!-- end row -->
                     <br>
@@ -139,6 +140,7 @@
                                 </tr>
                             </table>
                         </div>
+                        <p class="fbm-sources-sm">Sources : ENRU / AGORA et enquête annuelle livraison 2014 </p>
                     </div>
                 </div>
 
@@ -183,7 +185,8 @@
                                 <tr><td scope="row" class="pl-4">Dt. Autres status d'occupation</td><td>@{{dt10[1].c5  | number:0}}</td><td>@{{(dt10[1].c5 / dt10[1].c1)*100 | number:1}}%</td><td>@{{dt10[1].b5  | number:0}}</td><td>@{{(dt10[1].b5 / dt10[1].b1)*100 | number:1}}%</td></tr>
                                </tbody>
                          </table> 
-                        </div>             
+                        </div>
+                        <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
                     </div><!-- end row -->
           </div> <!-- end tab sec 2 -->
          <div  class="tab-pane  "  id="sec3" role="tabpanel"><!-- tab sec 3 -->
@@ -320,7 +323,7 @@
                           </table>
                           <br>
 
-                          <p><span class="fbm-table-enphase"><i class="fa fa-arrow-circle-right text-info " aria-hidden="true"></i> Référence ménages < PLAI </span></p>
+                          <p><span class="fbm-sources-sm"><i class="fa fa-arrow-circle-right text-info " aria-hidden="true"></i> Référence ménages < PLAI </span></p>
 
 
                            <table class="table table-sm table-bordered fbm-table" id="table_3b">
@@ -426,7 +429,7 @@
                                </tbody>
                           </table>
                   </div>
-
+                <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
               </div><!-- end row -->
               <div class="row">
 
@@ -488,6 +491,7 @@
                           <br>
                 </div>
               </div>
+                 <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
           </div> <!-- end tab sec 3 -->
   </div><!-- end tabs content -->
 </div>

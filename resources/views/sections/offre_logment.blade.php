@@ -50,6 +50,7 @@
                             </div>
 
                             <div id="map2" class=""> </div>
+                            <p class="fbm-sources-sm text-right" style="margin-right: 2em;">sources : OpenStreetMap & GéoPortail 2017</p>
                         </div>
                     </div><!-- end row -->
                     <br>
@@ -162,6 +163,7 @@
                                </tbody>
                             </table>
                       </div>
+                <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
                 </div><!-- end row -->
                  <!-- ########################################## TABLEAU B ################################################################## -->
                 <div class="row">
@@ -255,6 +257,7 @@
                                 <hr>
    
                  </div>
+                    <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
 
              </div><!-- end row -->
             <p style="page-break-before: always">
@@ -346,6 +349,7 @@
                                </tbody>
                </table>
              </div>
+             <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
 
             </div><!-- end row -->
              <!-- ########################################## TABLEAU D ################################################################## -->
@@ -442,6 +446,7 @@
                        </span>
                        <hr>    
                    </div>
+                 <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
                  </div> <!-- end row -->
                  <!-- ########################################## TABLEAU section 2 A ################################################################## -->
                    <br>
@@ -538,6 +543,7 @@
                                </tbody>
                             </table>
              </div>
+              <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
              </div><!-- end row -->
              <!-- ########################################## TABLEAU section 2 B ################################################################## -->
               <div class="row">
@@ -607,6 +613,7 @@
                             </table>
 
                 </div>
+                  <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
                 </div><!-- end row -->
                   <div class="row">
                       <div class="col-md-6">
@@ -692,6 +699,7 @@
                                </tbody>
                               </table>
                      </div>
+                      <p class="fbm-sources-sm">Sources : FILOCOM 2013 - MEEM d'après DGFIP </p>
                     </div><!-- end row -->
               </div> <!-- end tab sec 2 -->
               

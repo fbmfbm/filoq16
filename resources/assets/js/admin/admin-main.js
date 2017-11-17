@@ -8,10 +8,8 @@ $(document).ready(function(){
 });
 
 
-
-
-
 var app = angular.module('app', ['file-model']);
+
 
 
 var togglePermission = function(rolId, permName, siteUrl){
@@ -19,13 +17,14 @@ var togglePermission = function(rolId, permName, siteUrl){
     window.location.href = 'role/'+rolId+'/togglperm/'+permName;
 };
 
+
+
 var confirmeDelet =  function(refName, refId){
 
     bootbox.setDefaults({
 
         locale: "fr",
         backdrop: true
-
     });
 
     bootbox.confirm({
