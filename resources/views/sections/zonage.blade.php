@@ -58,7 +58,7 @@
                 <div class="modal-content text-center">
                     <br>
                     <p>
-                    Chargement ... <br>
+                    Chargement... <br>
                     <i class="fa fa-spinner fa-spin fa-2x fa-fw text-primary"></i>
                     <span class="sr-only">Chargement...</span>
                     </p>

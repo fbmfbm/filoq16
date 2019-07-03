@@ -38,12 +38,23 @@ var getGeoJsonData = function(){
 
     $('#loadingModal').modal('show');
 
+    var $myModal = $('#loadingModal')
+    // Hack for non closing bootstrap modale
+    $myModal.on('shown.bs.modal', function () {
+        // modal shown
+        setTimeout(function () {
+            $myModal.modal('hide')
+        }, 1000)
+    })
+
         GeoJsonData.getGeoData($scope.refCode, $scope.refScale, $scope.refDep).then(function(result){
+            $('#loadingModal').modal('hide');
            	vectorSource.addFeatures(result);
-            $('#loadingModal').modal('hide');
+
         }, function(err){
-            alert("votre requête n'a pas pu être traitée v2. Merci de renouveler votre demande.");
+            alert("votre requête n'a pas pu être traitée. Merci de renouveler votre demande.");
             $('#loadingModal').modal('hide');
+
         });
     };
 
@@ -108,18 +119,7 @@ var getGeoJsonData = function(){
 
    var buildLayers = function(){
 
-
        var ignKey = 'ar5b9suuwo6hkdonwp48kpjy' ;
-      /*
-       var baseLayer = new ol.layer.Group({
-          'title': 'Fond de plan',layers: [
-              new ol.layer.Tile({source: new ol.source.OSM()}),
-              //new ol.layer.Tile({title: 'Stamen toner', opacity: 0.2, source: new ol.source.Stamen({layer: 'toner'})})
-          ]});
-
-        */
-
-
 
       var baseLayer = new ol.layer.Group({'title': 'Fond de plan',layers: [
          //new ol.layer.Tile({source: new ol.source.BingMaps({ key: 'Ann-y97gpi1eYfOK806hTKFoZz8z8763yMvIg96gwTMvkGQbhaVN_Yx5qoRUCq9z', imagerySet: 'Aerial' })}),
@@ -146,26 +146,9 @@ var getGeoJsonData = function(){
 
         ]});
 
-     
-
       baseLayer.set('name', 'fond de plan');
 
       baseLayer.set('baselayer', true);
-
-    /*
-	   	layerVector = new ol.layer.Vector({
-	            source: vectorSource,
-	            style: new ol.style.Style({
-	                stroke: new ol.style.Stroke({color: "rgba(200,200,200,0.5)", lineDash: [5, 10 ], width: 2}),
-	                fill: new ol.style.Fill({color: "rgba(200,200,200,0.11)"})
-	            }),
-	            title: "Limites de territoires",
-	            name : "vector"
-	        });
-	*/
-
-
-
 
        layerVector = new ol.layer.Tile({
            source: new ol.source.WMTS({
