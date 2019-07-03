@@ -7,7 +7,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v4.0.0 | MIT License | github.com/necolas/normalize.css */
-@import url(http://openlayers.org/en/v3.16.0/css/ol.css);
+@import url(https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -19,7 +19,6 @@ body {
 p.fbm-sources-sm {
   font-size: 0.6em;
   margin-left: 2em;
-
 }
 
 article,
