@@ -5,7 +5,7 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
-    "angular": "^1.5.6",
+    "angular": "^1.7.9",
     "angular-openlayers-directive": "^1.13.0",
     "angular-sanitize": "^1.5.6",
     "bootbox": "^4.4.0",
